@@ -183,21 +183,118 @@ a teacher and experiences stronger educational benefits as a result (such as in 
 It becomes a useful to capture the significant passive information provided by the
 user during the interaction and adapt the situation to it.
 
+The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}.
 
 \subsection{Approach}
+
+The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention below dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
+
+Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose the camera matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
+
+\begin{equation}
+s  \; m' = A [R|t] M'
+\label{eq:pinHole}
+\end{equation}
+\begin{equation}
+s
+\begin{bmatrix}
+x \\
+y \\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_x & 0 & c_x  \\
+0 & f_y & c_y  \\
+0 & 0 & 1 
+\end{bmatrix}
+\begin{bmatrix}
+r_{11} & r_{12} & r_{13} & t_x  \\
+r_{21} & r_{22} & r_{23} & t_y  \\
+r_{31} & r_{32} & r_{33} & t_z  
+\end{bmatrix}
+\begin{bmatrix}
+X \\
+Y \\
+Z \\
+1
+\end{bmatrix}
+\label{eq:pinHole2}
+\end{equation}
+
+Finally, the matrix of extrinsic parameters [R|t] is obtained by joining the rotation matrix R (calculated from the rotation vector) and translation vector \textit{t}. The result is a matrix projection \textbf{P} which maps a point in the 3D space onto a point in the 2D image place solving the equation \ref{eq:p}.
+
+\begin{equation}
+s  \; m' = P \; M'
+\label{eq:p}
+\end{equation}
+
+The second step is to use the matrix [R|t] to set the correct translation and orientation of the \textit{tf} frame which represents the face in the 3D space. In order to achieve that it is necessary first, to set the origin defined by the vector \textit{t}. Second, the matrix \textit{R} needs to be reformulated into a quaternion as shown in equation \ref{eq:quat} due to the smoothly interpolation between them.
+
+\begin{equation}
+\begin{bmatrix}
+qw \\
+qx \\
+qy \\
+qz
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sqrt{1 + r_{11} + r_{22} + r_{33}} /2 \\
+(r_{32} - r_{23})/( 4 \cdot qw) \\
+(r_{13} - r_{31})/( 4 \cdot qw) \\
+(r_{21} - r_{12})/( 4 \cdot qw)
+\end{bmatrix}
+\label{eq:quat}
+\end{equation}
+\\
+However, it is necessary to consider the cases where the division is performed by 0 (in 180\degree rotation about the y-axis for instance) or when \textit{qw} becomes close to zero.
+
+The third step is to generate a representation of the field of view which origin and orientation are the ones defined by the face detection \textit{tf} frame. 
+
 Defining accurately the human field of view in the implementation is a must. Holmqvist in \cite{holmqvist2011eye} specifies that the visual human range is $ \pm  40\degree $ in the horizontal and $ \pm 25\degree $ in the vertical. In \cite{walker1980clinical} Spector provides a more detailed specification for each eye splitting the vertical range into $ 60\degree $ the upper region and $ 75\degree $ the lower one. Moreover, the horizontal range gets separated in $ 60\degree $ inwards (towards the nose) and $ 95\degree $ outwards. In the present implementation, the first approach explained has been chosen representing the field of view using a cone with such dimensions.
 
-We used a commercial RGB camera acquiring images of 640x480 pixels at 25 fps. The camera was located at 5 cm from the center of Nao's feet and its holder was tied to a wood base for stability purposes. Thus, the camera's objective was 9 cm above and $ 40\degree $ inclination with respect to the surface of the table. 
-The subjects were typically located 50 cm away from the robot with the first tablet in front and the second one 30 cm to the left of the first one. In the same way, the experimenter was located around 60 cm to the left of the subject. Finally, two observers were located far away from the interaction field to manually assess
+Assuming that the \textit{tf} frames representing the robotic agent, the two tablets, the experimenter and the observers are static, need to be monitored. This task consists on evaluating the intersection between the \textit{tf} frames and the field of view: If one focus of attention is within the region defined by the field of view, we assume the subject is looking at it. In order to solve such operation mathematically it is necessary to compute the transformation matrix between the coordinate frames to be able to locate the monitored frames \textit{A} in the subject's coordinate system \textit{B} (see equation \ref{eq:transform}).
 
-in the context of the CoWriter project \footnote{The primary repository is
-\url{https://github.com/chili-epfl/cowriter_letter_learning}.}
+\begin{equation}
+v' = B(A^-1)v
+\end{equation}
 
- 
+where \textit{v} is a point in \textit{A} that becomes v' in coordinate system \textit{B}. However, in practice there are, at least, three different \textit{tf} frames involved in the transformation (subject-camera, camera-base, base-focus). Following the transformation result, the distance of the monitored frame with respect to the x-axis face \textit{tf} frame, $ d_{x_{axis}} $, representing the subject's face can be computed as simple as in equation \ref{eq:pitagoras}. Always considering the x-axis as the one defining the face's orientation and thus field of view's main axis.
+
+\begin{equation}
+d_{x_{axis}} = \sqrt{t_y^2 + t_z^2}
+\label{eq:pitagoras}
+\end{equation}
+
+It is necessary to compare the distance acquired $ d_{x_{axis}} $ with the radius of the field of view at the target \textit{tf} frame x-coordinate $ r_{fov} $ as shown in equation \ref{eq:fovtf}.
+
+\begin{equation}
+r_{fov} = tan\left(\frac{fov}{2}\right) \cdot t_x
+\label{eq:fovtf}
+\end{equation}
+
+where \textit{fov} is the aperture angle of the field of view. Finally, if $ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
+
+% Plot to clarify this??
+
+
 \subsection{Experimental set-up}
-Figure~\ref{drawSetup} illustrates our general experimental setup: a
+Figure~\ref{realSetup} illustrates our general experimental setup: a
 face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
 robot.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\columnwidth]{realSetup}
+    \caption{\small Our experimental setup: face-to-face interaction with a {\sc
+            nao} robot.  The robot writes on the tactile tablet, the child then
+            corrects the robot by directly overwriting its letters on the tablet
+            with a stylus. An adult (either a therapist or an experimenter,
+            depending on the studies), remains next to the child to guide the work. 
+            A second tablet allows to choose words and the camera captures the subject's face.}
+    \label{realSetup}
+\end{figure}
 
 A tactile tablet (with a custom application) is used for both the robot and the
 child to write: during a typical round, the child requests the robot to write
@@ -217,150 +314,57 @@ its writing (simple sentences like ``What do you think?''), and pressing on a
 small robot icon on the tablet once the child has finished correcting. In our
 experiments, both were easy to grasp for children.
 
+Implementing such a system raises several challenges that are discussed in detail in \cite{Hood:2015}.
+
+An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The camera was located at 5 cm from the center of Nao's feet and its holder was tied to a wood base for stability purposes. Thus, the camera's objective was 9 cm above and $ 40\degree $ inclination with respect to the surface of the table. 
+The subjects were typically located 50 cm away from the robot with the first tablet in front and the second one 30 cm to the left of the first one. In the same way, the experimenter was located around 60 cm to the left of the subject. Finally, two observers were located far away from the interaction field to manually assess the state of the interaction.
+
+Figure \ref{drawSetup} allows us to intuitively identify several focuses of attention along the interaction such as the two tablets, the robot, the experimenter and the observers located in the diagonal.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.7\columnwidth]{drawSetup}
-    \caption{\small Our experimental setup: face-to-face interaction with a {\sc
-        nao} robot.  The robot writes on the tactile tablet, the child then
-        corrects the robot by directly overwriting its letters on the tablet
-        with a stylus. An adult (either a therapist or an experimenter,
-        depending on the studies), remains next to the child to guide the work
-        (prompting, turn taking, etc.). A second tablet allows to choose words
-        and the camera captures the subject's head. In red, the focuses of attention
-        in the scene.}
+    \caption{\small Graphical representation of he set-up and the possible children focuses of attention in the scene, in red.}
     \label{drawSetup}
 \end{figure}
 
-Implementing such a system raises several challenges that are discussed in detail in \cite{Hood:2015}.
-
-As we observe the current set-up allow us to intuitively identify several focuses of attention along the interaction such as the two tablets, the robot, the experimenter and the observers located in the diagonal.
-
-
 \subsection{From face detection to Focus of Attention}
-
+According to \cite{stiefelhagen2002tracking}
 
 In our approach we use the opensource library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays or glasses but also images acquired from an RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition is able to handle different number and positions of participants in the scenario.
 
-%equations
-
 In this work, head orientation is used to predict a person’s focus of attention in face-to-face interactions. Therefore, we assume that head pose is a reliable marker of the attention focus during a social interaction, in both cases human-human, human-robot. Since we estimate where the subject is looking at based on its head position, several important questions arise:
 
-1. How much the head pose contributes to the real gaze of the subject?
-2. Which accuracy can we achieve during a real case scenario in terms of head pose estimation tracking?  
-3. How accurate can we predict where the subject is looking at based only on the head pose estimation?
-4. How can we evaluate the performance of the children based on the activity?
+\begin{enumerate}
+\item How much the head pose contributes to the real gaze of the subject?
+\item Which percentage can we achieve during a real case scenario in terms of head pose estimation tracking?  
+\item How accurate can we predict where the subject is looking at based only on the head pose estimation?
+\item How can we evaluate the performance of the children based on the activity?
+\end{enumerate}
 
 % Stats from the paper
 % Stats from me
 % Real vs captured plot
 % Real vs expected plot 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=1\columnwidth]{realSetup}
-    \caption{\small Typical child-robot interaction scenario during the experiments}
-
-    \label{realSetup}
-\end{figure}
+\section{Results}
 
 \subsection{Head pose contribution to the gaze}
 
-\section{Results}
+\begin{table}
+	\centering
+	\caption{Tracking precision in face-to-face scenario}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+	Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
+	Tracked & 78\% & \% & \% & \% & \% & \% & \% \\ \hline
+	\end{tabular}
+\end{table}
+
 
 \section{Discussion}
-The results has shown that the percentage of accuracy in the tracking is not only conditioned by the subject's amount of movement, but also by the speed of the same movements: Restless children externalize greater levels of movement decreasing the tracker accuracy. Additionally, several classic computer vision challenges such as the lighting conditions, occlusions and the face angle with respect to the camera are factors that contribute to reduce the accuracy.
-
-
-\subsubsection{Inline (In-text) Equations}
-A formula that appears in the running text is called an
-inline or in-text formula.  It is produced by the
-\textbf{math} environment, which can be
-invoked with the usual \texttt{{\char'134}begin. . .{\char'134}end}
-construction or with the short form \texttt{\$. . .\$}. You
-can use any of the symbols and structures,
-from $\alpha$ to $\omega$, available in
-\LaTeX\cite{Lamport:LaTeX}; this section will simply show a
-few examples of in-text equations in context. Notice how
-this equation: \begin{math}\lim_{n\rightarrow \infty}x=0\end{math},
-set here in in-line math style, looks slightly different when
-set in display style.  (See next section).
-
-\subsubsection{Display Equations}
-A numbered display equation -- one set off by vertical space
-from the text and centered horizontally -- is produced
-by the \textbf{equation} environment. An unnumbered display
-equation is produced by the \textbf{displaymath} environment.
-
-Again, in either environment, you can use any of the symbols
-and structures available in \LaTeX; this section will just
-give a couple of examples of display equations in context.
-First, consider the equation, shown as an inline equation above:
-\begin{equation}\lim_{n\rightarrow \infty}x=0\end{equation}
-Notice how it is formatted somewhat differently in
-the \textbf{displaymath}
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}\sum_{i=0}^{\infty} x + 1\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
-
-\subsection{Citations}
-Citations to articles \cite{bowman:reasoning,
-clark:pct, braams:babel, herlihy:methodology},
-conference proceedings \cite{clark:pct} or
-books \cite{salas:calculus, Lamport:LaTeX} listed
-in the Bibliography section of your
-article will occur throughout the text of your article.
-You should use BibTeX to automatically produce this bibliography;
-you simply need to insert one of several citation commands with
-a key of the item cited in the proper location in
-the \texttt{.tex} file \cite{Lamport:LaTeX}.
-The key is a short reference you invent to uniquely
-identify each work; in this sample document, the key is
-the first author's surname and a
-word from the title.  This identifying key is included
-with each item in the \texttt{.bib} file for your article.
-
-The details of the construction of the \texttt{.bib} file
-are beyond the scope of this sample document, but more
-information can be found in the \textit{Author's Guide},
-and exhaustive details in the \textit{\LaTeX\ User's
-Guide}\cite{Lamport:LaTeX}.
-
-This article shows only the plainest form
-of the citation command, using \texttt{{\char'134}cite}.
-This is what is stipulated in the SIGS style specifications.
-No other citation format is endorsed or supported.
+The results has shown that the percentage of accuracy in the tracking is not only conditioned by the subject's amount of movement, but also by the speed of the same movements: Restless children externalize greater levels of movement decreasing the tracker accuracy. Additionally, several recurrent computer vision challenges such as the lighting conditions, occlusions and the face angle with respect to the camera are factors that contribute to reduce the accuracy.
 
 \subsection{Tables}
-Because tables cannot be split across pages, the best
-placement for them is typically the top of the page
-nearest their initial cite.  To
-ensure this proper ``floating'' placement of tables, use the
-environment \textbf{table} to enclose the table's contents and
-the table caption.  The contents of the table itself must go
-in the \textbf{tabular} environment, to
-be aligned properly in rows and columns, with the desired
-horizontal and vertical rules.  Again, detailed instructions
-on \textbf{tabular} material
-is found in the \textit{\LaTeX\ User's Guide}.
-
-Immediately following this sentence is the point at which
-Table 1 is included in the input file; compare the
-placement of the table here with the table in the printed
-dvi output of this document.
-
-\begin{table}
-\centering
-\caption{Frequency of Special Characters}
-\begin{tabular}{|c|c|l|} \hline
-Non-English or Math&Frequency&Comments\\ \hline
-\O & 1 in 1,000& For Swedish names\\ \hline
-$\pi$ & 1 in 5& Common in math\\ \hline
-\$ & 4 in 5 & Used in business\\ \hline
-$\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
-\hline\end{tabular}
-\end{table}
 
 To set a wider table, which takes up the whole width of
 the page's live area, use the environment
@@ -386,111 +390,12 @@ Command&A Number&Comments\\ \hline
 \end{table*}
 % end the environment with {table*}, NOTE not {table}!
 
-\subsection{Figures}
-
-As was the case with tables, you may want a figure
-that spans two columns.  To do this, and still to
-ensure proper ``floating'' placement of tables, use the environment
-\textbf{figure*} to enclose the figure and its caption.
-and don't forget to end the environment with
-{figure*}, not {figure}!
-
-\begin{figure*}
-\centering
-
-\caption{A sample black and white graphic (.eps format)
-that needs to span two columns of text.}
-\end{figure*}
-
-Note that either {\textbf{.ps}} or {\textbf{.eps}} formats are
-used; use
-the \texttt{{\char'134}epsfig} or \texttt{{\char'134}psfig}
-commands as appropriate for the different file types.
-
-\begin{figure}
-\centering
-\caption{A sample black and white graphic (.ps format) that has
-been resized with the \texttt{psfig} command.}
-\vskip -6pt
-\end{figure}
-
-\subsection{Theorem-like Constructs}
-Other common constructs that may occur in your article are
-the forms for logical constructs like theorems, axioms,
-corollaries and proofs.  There are
-two forms, one produced by the
-command \texttt{{\char'134}newtheorem} and the
-other by the command \texttt{{\char'134}newdef}; perhaps
-the clearest and easiest way to distinguish them is
-to compare the two in the output of this sample document:
-
-This uses the \textbf{theorem} environment, created by
-the\linebreak\texttt{{\char'134}newtheorem} command:
-\newtheorem{theorem}{Theorem}
-\begin{theorem}
-Let $f$ be continuous on $[a,b]$.  If $G$ is
-an antiderivative for $f$ on $[a,b]$, then
-\begin{displaymath}\int^b_af(t)dt = G(b) - G(a).\end{displaymath}
-\end{theorem}
-
-The other uses the \textbf{definition} environment, created
-by the \texttt{{\char'134}newdef} command:
-\newdef{definition}{Definition}
-\begin{definition}
-If $z$ is irrational, then by $e^z$ we mean the
-unique number which has
-logarithm $z$: \begin{displaymath}{\log e^z = z}\end{displaymath}
-\end{definition}
-
-Two lists of constructs that use one of these
-forms is given in the
-\textit{Author's  Guidelines}.
- 
-There is one other similar construct environment, which is
-already set up
-for you; i.e. you must \textit{not} use
-a \texttt{{\char'134}newdef} command to
-create it: the \textbf{proof} environment.  Here
-is a example of its use:
-\begin{proof}
-Suppose on the contrary there exists a real number $L$ such that
-\begin{displaymath}
-\lim_{x\rightarrow\infty} \frac{f(x)}{g(x)} = L.
-\end{displaymath}
-Then
-\begin{displaymath}
-l=\lim_{x\rightarrow c} f(x)
-= \lim_{x\rightarrow c}
-\left[ g{x} \cdot \frac{f(x)}{g(x)} \right ]
-= \lim_{x\rightarrow c} g(x) \cdot \lim_{x\rightarrow c}
-\frac{f(x)}{g(x)} = 0\cdot L = 0,
-\end{displaymath}
-which contradicts our assumption that $l\neq 0$.
-\end{proof}
-
-Complete rules about using these environments and using the
-two different creation commands are in the
-\textit{Author's Guide}; please consult it for more
-detailed instructions.  If you need to use another construct,
-not listed therein, which you want to have the same
-formatting as the Theorem
-or the Definition\cite{salas:calculus} shown above,
-use the \texttt{{\char'134}newtheorem} or the
-\texttt{{\char'134}newdef} command,
-respectively, to create it.
-
-
 \section{Conclusions}
 
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
-This section is optional; it is a location for you
-to acknowledge grants, funding, editing assistance and
-what have you.  In the present case, for example, the
-authors would like to thank Gerald Murray of ACM for
-his help in codifying this \textit{Author's Guide}
-and the \textbf{.cls} and \textbf{.tex} files that it describes.
+
 
 %
 % The following two commands are all you need in the
