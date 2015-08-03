@@ -57,14 +57,9 @@
 % --- End of Author Metadata ---
 
 \title{Alternate {\ttlit ACM} SIG Proceedings Paper in LaTeX
-Format\titlenote{(Produces the permission block, and
-copyright information). For use with
-SIG-ALTERNATE.CLS. Supported by ACM.}}
-\subtitle{[Extended Abstract]
-\titlenote{A full version of this paper is available as
-\textit{Author's Guide to Preparing ACM SIG Proceedings Using
-\LaTeX$2_\epsilon$\ and BibTeX} at
-\texttt{www.acm.org/eaddress.htm}}}
+Format}
+\author{Fernando Garcia\qquad Séverin Lemaignan \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
+
 %
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -90,11 +85,11 @@ SIG-ALTERNATE.CLS. Supported by ACM.}}
 % without further effort on your part as the last section in
 % the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{8} %  in this sample file, there are a *total*
+%\numberofauthors{4} %  in this sample file, there are a *total*
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
-\author{
+%\author{
 % You can go ahead and credit any number of authors here,
 % e.g. one 'row of three' or two rows (consisting of one row of three
 % and a second row of one, two or three).
@@ -106,72 +101,49 @@ SIG-ALTERNATE.CLS. Supported by ACM.}}
 % e-mail address with \email.
 %
 % 1st. author
-\alignauthor
-Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
-       \affaddr{Institute for Clarity in Documentation}\\
-       \affaddr{1932 Wallamaloo Lane}\\
-       \affaddr{Wallamaloo, New Zealand}\\
-       \email{trovato@corporation.com}
-% 2nd. author
-\alignauthor
-G.K.M. Tobin\titlenote{The secretary disavows
-any knowledge of this author's actions.}\\
-       \affaddr{Institute for Clarity in Documentation}\\
-       \affaddr{P.O. Box 1212}\\
-       \affaddr{Dublin, Ohio 43017-6221}\\
-       \email{webmaster@marysville-ohio.com}
-% 3rd. author
-\alignauthor Lars Th{\o}rv{\"a}ld\titlenote{This author is the
-one who did all the really hard work.}\\
-       \affaddr{The Th{\o}rv{\"a}ld Group}\\
-       \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
-       \affaddr{Hekla, Iceland}\\
-       \email{larst@affiliation.org}
-\and  % use '\and' if you need 'another row' of author names
-% 4th. author
-\alignauthor Lawrence P. Leipuner\\
-       \affaddr{Brookhaven Laboratories}\\
-       \affaddr{Brookhaven National Lab}\\
-       \affaddr{P.O. Box 5000}\\
-       \email{lleipuner@researchlabs.org}
-% 5th. author
-\alignauthor Sean Fogarty\\
-       \affaddr{NASA Ames Research Center}\\
-       \affaddr{Moffett Field}\\
-       \affaddr{California 94035}\\
-       \email{fogartys@amesres.org}
-% 6th. author
-\alignauthor Charles Palmer\\
-       \affaddr{Palmer Research Laboratories}\\
-       \affaddr{8600 Datapoint Drive}\\
-       \affaddr{San Antonio, Texas 78229}\\
-       \email{cpalmer@prl.com}
-}
-% There's nothing stopping you putting the seventh, eighth, etc.
-% author on the opening page (as the 'third row') but we ask,
-% for aesthetic reasons that you place these 'additional authors'
-% in the \additional authors block, viz.
-\additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
-email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
-(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
-\date{30 July 1999}
-% Just remember to make sure that the TOTAL number of authors
-% is the number that will appear on the first page PLUS the
-% number that will appear in the \additionalauthors section.
+%\alignauthor
+%Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
+%       \affaddr{Institute for Clarity in Documentation}\\
+%       \affaddr{1932 Wallamaloo Lane}\\
+%       \affaddr{Wallamaloo, New Zealand}\\
+%       \email{trovato@corporation.com}
+%% 2nd. author
+%\alignauthor
+%G.K.M. Tobin\titlenote{The secretary disavows
+%any knowledge of this author's actions.}\\
+%       \affaddr{Institute for Clarity in Documentation}\\
+%       \affaddr{P.O. Box 1212}\\
+%       \affaddr{Dublin, Ohio 43017-6221}\\
+%       \email{webmaster@marysville-ohio.com}
+%% 3rd. author
+%\alignauthor Lars Th{\o}rv{\"a}ld\titlenote{This author is the
+%one who did all the really hard work.}\\
+%       \affaddr{The Th{\o}rv{\"a}ld Group}\\
+%       \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+%       \affaddr{Hekla, Iceland}\\
+%       \email{larst@affiliation.org}
+%\and  % use '\and' if you need 'another row' of author names
+%% 4th. author
+%\alignauthor Lawrence P. Leipuner\\
+%       \affaddr{Brookhaven Laboratories}\\
+%       \affaddr{Brookhaven National Lab}\\
+%       \affaddr{P.O. Box 5000}\\
+%       \email{lleipuner@researchlabs.org}
+%}
 
 \maketitle
 \begin{abstract}
 In long term interactions between a human and a robot, it is necessary that the agent exhibits some sort of social intelligence to be able to engage the human providing the appropriate response to specific face-to-face situations. In a educational context, this feature becomes a must due to the fact that engagement plays a very important role in the learning process. Therefore, maximizing the interaction time at a high engagement level may provide learning benefits to the children. In this work, a real-time attention tracker based on the head pose estimation using an RGB camera is proposed to be able to identify faults during the interaction and eventually detect low engagement level situations. In this paper we want to show a practical approach to evaluate the engagement that arises from the interaction reporting several experiences in the field, with the robot Nao.
 \end{abstract}
 
-% A category with the (minimum) three required fields
-\category{H.4}{Information Systems Applications}{Miscellaneous}
-%A category including the fourth, optional field follows...
-\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
-
-\terms{Theory}
-
-\keywords{ACM proceedings, \LaTeX, text tagging}
+%% A category with the (minimum) three required fields
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+%%A category including the fourth, optional field follows...
+%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+%
+%\terms{Theory}
+%
+%\keywords{ACM proceedings, \LaTeX, text tagging}
 
 \section{Introduction}
 The use of robots in the learning activity presents an opportunity for the children
@@ -185,9 +157,11 @@ user during the interaction and adapt the situation to it.
 
 The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}.
 
-\subsection{Approach}
+\section{Approach}
 
-The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention below dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
+In our approach we use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays or glasses but also images acquired from an RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition is able to handle different number and positions of participants in the scenario.
+
+The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention before dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
 
 Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose the camera matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
 
@@ -257,7 +231,8 @@ Defining accurately the human field of view in the implementation is a must. Hol
 Assuming that the \textit{tf} frames representing the robotic agent, the two tablets, the experimenter and the observers are static, need to be monitored. This task consists on evaluating the intersection between the \textit{tf} frames and the field of view: If one focus of attention is within the region defined by the field of view, we assume the subject is looking at it. In order to solve such operation mathematically it is necessary to compute the transformation matrix between the coordinate frames to be able to locate the monitored frames \textit{A} in the subject's coordinate system \textit{B} (see equation \ref{eq:transform}).
 
 \begin{equation}
-v' = B(A^-1)v
+v' = B(A^{-1})v
+\label{eq:transform}
 \end{equation}
 
 where \textit{v} is a point in \textit{A} that becomes v' in coordinate system \textit{B}. However, in practice there are, at least, three different \textit{tf} frames involved in the transformation (subject-camera, camera-base, base-focus). Following the transformation result, the distance of the monitored frame with respect to the x-axis face \textit{tf} frame, $ d_{x_{axis}} $, representing the subject's face can be computed as simple as in equation \ref{eq:pitagoras}. Always considering the x-axis as the one defining the face's orientation and thus field of view's main axis.
@@ -279,7 +254,10 @@ where \textit{fov} is the aperture angle of the field of view. Finally, if $ d_{
 % Plot to clarify this??
 
 
-\subsection{Experimental set-up}
+\subsection{Experimental Set-up}
+
+The target of this study were 6 children with ages compressed between 5 and 6 years old. The experiments were developed individually and consisted on a writing activity by turns and one story telling performed by the robot at a given time of the interaction.
+
 Figure~\ref{realSetup} illustrates our general experimental setup: a
 face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
 robot.
@@ -328,87 +306,84 @@ Figure \ref{drawSetup} allows us to intuitively identify several focuses of atte
     \label{drawSetup}
 \end{figure}
 
-\subsection{From face detection to Focus of Attention}
-According to \cite{stiefelhagen2002tracking}
 
-In our approach we use the opensource library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays or glasses but also images acquired from an RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition is able to handle different number and positions of participants in the scenario.
+\section{Results}
 
-In this work, head orientation is used to predict a person’s focus of attention in face-to-face interactions. Therefore, we assume that head pose is a reliable marker of the attention focus during a social interaction, in both cases human-human, human-robot. Since we estimate where the subject is looking at based on its head position, several important questions arise:
+In this work, head orientation is used to predict a person's focus of attention in face-to-face interactions. Therefore, we assume that head pose is a reliable marker of the attention focus during a social interaction, in both cases human-human, human-robot. Since we estimate where the subject is looking at based on its head position, several important questions arise:
 
 \begin{enumerate}
-\item How much the head pose contributes to the real gaze of the subject?
 \item Which percentage can we achieve during a real case scenario in terms of head pose estimation tracking?  
 \item How accurate can we predict where the subject is looking at based only on the head pose estimation?
-\item How can we evaluate the performance of the children based on the activity?
+\item How can we evaluate the performance of the children based on the focus of attention?
 \end{enumerate}
 
 % Stats from the paper
 % Stats from me
 % Real vs captured plot
-% Real vs expected plot 
+% Real vs expected plot
 
-\section{Results}
+\subsection{From Face Detection to Focus of Attention}
 
-\subsection{Head pose contribution to the gaze}
+According to \cite{stiefelhagen2002tracking} the head orientation's contribution in overall gaze direction is 68.9\% showing agreement between both measurements. In addition, it shows that the head orientation alone can get an average accuracy of 88.7\% detecting the focus of attention in a meeting application scenario using a head-mounted display with eye and head tracking.
 
-\begin{table}
+Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations of two evaluators.
+
+\begin{table}[h!]
 	\centering
-	\caption{Tracking precision in face-to-face scenario}
+	\caption{Tracking accuracy in face-to-face scenario}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-	Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
-	Tracked & 78\% & \% & \% & \% & \% & \% & \% \\ \hline
+	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
+	\small Track(\%) & \small78.7 & \small81.1 & \small73.7 & \small75.6 & \small77.1 & \small68.7 & \small75.8 \\ \hline
+	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.58 & \small & \small & \small & \small & \small & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small87.3 & \small  & \small & \small & \small & \small & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small59.4 & \small & \small & \small & \small & \small & \small \\ \hline
 	\end{tabular}
+	\label{tab:results}
 \end{table}
 
-
-\section{Discussion}
 The results has shown that the percentage of accuracy in the tracking is not only conditioned by the subject's amount of movement, but also by the speed of the same movements: Restless children externalize greater levels of movement decreasing the tracker accuracy. Additionally, several recurrent computer vision challenges such as the lighting conditions, occlusions and the face angle with respect to the camera are factors that contribute to reduce the accuracy.
 
-\subsection{Tables}
-
-To set a wider table, which takes up the whole width of
-the page's live area, use the environment
-\textbf{table*} to enclose the table's contents and
-the table caption.  As with a single-column table, this wide
-table will ``float" to a location deemed more desirable.
-Immediately following this sentence is the point at which
-Table 2 is included in the input file; again, it is
-instructive to compare the placement of the
-table here with the table in the printed dvi
-output of this document.
+\subsection{Subject's Focus of Attention Analysis}
 
 
-\begin{table*}
-\centering
-\caption{Some Typical Commands}
-\begin{tabular}{|c|c|l|} \hline
-Command&A Number&Comments\\ \hline
-\texttt{{\char'134}alignauthor} & 100& Author alignment\\ \hline
-\texttt{{\char'134}numberofauthors}& 200& Author enumeration\\ \hline
-\texttt{{\char'134}table}& 300 & For tables\\ \hline
-\texttt{{\char'134}table*}& 400& For wider tables\\ \hline\end{tabular}
-\end{table*}
-% end the environment with {table*}, NOTE not {table}!
+% This two plots are provisional. We expect to improve them with images and boxes
+\begin{figure*}
+    \centering
+    \includegraphics[width=2\columnwidth]{realExpected}
+    \caption{\small In blue, real focus accoding to two observer assessment. In green, the expected focus based on the system state and in cyan, the overlapping between them.}
+    \label{fig:realExpected}
+\end{figure*}
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=2\columnwidth]{realCaptured}
+    \caption{\small In blue, real focus accoding to two observer assessment. In green, the captured focus using our aproach and in cyan, the overlapping between them.}
+    \label{fig:realCaptured}
+\end{figure*}
+% % % % % % % % % % % % % % % % % % % %
+
+In several occasions during the interaction, none of the focuses of attention were within the field of view due to the time transition from one focus to another. In order to deal with these few cases we assume that the minimum distance between the height of the field of view (cone) and the targets corresponds to the most likely focus of attention.
+
+However, we also want to distinguish such cases when the subject is directly not looking where the defined targets are located, but towards a region far from the interaction field. These cases are not common but they can be easily identified by setting a horizontal threshold to the field of view.
+
+Several results can extracted from figure \ref{fig:realExpected}. First, the matching curve shows the overlapping between the expected and the real focuses of attention. As we can see there is a fluctuation at the beginning of the interaction suggesting a novelty effect. It suggests that the adaptation time is around the first 2 minutes in average. 
+
+Second, once the turn-taking is established, a pattern becomes visible during the subject's feedback, when a word is being written by the children: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It shows that the subject is using the word model in the selection tablet to provide a better answer to the robot. But not only that, the subjects also decrease the response time after each shift as well as the gaze frequency towards the model suggesting and improvement over time. Moreover, when a new word is selected for playing, the same behavior is replicated.
+
+A third trend that can be observed is the continuous 'look for approval' situation where the subjects look at the experimenter in order to provide feedback about the robot's response before providing their own one. Such transition tablet-facilitator becomes more frequent in several cases, for instance: An unexpected situation is faced or the facilitator make a suggestion. 
+
+Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
 \section{Conclusions}
 
-
 %ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
+\section*{Acknowledgments}
+This research was partially supported by the Funda\c{c}\~{a}o para a Ci\^{e}ncia
+e a Tecnologia (FCT) with reference UID/CEC/ 50021/2013, and by the Swiss
+National Science Foundation through the National Centre of Competence in
+Research Robotics.
 
-
-%
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
 \bibliographystyle{abbrv}
-\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
-% You must have a proper ".bib" file
-%  and remember to run:
-% latex bibtex latex latex
-% to resolve all references
-%
-% ACM needs 'a single self-contained file'!
-
-%\balancecolumns % GM June 2007
+\bibliography{sigproc}
 \end{document}
