@@ -51,14 +51,14 @@
 \begin{document}
 %
 % --- Author Metadata here ---
-\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+\conferenceinfo{HRI}{'15 Chrischurch, New Zealand.}
 %\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
 \title{Alternate {\ttlit ACM} SIG Proceedings Paper in LaTeX
 Format}
-\author{Fernando Garcia\qquad Séverin Lemaignan \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
+\author{Fernando Garcia \qquad Séverin Lemaignan \qquad Alexis Jacq \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
 
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -133,34 +133,73 @@ Format}
 
 \maketitle
 \begin{abstract}
-In long term interactions between a human and a robot, it is necessary that the agent exhibits some sort of social intelligence to be able to engage the human providing the appropriate response to specific face-to-face situations. In a educational context, this feature becomes a must due to the fact that engagement plays a very important role in the learning process. Therefore, maximizing the interaction time at a high engagement level may provide learning benefits to the children. In this work, a real-time attention tracker based on the head pose estimation using an RGB camera is proposed to be able to identify faults during the interaction and eventually detect low engagement level situations. In this paper we want to show a practical approach to evaluate the engagement that arises from the interaction reporting several experiences in the field, with the robot Nao.
+In long term interactions between humans and robots, it is necessary that the agent exhibits some sort of social intelligence to be able to engage the human providing the appropriate response to specific face-to-face situations. In a educational context, this feature becomes a must due to the fact that engagement plays a relevant role in the learning process. Therefore, maximizing the interaction time at a high engagement level provides learning benefits. In this work, a visual focus of attention based on head pose estimation using a camera is proposed to be able to monitor and assess the quality of the interaction. We want to show a practical approach to evaluate the engagement that arises from the interaction reporting several experiences in the field, with the robot Nao and discussing the experimental results.
 \end{abstract}
 
 %% A category with the (minimum) three required fields
 %\category{H.4}{Information Systems Applications}{Miscellaneous}
 %%A category including the fourth, optional field follows...
 %\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
-%
-%\terms{Theory}
-%
-%\keywords{ACM proceedings, \LaTeX, text tagging}
+
+\terms{Experimentation, Human Factors.}
+
+\keywords{Human-Robot Interaction; Social Robotics; Children.}
 
 \section{Introduction}
-The use of robots in the learning activity presents an opportunity for the children
-to interact with an embodied, physical agent as part of the learning experience. Furthermore,
-the use of robots in handwriting education comes with the potential to engage the child in
-meta-cognition through the learning by teaching paradigm, wherein a student takes the role of
+
+In the recent years, research is pushing forward in building intelligent systems and environments that try to maximize the benefits of cooperation with humans based on verbal and non-verbal communication. The interaction between social robots and humans provide a rich set of behaviors, and reveals a need of capturing the significant passive information provided by the user during the interaction process. Such information should be used to adapt the system to the specific user's needs in order to be able to provide a social or emotional intelligence to the agents. 
+
+While new algorithms and robotic technologies ensure better cognitive and interactive abilities, a deeper study about the benefits in the social interaction needs to be done: Is not enough to exhibit human-like capabilities in social tasks, but to do it in a human-like manner. For instance, several studies showed that humans prefer to interact with a robots whose task outcome is delayed, shows uncertainty or an undesired output \cite{Admoni,Short}. In fact, the ability to adapt has been proved to be beneficial in long-term interactions \cite{Tielman:2014, Lim:2014}, specifically with children, manifesting a more positive attitude over time.
+
+In order to build intelligent agents, it is necessary to equip them with perceptive capabilities based on sensors an algorithms: face and object tracking and recognition \cite{Zhao:2003, Jafri:2014}, path planning \cite{Galceran:2013}, speech recognition \cite{brick2007incremental} or task learning \cite{calinon2007learning} are some of the current research topics. However, each algorithm is evaluated in their own metric space of its specific problem: efficiency, accuracy or time are some few examples. In \cite{anzalone} is exposed the need to evaluate such processes in terms of their capability to obtain the desired effect in a human-robot interaction context through several proposed metrics around engagement as quality experience indicator.
+
+Engagement describes a cognitive, affective (specifically intrinsic motivation), and behavioral state of interaction with a computer application that ``makes the user want to be there" \cite{OBrien:2010}. Engaging inter-actions were thought to involve attention, intrinsic interest, interactivity, perceived control and choice, functionality and motivation.
+
+In this way, in situ Visual Focus of Attention (VFOA) estimation is advantageous to human-robot interaction and a major contribution towards a better understanding of the interaction quality. \cite{yarbus1967eye, barber1976perception} suggest that human's interest is highly correlated with what they look at and the existing relationship between gaze and attention during social interaction has been exposed in \cite{argyle1969social}.
+
+One of the most interesting fields where to develop this research is in a learning context since children's engagement sustainability over time is one of the most important variables to make
+the process of learning effective \cite{Umbach}. It is well known that the role of the teacher \cite{smith2005pedagogies}, as well as the way the activity is formulated do matters in the learning efficiency. Moreover, the use of robots in the learning activity presents an opportunity for children
+to interact with an embodied, physical agent as part of the learning experience. 
+
+Furthermore, while \cite{zhao2012learning} recommends the development of a teachable agent that is actively, rather than passively, engaged in the learning by teaching interaction, the increased learning gain results attained in \cite{okita2006observation} were done so even with the pupil being taught having been instructed to not contribute much information. This suggests that it may not be necessary, from a learning by teaching point of view, for the teachable agent to participate actively in the interaction to incite educational benefits. However, from an engagement point of view, this may not necessarily be true.
+
+In fact, the use of robots in education comes with the potential to engage the child in meta-cognition through the learning by teaching paradigm, wherein a student takes the role of
 a teacher and experiences stronger educational benefits as a result (such as in \cite{Palinscar1984}).
 
-It becomes a useful to capture the significant passive information provided by the
-user during the interaction and adapt the situation to it.
+The focus of this research is to evaluate the quality of the interaction using the focus of attention as an engagement indicator in a complex scenario using an RGB camera. The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}. However, in a child-robot interaction context, avoiding 'invasive' technologies such as wearable devices is a must to keep the experience as natural as possible. 
 
-The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}.
+
+%Needs to be redifined
+\section{Related Work}
+
+It is a model based approach to head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model -> plug and play
+
+In this research, we address the problem of tracking the children's focus of attention during a long term child-robot interaction in a learning context, first. And second, we provide qualitative and quantitative evaluation of the outcome provided using a first person RGB camera approach.
+
+
+In neural networks requires a previous image acquisition and training as well as a fixed point of view correspondent to the data acquired.  -> The systems only works for a user standing within a certain region in front of an inmobile robot and probabilisty maps the users head orientation to some fixed focus target.
+
+
+The evaluation of response times to provide an estimation of the user's engagement based on the correctness has been proposed in a learning context \cite{Beck} before. However, several aspects like the inter-subject variability or the environment complexity make it hardly applicable in a child-robot interaction
+
+PAIVA curvature
+
+%Needs to be redifined
+\section{Research Questions}
+Measurement
+The participants' VFOA acquisition was the only dependent variable. This included their gaze times and patterns of looking or not looking to the targets. Data from a robot head-
+mounted Microsoft Kinect camera was coded post-hoc to quantify these measures.
+
+Hypothesis and Predictions
+It is hypothesized that there will be no generalizable pattern of participant VFOA behavior, necessitating online, in situ VFOA estimation capabilities to enable robots to communicate intentionally.
+
+%The identification of the patterns can lead to a better understanding to the children progression. Less time means better understanding a move to next level.
 
 \section{Approach}
 
-In our approach we use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays or glasses but also images acquired from an RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition is able to handle different number and positions of participants in the scenario.
+In our approach we use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables or RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it is able to handle different number and positions of participants in the scenario.
 
+\subsection{Estimating Head Pose}
 The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention before dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
 
 Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose the camera matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
@@ -203,6 +242,7 @@ s  \; m' = P \; M'
 \label{eq:p}
 \end{equation}
 
+\subsection{Setting the \textit{tf} Frame}
 The second step is to use the matrix [R|t] to set the correct translation and orientation of the \textit{tf} frame which represents the face in the 3D space. In order to achieve that it is necessary first, to set the origin defined by the vector \textit{t}. Second, the matrix \textit{R} needs to be reformulated into a quaternion as shown in equation \ref{eq:quat} due to the smoothly interpolation between them.
 
 \begin{equation}
@@ -224,6 +264,7 @@ qz
 \\
 However, it is necessary to consider the cases where the division is performed by 0 (in 180\degree rotation about the y-axis for instance) or when \textit{qw} becomes close to zero.
 
+\subsection{Defining the Field of View}
 The third step is to generate a representation of the field of view which origin and orientation are the ones defined by the face detection \textit{tf} frame. 
 
 Defining accurately the human field of view in the implementation is a must. Holmqvist in \cite{holmqvist2011eye} specifies that the visual human range is $ \pm  40\degree $ in the horizontal and $ \pm 25\degree $ in the vertical. In \cite{walker1980clinical} Spector provides a more detailed specification for each eye splitting the vertical range into $ 60\degree $ the upper region and $ 75\degree $ the lower one. Moreover, the horizontal range gets separated in $ 60\degree $ inwards (towards the nose) and $ 95\degree $ outwards. In the present implementation, the first approach explained has been chosen representing the field of view using a cone with such dimensions.
@@ -253,10 +294,10 @@ where \textit{fov} is the aperture angle of the field of view. Finally, if $ d_{
 
 % Plot to clarify this??
 
-
+\section{Methodology}
 \subsection{Experimental Set-up}
 
-The target of this study were 6 children with ages compressed between 5 and 6 years old. The experiments were developed individually and consisted on a writing activity by turns and one story telling performed by the robot at a given time of the interaction.
+The target of this study were 6 children with ages compressed between 5 and 6 years old. The experiments were developed individually and consisted on a writing activity by turns and one story telling performed by the robot at a given time of the interaction. All this performed in a over all 20 minutes interaction average time.
 
 Figure~\ref{realSetup} illustrates our general experimental setup: a
 face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
@@ -312,8 +353,8 @@ Figure \ref{drawSetup} allows us to intuitively identify several focuses of atte
 In this work, head orientation is used to predict a person's focus of attention in face-to-face interactions. Therefore, we assume that head pose is a reliable marker of the attention focus during a social interaction, in both cases human-human, human-robot. Since we estimate where the subject is looking at based on its head position, several important questions arise:
 
 \begin{enumerate}
-\item Which percentage can we achieve during a real case scenario in terms of head pose estimation tracking?  
-\item How accurate can we predict where the subject is looking at based only on the head pose estimation?
+\item Which head pose estimation tracking rate can we achieve during a real case scenario?  
+\item How accurate can we predict where the subject is looking at based on the head pose estimation?
 \item How can we evaluate the performance of the children based on the focus of attention?
 \end{enumerate}
 
@@ -326,7 +367,9 @@ In this work, head orientation is used to predict a person's focus of attention 
 
 According to \cite{stiefelhagen2002tracking} the head orientation's contribution in overall gaze direction is 68.9\% showing agreement between both measurements. In addition, it shows that the head orientation alone can get an average accuracy of 88.7\% detecting the focus of attention in a meeting application scenario using a head-mounted display with eye and head tracking.
 
-Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations of two evaluators.
+Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations from two evaluators with an average reliability of $ \alpha--------\% $.
+
+In order to calculate the inter-rater reliability between the two measurements (real-captured and real-expected), the overlap percentage between the two curves has been computed. A more reliable measurement between the real and captured focuses of attention is provided using the cosine similarity. These results are shown in table \ref{tab:results}. 
 
 \begin{table}[h!]
 	\centering
@@ -334,9 +377,9 @@ Our results for a peer-to-peer work scenarios using an approach based on RGB cam
 	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
 	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
 	\small Track(\%) & \small78.7 & \small81.1 & \small73.7 & \small75.6 & \small77.1 & \small68.7 & \small75.8 \\ \hline
-	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.58 & \small & \small & \small & \small & \small & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small87.3 & \small  & \small & \small & \small & \small & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small93.1 & \small  & \small & \small & \small & \small & \small \\ \hline
 	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small59.4 & \small & \small & \small & \small & \small & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.72 & \small & \small & \small & \small & \small & \small \\ \hline
 	\end{tabular}
 	\label{tab:results}
 \end{table}
@@ -346,22 +389,21 @@ The results has shown that the percentage of accuracy in the tracking is not onl
 \subsection{Subject's Focus of Attention Analysis}
 
 
-% This two plots are provisional. We expect to improve them with images and boxes
 \begin{figure*}
     \centering
     \includegraphics[width=2\columnwidth]{realExpected}
-    \caption{\small In blue, real focus accoding to two observer assessment. In green, the expected focus based on the system state and in cyan, the overlapping between them.}
+    \caption{\small In blue, real focus accoding to two observer assessment. In cyan, the overlap between the real and the expected focus of attentions. In yellow, the repeated pattern in turn-taking and orange is the experimenter's suggestion to switch to a difficult word}
     \label{fig:realExpected}
 \end{figure*}
 
 
 \begin{figure*}
     \centering
-    \includegraphics[width=2\columnwidth]{realCaptured}
-    \caption{\small In blue, real focus accoding to two observer assessment. In green, the captured focus using our aproach and in cyan, the overlapping between them.}
+    \includegraphics[width=2\columnwidth]{bitmap_zoom}
+    \caption{\small At the top in blue, the real focus accoding to two observer assessment. In green, the captured focus using our aproach and in cyan, the overlap between them. At the bottom, the cosine similarity matrix between both curves with a window size of 10 seconds.}
     \label{fig:realCaptured}
 \end{figure*}
-% % % % % % % % % % % % % % % % % % % %
+
 
 In several occasions during the interaction, none of the focuses of attention were within the field of view due to the time transition from one focus to another. In order to deal with these few cases we assume that the minimum distance between the height of the field of view (cone) and the targets corresponds to the most likely focus of attention.
 
@@ -369,13 +411,35 @@ However, we also want to distinguish such cases when the subject is directly not
 
 Several results can extracted from figure \ref{fig:realExpected}. First, the matching curve shows the overlapping between the expected and the real focuses of attention. As we can see there is a fluctuation at the beginning of the interaction suggesting a novelty effect. It suggests that the adaptation time is around the first 2 minutes in average. 
 
-Second, once the turn-taking is established, a pattern becomes visible during the subject's feedback, when a word is being written by the children: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It shows that the subject is using the word model in the selection tablet to provide a better answer to the robot. But not only that, the subjects also decrease the response time after each shift as well as the gaze frequency towards the model suggesting and improvement over time. Moreover, when a new word is selected for playing, the same behavior is replicated.
+Second, once the turn-taking is established, a pattern becomes visible during the subject's feedback, when a word is being written by the children: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It shows that the subject is using the word model in the selection tablet to provide a better answer to the robot. But not only that, the subjects also decrease the response time after each shift as well as the gaze frequency towards the model suggesting and improvement over time. Moreover, when a new word is selected for playing, the same behavior is replicated (see yellow boxes in figure \ref{fig:realExpected}).
 
-A third trend that can be observed is the continuous 'look for approval' situation where the subjects look at the experimenter in order to provide feedback about the robot's response before providing their own one. Such transition tablet-facilitator becomes more frequent in several cases, for instance: An unexpected situation is faced or the facilitator make a suggestion. 
+A third trend that can be observed is the continuous 'look for approval' situation where the subjects look at the experimenter in order to provide feedback about the robot's response before providing their own one (see yellow boxes in figure \ref{fig:realExpected}). Such transition tablet-experimenter becomes more frequent in several cases, for instance: An unexpected situation is faced (before the story telling) or the experimenter makes a suggestion (orange box in figure \ref{fig:realExpected}).
 
 Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
+
+%what do you think? -> tablet -> robot -> facilitator -> pattern
+
+%Too much gaze to selection: the challenge may be too big, let's adapt response from robot
+
+%Use time to account quality of interaction?
+
 \section{Conclusions}
+The rate of attention shift can predict retained learning.
+%Support this with a plot averaging all interactions of all subjects 
+The solution presented can be adapted to work in new locations
+Thanks to their easiness of use in real world scenario, due to employment of non-intrusive sensors
+
+
+%Future work
+Possible focuses of attention has to be known in advance.  
+Our system could be extended to allow both user and robot to move freely.
+develop the concept of gaze-aware robot Woud be nice to do it in an unconstrained environment.
+
+It is necessary to take into account that eye gaze information is neglected which induces a certain amount of error, as well as the noise induced by the 3D pose estimation computed from face landmarkers.
+
+From first person videos -> we put the camera there to maximize the detection during the writing time but it could installed in the head of the robot as tf even with movement constantly updating the tf frame matrix.
+
 
 %ACKNOWLEDGMENTS are optional
 \section*{Acknowledgments}
