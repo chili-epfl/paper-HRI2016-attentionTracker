@@ -166,43 +166,44 @@ Furthermore, while \cite{zhao2012learning} recommends the development of a teach
 In fact, the use of robots in education comes with the potential to engage the child in meta-cognition through the learning by teaching paradigm, wherein a student takes the role of
 a teacher and experiences stronger educational benefits as a result (such as in \cite{Palinscar1984}).
 
-The focus of this research is to evaluate the quality of the interaction using the focus of attention as an engagement indicator in a complex scenario using an RGB camera. The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}. However, in a child-robot interaction context, avoiding 'invasive' technologies such as wearable devices is a must to keep the experience as natural as possible. 
+The focus of this research is to evaluate the quality of the interaction using the VFOA as an engagement indicator and the current performed task in a complex scenario using an RGB camera. The present studies has been developed in the context of the CoWriter project \footnote{The primary repository is \url{https://github.com/chili-epfl/cowriter_letter_learning}.}. However, in a child-robot interaction context, avoiding 'invasive' technologies such as wearable devices is a must to keep the experience as natural as possible. 
 
-
-%Needs to be redifined
 \section{Related Work}
 
-It is a model based approach to head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model -> plug and play
+The notion of engagement has actively been studied in a diverse set of domains, and several variables and social signals have been proposed in the literature to quantify and study it in social interactions.
 
-In this research, we address the problem of tracking the children's focus of attention during a long term child-robot interaction in a learning context, first. And second, we provide qualitative and quantitative evaluation of the outcome provided using a first person RGB camera approach.
+The evaluation of response times to provide an estimation of the user's engagement based on the correctness has been proposed in a learning context \cite{Beck} before. However, several aspects like the inter-subject variability or the environment complexity make it hardly applicable in a child-robot interaction. Additionally, other techniques \cite{Chipman07postureas} like the use of the weight distribution using a pressure sensitive chair has reported results. But it is in the computer vision field where major contributions have been done. 
 
+In \cite{peters2010investigating} approach, a model of user's interest and engagement with a virtual agent displaying shared attention behavior, by using eye gaze and head direction information is proposed. Similarly, in \cite{nakano2010estimating} an approach to estimate the user's conversational engagement with a conversational agent based on analysis of gaze patterns was implemented. Other significant work \cite{Castellano:2009} focus on feature evaluation related to the user's non-verbal behavior, the task and the companion's affective reactions are identified to predict the children's level of engagement using a Bayesian model.
 
-In neural networks requires a previous image acquisition and training as well as a fixed point of view correspondent to the data acquired.  -> The systems only works for a user standing within a certain region in front of an inmobile robot and probabilisty maps the users head orientation to some fixed focus target.
+Some few studies have proposed approaches for the detection of engagement with a robot. In \cite{Rich:2010} a computational model based on the recognition of connection events such
+as directed gaze, mutual facial gaze is proposed. In this context, some other \cite{Sanghvi:2011} focus only on the back or trunk posture as a determined factor for the assessment. A recent study \cite{anzalone} with social robots in face to face scenarios proposed a set of metrics based on non-verbal cues but manifesting some possible limitations in long-term scenarios.
 
+In this research, we address the problem of tracking the children's engagement based on their VFOA and current performed task during a long term child-robot interaction in a learning context, first. And second, we provide qualitative and quantitative evaluation of the outcome provided using a first person RGB camera approach. Moreover, this monitoring activity has been supporting our research in child-robot interaction for learning and instruction.
+\\\\
 
-The evaluation of response times to provide an estimation of the user's engagement based on the correctness has been proposed in a learning context \cite{Beck} before. However, several aspects like the inter-subject variability or the environment complexity make it hardly applicable in a child-robot interaction
-
-PAIVA curvature
-
-%Needs to be redifined
 \section{Research Questions}
-Measurement
-The participants' VFOA acquisition was the only dependent variable. This included their gaze times and patterns of looking or not looking to the targets. Data from a robot head-
-mounted Microsoft Kinect camera was coded post-hoc to quantify these measures.
 
-Hypothesis and Predictions
-It is hypothesized that there will be no generalizable pattern of participant VFOA behavior, necessitating online, in situ VFOA estimation capabilities to enable robots to communicate intentionally.
+The participants' VFOA acquisition is the only dependent variable. This includes their gaze times and patterns of looking or not looking to the targets and the synchrony on the movements. This data extracted from an RGB camera was also coded post-hoc to quantify some of these measurements.
 
-%The identification of the patterns can lead to a better understanding to the children progression. Less time means better understanding a move to next level.
+We predict that there will be no generalizable pattern of participant's VFOA behavior for different scenarios such as multiple subjects, necessitating in situ VFOA estimation capabilities to enable robots to adapt in the specific scenarios. However, we believe that off-line pattern identification can lead to a better understanding of the children progression as well as engagement level assessment in face-to-face long term interactions.
 
 \section{Approach}
 
-In our approach we use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables or RGB-D cameras for instance, this approach has a clear advantage of simplicity but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it is able to handle different number and positions of participants in the scenario.
+We propose a adaptive model based solution to approach head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model. We use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at and obtain a 3D scene representation as it is executed as a ROS (Robot Operating System) node that can be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables for instance, this approach has a clear advantage of simplicity and integration with robotic systems, but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it is able to handle different number and positions of participants in the scene.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\columnwidth]{rviz}
+    \caption{\small Rviz screenshot with Nao, camera (Nao's feet), face marker with VFOA (gray cone) and several static marker representations in the scene.}
+    \label{rviz}
+\end{figure}
 
 \subsection{Estimating Head Pose}
 The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention before dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
 
-Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose the camera matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
+\newpage
+Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose its matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
 
 \begin{equation}
 s  \; m' = A [R|t] M'
@@ -292,7 +293,8 @@ r_{fov} = tan\left(\frac{fov}{2}\right) \cdot t_x
 
 where \textit{fov} is the aperture angle of the field of view. Finally, if $ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
 
-% Plot to clarify this??
+
+% Plot to clarify this?
 
 \section{Methodology}
 \subsection{Experimental Set-up}
@@ -431,6 +433,8 @@ The solution presented can be adapted to work in new locations
 Thanks to their easiness of use in real world scenario, due to employment of non-intrusive sensors
 
 
+
+%. Less time means better understanding a move to next level.
 %Future work
 Possible focuses of attention has to be known in advance.  
 Our system could be extended to allow both user and robot to move freely.
