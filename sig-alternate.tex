@@ -190,12 +190,12 @@ We predict that there will be no generalizable pattern of participant's VFOA beh
 
 \section{Approach}
 
-We propose a adaptive model based solution to approach head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model. We use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way we can estimate where the subject was looking at and obtain a 3D scene representation as it is executed as a ROS (Robot Operating System) node that can be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables for instance, this approach has a clear advantage of simplicity and integration with robotic systems, but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it is able to handle different number and positions of participants in the scene.
+We propose a adaptive model based solution to approach head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model. We use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way, we can estimate what the subject was looking at and obtain a 3D scene representation as it is executed as a ROS (Robot Operating System) node that can be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables for instance, this approach has a clear advantage of simplicity and integration with robotic systems, but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it allows as to model complex environments, handling different number and positions of participants in the scene.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\columnwidth]{rviz}
-    \caption{\small Rviz screenshot with Nao, camera (Nao's feet), face marker with VFOA (gray cone) and several static marker representations in the scene.}
+    \caption{\small Rviz screenshot with Nao, camera (Nao's feet), face marker with VFOA (gray cone) and blue marker intersecting the field of view.}
     \label{rviz}
 \end{figure}
 
@@ -293,10 +293,10 @@ r_{fov} = tan\left(\frac{fov}{2}\right) \cdot t_x
 
 where \textit{fov} is the aperture angle of the field of view. Finally, if $ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
 
+% Schema to clarify this?
 
-% Plot to clarify this?
-
-\section{Methodology}
+\section{Case Study}
+The presented method have been successfully employed in a real child-robot interaction situation where the robot tries to engage the child in handwriting tasks using the paradigm learning by teaching.
 \subsection{Experimental Set-up}
 
 The target of this study were 6 children with ages compressed between 5 and 6 years old. The experiments were developed individually and consisted on a writing activity by turns and one story telling performed by the robot at a given time of the interaction. All this performed in a over all 20 minutes interaction average time.
@@ -313,31 +313,20 @@ robot.
             corrects the robot by directly overwriting its letters on the tablet
             with a stylus. An adult (either a therapist or an experimenter,
             depending on the studies), remains next to the child to guide the work. 
-            A second tablet allows to choose words and the camera captures the subject's face.}
+            A second tablet allows to choose demonstrations and the camera captures the subject's face.}
     \label{realSetup}
 \end{figure}
 
-A tactile tablet (with a custom application) is used for both the robot and the
-child to write: during a typical round, the child requests the robot to write
-something (a single letter, a number or a full word), and push the tablet
-towards the robot, the robot writes on the tablet by gesturing the writing (but
-without actually physically touching the tablet), the child then pull back the
-tablet, corrects the robot's attempt by writing him/herself on top or next to
-the robot's writing (see Figure~\ref{fig:diego}), and ``send'' his/her
-demonstration to the robot by pressing a small button on the tablet. The robot
-``learns'' from this demonstration and tries again.
+A tactile tablet (with a custom application) is used for both the robot and the child to write: during a typical round, the child requests the robot to write something (a single letter, a number or a full word), and push the tablet towards the robot, the robot writes on the tablet by gesturing the writing (but without actually physically touching the tablet), the child then pull back the
+tablet, corrects the robot's attempt by writing him/herself on top or next to the robot's writing (see Figure~\ref{fig:diego}), and ``send'' his/her demonstration to the robot by pressing a small button on the tablet. The robot ``learns'' from this demonstration and tries again.
 
-Since the child is assumed to take on the role of the teacher, we had to ensure
-(s)he would be able to manage by him/herself the turn-taking and the overall
-progression of the activity (moving to the next letter or word). In our design,
-the turn-taking relies on the robot prompting for feedback once it is done with
-its writing (simple sentences like ``What do you think?''), and pressing on a
-small robot icon on the tablet once the child has finished correcting. In our
-experiments, both were easy to grasp for children.
+Since the child is assumed to take on the role of the teacher, we had to ensure (s)he would be able to manage by him/herself the turn-taking and the overall progression of the activity (moving to the next letter or word). In our design, the turn-taking relies on the robot prompting for feedback once it is done with its writing (simple sentences like ``What do you think?''), and pressing on a
+small robot icon on the tablet once the child has finished correcting. In our experiments, both were easy to grasp for children.
 
 Implementing such a system raises several challenges that are discussed in detail in \cite{Hood:2015}.
 
-An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The camera was located at 5 cm from the center of Nao's feet and its holder was tied to a wood base for stability purposes. Thus, the camera's objective was 9 cm above and $ 40\degree $ inclination with respect to the surface of the table. 
+An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The camera was located at 5 cm from the center of Nao's feet and its holder was tied to a wood base for stability purposes. Thus, the camera's objective was 9 cm above and $ 40\degree $ inclination with respect to the surface of the table to maximize the detection during the writing time. However, Nao's camera could have been used, always considering the \textit{tf} frame matrix update according to the head orientation.
+
 The subjects were typically located 50 cm away from the robot with the first tablet in front and the second one 30 cm to the left of the first one. In the same way, the experimenter was located around 60 cm to the left of the subject. Finally, two observers were located far away from the interaction field to manually assess the state of the interaction.
 
 Figure \ref{drawSetup} allows us to intuitively identify several focuses of attention along the interaction such as the two tablets, the robot, the experimenter and the observers located in the diagonal.
@@ -371,7 +360,7 @@ According to \cite{stiefelhagen2002tracking} the head orientation's contribution
 
 Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations from two evaluators with an average reliability of $ \alpha--------\% $.
 
-In order to calculate the inter-rater reliability between the two measurements (real-captured and real-expected), the overlap percentage between the two curves has been computed. A more reliable measurement between the real and captured focuses of attention is provided using the cosine similarity. These results are shown in table \ref{tab:results}. 
+In order to calculate the inter-rater reliability between the two measurements (real-captured and real-expected), the overlap percentage between the two curves has been computed. A more reliable measurement in terms of time shifting between the real and captured focuses of attention is provided using the cosine similarity. These results are shown in table \ref{tab:results}. 
 
 \begin{table}[h!]
 	\centering
@@ -396,6 +385,8 @@ The results has shown that the percentage of accuracy in the tracking is not onl
     \includegraphics[width=2\columnwidth]{realExpected}
     \caption{\small In blue, real focus accoding to two observer assessment. In cyan, the overlap between the real and the expected focus of attentions. In yellow, the repeated pattern in turn-taking and orange is the experimenter's suggestion to switch to a difficult word}
     \label{fig:realExpected}
+    
+    % Maybe we should add the expected VFOA
 \end{figure*}
 
 
@@ -406,44 +397,36 @@ The results has shown that the percentage of accuracy in the tracking is not onl
     \label{fig:realCaptured}
 \end{figure*}
 
+According to figure \ref{fig:realExpected} several findings can be analyzed in detail. The matching curve (cyan color) shows the overlapping between the expected and the real focuses of attention. As can be noticed there is a fluctuation at the beginning of the interaction as well as just before the activity switching. These chaotic gaze manifestation is what we call an automatic discovery of events, when the user experiences an uncertainty in the present situation. 
 
-In several occasions during the interaction, none of the focuses of attention were within the field of view due to the time transition from one focus to another. In order to deal with these few cases we assume that the minimum distance between the height of the field of view (cone) and the targets corresponds to the most likely focus of attention.
+The first one of the previous two situations presented above is due to the novelty effect the subjects experience for the first time in front of the system and according to the rest of participants suggests that the adaptation time is around the first 2 minutes of interaction. In the second case, an unexpected robot behavior produces such reaction due to an activity switching, the story telling.
 
-However, we also want to distinguish such cases when the subject is directly not looking where the defined targets are located, but towards a region far from the interaction field. These cases are not common but they can be easily identified by setting a horizontal threshold to the field of view.
+It is important to consider that in some occasions during the interaction, none of the focuses of attention were within the field of view due to the time transition from one focus to another resulting in an ambiguity. In order to deal with these few cases it is assumed that the minimum distance between the height of the field of view (cone) and the targets corresponds to the most likely focus of attention. However, we also want to distinguish such cases when the subject is directly not looking where the defined targets are located, but towards a region far from the interaction field. These cases are not common but they can be easily identified by setting a horizontal threshold to the field of view.
 
-Several results can extracted from figure \ref{fig:realExpected}. First, the matching curve shows the overlapping between the expected and the real focuses of attention. As we can see there is a fluctuation at the beginning of the interaction suggesting a novelty effect. It suggests that the adaptation time is around the first 2 minutes in average. 
+A relevant trend that can be observed is the continuous `look for approval' situation where the subjects look at the experimenter in order to provide feedback about the robot's response before providing their own one (see yellow boxes in figure \ref{fig:realExpected}). Such transition tablet-experimenter becomes more frequent in several cases, for instance when the experimenter makes a suggestion (orange box in figure \ref{fig:realExpected}), in this case, switch to a more complicated word.
 
-Second, once the turn-taking is established, a pattern becomes visible during the subject's feedback, when a word is being written by the children: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It shows that the subject is using the word model in the selection tablet to provide a better answer to the robot. But not only that, the subjects also decrease the response time after each shift as well as the gaze frequency towards the model suggesting and improvement over time. Moreover, when a new word is selected for playing, the same behavior is replicated (see yellow boxes in figure \ref{fig:realExpected}).
+Once the turn-taking is established, a pattern becomes visible during the subject's feedback, when an attempt is performed: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It also reveals that the subject is using the demonstration model in the selection tablet to provide a better answer to the robot. In fact, subjects decrease the response time after each shift as well as the gaze frequency towards the model suggesting an assimilation over time. Moreover, when a new demonstration is selected for playing, the same behavior is replicated (see yellow boxes in figure \ref{fig:realExpected}).
 
-A third trend that can be observed is the continuous 'look for approval' situation where the subjects look at the experimenter in order to provide feedback about the robot's response before providing their own one (see yellow boxes in figure \ref{fig:realExpected}). Such transition tablet-experimenter becomes more frequent in several cases, for instance: An unexpected situation is faced (before the story telling) or the experimenter makes a suggestion (orange box in figure \ref{fig:realExpected}).
+If we consider the previous case, evaluating the subject's progression together with the time on task may be an indicator of engagement: If the subject answers so quickly with respect to the previous attempts with a poorer handwriting may be the case she is not engaged anymore. In such hypothetical case an activity switch can be easily implemented in a robot architecture. It confirms the findings reported in \cite{anzalone} where time response to event is proposed to account quality of interaction. 
+
+Therefore, a high amount of gaze to selection towards the demonstration provided can reveal that the challenge is too big or no gaze, the exactly the opposite. In this case, the robot response can be adapted to the situation. 
+
+It is important to notice that the initiative of the robot into the learning process in a turn-taking activity produces an effect in the engagement of the human partner. However, experience suggests that a robot that learns evoke a positive action in the partner. But the opposite, a robot that is not able to progress over time, makes the opposite effect.
 
 Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
-
-%what do you think? -> tablet -> robot -> facilitator -> pattern
-
-%Too much gaze to selection: the challenge may be too big, let's adapt response from robot
-
-%Use time to account quality of interaction?
-
+% Still under construction
 \section{Conclusions}
-The rate of attention shift can predict retained learning.
-%Support this with a plot averaging all interactions of all subjects 
-The solution presented can be adapted to work in new locations
-Thanks to their easiness of use in real world scenario, due to employment of non-intrusive sensors
+The rate of attention shift can predict retained learning. If we consider the gaze shift within the feedback episodes, it is possible to distinguish between long and short based on the number of previous repetitions playing with the same word.
+%Plot -> Support this with a plot averaging all interactions of all subjects
+%Plot -> Time gets reduced at the same time correctness improves
 
+Furthermore, the solution presented can be extended to work in different platforms for simulating complex interaction scenarios monitoring several VFOA without employment of intrusive sensors. Although it has not been tested in a real scenario with several subjects at the same time, the approach allows to handle such situations too.
 
+%Future work & Limitations
+On one hand, several future work need to be considered in the future. The most relevant one, the fact that the positions of the VFOA need to be known in advance and defined as static \textit{tf} frames. Moreover the gaze information acquired during the interactions can also be useful to develop actively the concept gaze-aware robot, where not only the robot knows where you look at, but shares the same subject's VFOA when the activity state allows it. 
 
-%. Less time means better understanding a move to next level.
-%Future work
-Possible focuses of attention has to be known in advance.  
-Our system could be extended to allow both user and robot to move freely.
-develop the concept of gaze-aware robot Woud be nice to do it in an unconstrained environment.
-
-It is necessary to take into account that eye gaze information is neglected which induces a certain amount of error, as well as the noise induced by the 3D pose estimation computed from face landmarkers.
-
-From first person videos -> we put the camera there to maximize the detection during the writing time but it could installed in the head of the robot as tf even with movement constantly updating the tf frame matrix.
-
+On the other hand, the main limitations of this approach are based on the fact that the eye gaze information is neglected which induces a certain amount of error, as well as the noise induced by the 3D pose estimation computed from face landmarkers.
 
 %ACKNOWLEDGMENTS are optional
 \section*{Acknowledgments}
