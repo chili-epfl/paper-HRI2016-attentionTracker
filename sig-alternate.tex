@@ -194,15 +194,14 @@ We propose a adaptive model based solution to approach head pose estimation that
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\columnwidth]{rviz}
-    \caption{\small Rviz screenshot with Nao, camera (Nao's feet), face marker with VFOA (gray cone) and blue marker intersecting the field of view.}
+    \includegraphics[width=0.9\columnwidth]{rviz_camera}
+    \caption{\small Rviz screenshot showing Nao, camera (Nao's feet), face detected with its field of view (gray cone) and blue marker intersecting as current VFOA.}
     \label{rviz}
 \end{figure}
 
 \subsection{Estimating Head Pose}
 The first step is to estimate the head pose using the pin-hole model shown in equation \ref{eq:pinHole}. As we mention before dlib library facilitates the task by providing the 2D points \textit{m'} that composes the face silhouette. However, it is enough with obtaining eight spread points, such as right and left eyes, right and left tragions, sellion or nasal depression zone, pronasale or center of the nose, stomion or center of the mouth and menton.
 
-\newpage
 Likewise, the 3D face model is needed. The proposed head pose estimation method would work best with a 3D face model of the query subject itself. When a 3D face model of the subject is not available, as in many practical situations, a 3D face model of a subject can be used. This is an estimation of the same anthropometric points \textit{M'} (for North American Caucasians) in the 3D space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters are necessary to be able to compose its matrix \textit{A}. The components are expanded in equation \ref{eq:pinHole2}.	
 
 \begin{equation}
@@ -305,7 +304,7 @@ Figure~\ref{realSetup} illustrates our general experimental setup: a
 face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
 robot.
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[width=1\columnwidth]{realSetup}
     \caption{\small Our experimental setup: face-to-face interaction with a {\sc
@@ -331,7 +330,7 @@ The subjects were typically located 50 cm away from the robot with the first tab
 
 Figure \ref{drawSetup} allows us to intuitively identify several focuses of attention along the interaction such as the two tablets, the robot, the experimenter and the observers located in the diagonal.
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\columnwidth]{drawSetup}
     \caption{\small Graphical representation of he set-up and the possible children focuses of attention in the scene, in red.}
@@ -358,7 +357,7 @@ In this work, head orientation is used to predict a person's focus of attention 
 
 According to \cite{stiefelhagen2002tracking} the head orientation's contribution in overall gaze direction is 68.9\% showing agreement between both measurements. In addition, it shows that the head orientation alone can get an average accuracy of 88.7\% detecting the focus of attention in a meeting application scenario using a head-mounted display with eye and head tracking.
 
-Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations from two evaluators with an average reliability of $ \alpha--------\% $.
+Our results for a peer-to-peer work scenarios using an approach based on RGB camera are summarized in table \ref{tab:results} where the \textit{expected} is the focus of attention that given the state of the system, it is likely to attract the subject's gaze. In the same manner, the \textit{captured} is the focus of attention our approach provides and the \textit{real}, the ground truth of the subject's gaze direction based on manual annotations from two evaluators with an average reliability of $ \alpha = .89 $.
 
 In order to calculate the inter-rater reliability between the two measurements (real-captured and real-expected), the overlap percentage between the two curves has been computed. A more reliable measurement in terms of time shifting between the real and captured focuses of attention is provided using the cosine similarity. These results are shown in table \ref{tab:results}. 
 
@@ -379,25 +378,23 @@ The results has shown that the percentage of accuracy in the tracking is not onl
 
 \subsection{Subject's Focus of Attention Analysis}
 
-
 \begin{figure*}
     \centering
-    \includegraphics[width=2\columnwidth]{realExpected}
-    \caption{\small In blue, real focus accoding to two observer assessment. In cyan, the overlap between the real and the expected focus of attentions. In yellow, the repeated pattern in turn-taking and orange is the experimenter's suggestion to switch to a difficult word}
+    \includegraphics[width=1.8\columnwidth]{realExpected}
+    \caption{\small In blue, real VFOA accoding to two observer's assessment. In cyan, the matching between the real and the obtained VFOA. In yellow, the repeated pattern in turn-taking and in orange, the experimenter's suggestion to choose a new word.}
     \label{fig:realExpected}
     
     % Maybe we should add the expected VFOA
 \end{figure*}
 
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=2\columnwidth]{bitmap_zoom}
-    \caption{\small At the top in blue, the real focus accoding to two observer assessment. In green, the captured focus using our aproach and in cyan, the overlap between them. At the bottom, the cosine similarity matrix between both curves with a window size of 10 seconds.}
-    \label{fig:realCaptured}
-\end{figure*}
-
 According to figure \ref{fig:realExpected} several findings can be analyzed in detail. The matching curve (cyan color) shows the overlapping between the expected and the real focuses of attention. As can be noticed there is a fluctuation at the beginning of the interaction as well as just before the activity switching. These chaotic gaze manifestation is what we call an automatic discovery of events, when the user experiences an uncertainty in the present situation. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{bitmap}
+    \caption{\small Cosine similarity matrix between real and obtained VFOA using a 10 sec. window size computation. The correspondent numbers are shown in figure \ref{fig:realCaptured}.}
+    \label{fig:bitmap}
+\end{figure}
 
 The first one of the previous two situations presented above is due to the novelty effect the subjects experience for the first time in front of the system and according to the rest of participants suggests that the adaptation time is around the first 2 minutes of interaction. In the second case, an unexpected robot behavior produces such reaction due to an activity switching, the story telling.
 
@@ -409,9 +406,30 @@ Once the turn-taking is established, a pattern becomes visible during the subjec
 
 If we consider the previous case, evaluating the subject's progression together with the time on task may be an indicator of engagement: If the subject answers so quickly with respect to the previous attempts with a poorer handwriting may be the case she is not engaged anymore. In such hypothetical case an activity switch can be easily implemented in a robot architecture. It confirms the findings reported in \cite{anzalone} where time response to event is proposed to account quality of interaction. 
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{heatmap}
+    \caption{\small 2D histogram of a subject's head movements.}
+    \label{heatmap}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{kmeans}
+    \caption{\small K-means clustering of the VFOA.}
+    \label{kmeans}
+\end{figure}
+        
 Therefore, a high amount of gaze to selection towards the demonstration provided can reveal that the challenge is too big or no gaze, the exactly the opposite. In this case, the robot response can be adapted to the situation. 
 
 It is important to notice that the initiative of the robot into the learning process in a turn-taking activity produces an effect in the engagement of the human partner. However, experience suggests that a robot that learns evoke a positive action in the partner. But the opposite, a robot that is not able to progress over time, makes the opposite effect.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1.81\columnwidth]{realCaptured}
+    \caption{\small Real VFOA accoding to two observer's assessment. In green, the obtained VFOA using our aproach and in cyan, the mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
+    \label{fig:realCaptured}
+\end{figure*}
 
 Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
