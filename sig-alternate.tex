@@ -190,7 +190,15 @@ We predict that there will be no generalizable pattern of participant's VFOA beh
 
 \section{Approach}
 
-We propose a adaptive model based solution to approach head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model. We use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation. In this way, we can estimate what the subject was looking at and obtain a 3D scene representation as it is executed as a ROS (Robot Operating System) node that can be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables for instance, this approach has a clear advantage of simplicity and integration with robotic systems, but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it allows as to model complex environments, handling different number and positions of participants in the scene.
+We propose a adaptive model based solution to approach head pose estimation that finds correspondences between facial landmarks points and their respective locations in a face model. We use the open-source library dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton of the subject's face and then, use the obtained landmarkers to calculate the head pose orientation estimation (see figure \ref{system}). In this way, we can estimate what the subject was looking at and obtain a 3D scene representation as it is executed as a ROS (Robot Operating System) node that can be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted displays, eye-trackers, wearables for instance, this approach has a clear advantage of simplicity and integration with robotic systems, but also becomes accurate enough for general purposes in face-to-face interactions. In addition, it allows as to model complex environments, handling different number and positions of participants in the scene.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{system}
+    \caption{\small System overview showing the most relevant components involved in the estimation.}
+    \label{system}
+\end{figure}
+
 
 \begin{figure}
     \centering
@@ -300,7 +308,7 @@ The presented method have been successfully employed in a real child-robot inter
 
 The target of this study were 6 children with ages compressed between 5 and 6 years old. The experiments were developed individually and consisted on a writing activity by turns and one story telling performed by the robot at a given time of the interaction. All this performed in a over all 20 minutes interaction average time.
 
-Figure~\ref{realSetup} illustrates our general experimental setup: a
+Figure~\ref{fig:realSetup} illustrates our general experimental setup: a
 face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
 robot.
 
@@ -313,11 +321,11 @@ robot.
             with a stylus. An adult (either a therapist or an experimenter,
             depending on the studies), remains next to the child to guide the work. 
             A second tablet allows to choose demonstrations and the camera captures the subject's face.}
-    \label{realSetup}
+    \label{fig:realSetup}
 \end{figure}
 
 A tactile tablet (with a custom application) is used for both the robot and the child to write: during a typical round, the child requests the robot to write something (a single letter, a number or a full word), and push the tablet towards the robot, the robot writes on the tablet by gesturing the writing (but without actually physically touching the tablet), the child then pull back the
-tablet, corrects the robot's attempt by writing him/herself on top or next to the robot's writing (see Figure~\ref{fig:diego}), and ``send'' his/her demonstration to the robot by pressing a small button on the tablet. The robot ``learns'' from this demonstration and tries again.
+tablet, corrects the robot's attempt by writing him/herself on top or next to the robot's writing, and ``send'' his/her demonstration to the robot by pressing a small button on the tablet. The robot ``learns'' from this demonstration and tries again.
 
 Since the child is assumed to take on the role of the teacher, we had to ensure (s)he would be able to manage by him/herself the turn-taking and the overall progression of the activity (moving to the next letter or word). In our design, the turn-taking relies on the robot prompting for feedback once it is done with its writing (simple sentences like ``What do you think?''), and pressing on a
 small robot icon on the tablet once the child has finished correcting. In our experiments, both were easy to grasp for children.
@@ -366,10 +374,10 @@ In order to calculate the inter-rater reliability between the two measurements (
 	\caption{Tracking accuracy in face-to-face scenario}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
 	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
-	\small Track(\%) & \small78.7 & \small81.1 & \small73.7 & \small75.6 & \small77.1 & \small68.7 & \small75.8 \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small93.1 & \small  & \small & \small & \small & \small & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small59.4 & \small & \small & \small & \small & \small & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.72 & \small & \small & \small & \small & \small & \small \\ \hline
+	\small Track(\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small \\ \hline
+	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.92 & \small \\ \hline
 	\end{tabular}
 	\label{tab:results}
 \end{table}
@@ -381,7 +389,7 @@ The results has shown that the percentage of accuracy in the tracking is not onl
 \begin{figure*}
     \centering
     \includegraphics[width=1.8\columnwidth]{realExpected}
-    \caption{\small In blue, real VFOA accoding to two observer's assessment. In cyan, the matching between the real and the obtained VFOA. In yellow, the repeated pattern in turn-taking and in orange, the experimenter's suggestion to choose a new word.}
+    \caption{\small In blue, real VFOA of subject 4 accoding to two observer's assessment. In cyan, the matching between the real and the obtained VFOA. In yellow, the repeated pattern in turn-taking and in orange, the experimenter's suggestion to choose a new word.}
     \label{fig:realExpected}
     
     % Maybe we should add the expected VFOA
@@ -416,7 +424,7 @@ If we consider the previous case, evaluating the subject's progression together 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\columnwidth]{kmeans}
-    \caption{\small K-means clustering of the VFOA.}
+    \caption{\small K-means clustering of the head movements.}
     \label{kmeans}
 \end{figure}
         
@@ -427,17 +435,37 @@ It is important to notice that the initiative of the robot into the learning pro
 \begin{figure*}
     \centering
     \includegraphics[width=1.81\columnwidth]{realCaptured}
-    \caption{\small Real VFOA accoding to two observer's assessment. In green, the obtained VFOA using our aproach and in cyan, the mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
+    \caption{\small Real VFOA of subject 4 accoding to two observer's assessment. In green, the obtained VFOA using our aproach and in cyan, the mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
     \label{fig:realCaptured}
 \end{figure*}
 
 Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{errorR}
+    \caption{\small .}
+    \label{errorR}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{gazeR}
+    \caption{\small .}
+    \label{gazeR}
+\end{figure}
+        
+        
+        
+        
 % Still under construction
 \section{Conclusions}
 The rate of attention shift can predict retained learning. If we consider the gaze shift within the feedback episodes, it is possible to distinguish between long and short based on the number of previous repetitions playing with the same word.
 %Plot -> Support this with a plot averaging all interactions of all subjects
-%Plot -> Time gets reduced at the same time correctness improves
+%Plot -> Time gets reduced at the same time correctness improves -> Did not show any good results
+%Plot -> Difference in gaze during feedback from a subject's whose learning is assimilated vs a one is not: The second shows more intermitent tablet-selection gaze directions.
+%Diagram dlib/ROS/launch/nodes/params_ini/txt_model_face
 
 Furthermore, the solution presented can be extended to work in different platforms for simulating complex interaction scenarios monitoring several VFOA without employment of intrusive sensors. Although it has not been tested in a real scenario with several subjects at the same time, the approach allows to handle such situations too.
 
