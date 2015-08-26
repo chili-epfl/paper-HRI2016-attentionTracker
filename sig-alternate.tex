@@ -374,10 +374,10 @@ In order to calculate the inter-rater reliability between the two measurements (
 	\caption{Tracking accuracy in face-to-face scenario}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
 	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
-	\small Track(\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small \\ \hline
-	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.92 & \small \\ \hline
+	\small Track(\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small86.4 \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small92.7 \\ \hline
+	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small72.8 \\ \hline
+	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.89 & \small0.8 \\ \hline
 	\end{tabular}
 	\label{tab:results}
 \end{table}
@@ -445,27 +445,28 @@ Finally, the subjects set their attention more often to the tablet displaying th
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\columnwidth]{errorR}
-    \caption{\small .}
+    \caption{\small Linear regression of all subject attempts against the word correctness, measured as the average euclidean distance of each leter in its corresponding eigenspace with respect to a reference leter. The gray region defines the confidence interval.}
     \label{errorR}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\columnwidth]{gazeR}
-    \caption{\small .}
+    \caption{\small Linear regression of all subject attempts against the occurrences of a gaze shift from the writing tablet towards the model provided. The gray region defines the confidence interval.}
     \label{gazeR}
 \end{figure}
         
         
-        
-        
+%If less than a 0.5 seconds without tracking -> Precission  
+% Maker-less technology decrease the complexity of the system and increase the naturally of the interaction
 % Still under construction
 \section{Conclusions}
 The rate of attention shift can predict retained learning. If we consider the gaze shift within the feedback episodes, it is possible to distinguish between long and short based on the number of previous repetitions playing with the same word.
-%Plot -> Support this with a plot averaging all interactions of all subjects
+%Plot -> Support this with a plot averaging all interactions of all subjects -> Done
 %Plot -> Time gets reduced at the same time correctness improves -> Did not show any good results
 %Plot -> Difference in gaze during feedback from a subject's whose learning is assimilated vs a one is not: The second shows more intermitent tablet-selection gaze directions.
-%Diagram dlib/ROS/launch/nodes/params_ini/txt_model_face
+%Diagram dlib/ROS/launch/nodes/params_ini/txt_model_face -
+%Need of more subjects to test the hypothesis
 
 Furthermore, the solution presented can be extended to work in different platforms for simulating complex interaction scenarios monitoring several VFOA without employment of intrusive sensors. Although it has not been tested in a real scenario with several subjects at the same time, the approach allows to handle such situations too.
 
