@@ -239,11 +239,6 @@ In this work, head orientation is used to predict a person's focus of attention 
 \item How can we evaluate the performance of the children based on the focus of attention?
 \end{enumerate}
 
-% Stats from the paper
-% Stats from me
-% Real vs captured plot
-% Real vs expected plot
-
 \subsection{From Face Detection to Focus of Attention}
 
 According to \cite{stiefelhagen2002tracking} the head orientation's contribution in overall gaze direction is 68.9\% showing agreement between both measurements. In addition, it shows that the head orientation alone can get an average accuracy of 88.7\% detecting the focus of attention in a meeting application scenario using a head-mounted display with eye and head tracking.
@@ -311,9 +306,11 @@ If we consider the previous case, evaluating the subject's progression together 
     \label{kmeans}
 \end{figure}
         
-Therefore, a high amount of gaze to selection towards the demonstration provided can reveal that the challenge is too big or no gaze, the exactly the opposite. In this case, the robot response can be adapted to the situation. 
+However, a high amount of gaze shift \ref{fig:gazeR} towards the demonstration provided can reveal that the challenge is too big or no gaze, the exactly the opposite. In this case, the robot response can be adapted to the situation. Similar, but least relevant results are obtained using the correctness \ref{fig:errorR} of the child's feedback after each attempt. 
 
-It is important to notice that the initiative of the robot into the learning process in a turn-taking activity produces an effect in the engagement of the human partner. However, experience suggests that a robot that learns evoke a positive action in the partner. But the opposite, a robot that is not able to progress over time, makes the opposite effect.
+This information can be used to estimate the child's state during the interaction. For instance, if we consider that a low level of engagement is produced by extremely high or low demanding situations, it is possible to assess the engagement level during the interaction based on gaze shift and word correctness.
+
+It is also important to notice that the initiative of the robot into the learning process in a turn-taking activity produces an effect in the engagement of the human partner. However, experience suggests that a robot that learns evoke a positive action in the partner. But the opposite, a robot that is not able to progress over time, produces the opposite effect.
 
 \begin{figure*}
     \centering
@@ -322,41 +319,34 @@ It is important to notice that the initiative of the robot into the learning pro
     \label{fig:realCaptured}
 \end{figure*}
 
-Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
-
+%Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\columnwidth]{errorR}
     \caption{\small Linear regression of all subject attempts against the word correctness, measured as the average euclidean distance of each leter in its corresponding eigenspace with respect to a reference leter. The gray region defines the confidence interval.}
-    \label{errorR}
+    \label{fig:errorR}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\columnwidth]{gazeR}
     \caption{\small Linear regression of all subject attempts against the occurrences of a gaze shift from the writing tablet towards the model provided. The gray region defines the confidence interval.}
-    \label{gazeR}
+    \label{fig:gazeR}
 \end{figure}
         
-        
-%If less than a 0.5 seconds without tracking -> Precission  
-% Maker-less technology decrease the complexity of the system and increase the naturally of the interaction
-% Still under construction
 \section{Conclusions}
-The rate of attention shift can predict retained learning. If we consider the gaze shift within the feedback episodes, it is possible to distinguish between long and short based on the number of previous repetitions playing with the same word.
-%Plot -> Support this with a plot averaging all interactions of all subjects -> Done
-%Plot -> Time gets reduced at the same time correctness improves -> Did not show any good results
-%Plot -> Difference in gaze during feedback from a subject's whose learning is assimilated vs a one is not: The second shows more intermitent tablet-selection gaze directions.
-%Diagram dlib/ROS/launch/nodes/params_ini/txt_model_face -
-%Need of more subjects to test the hypothesis
+In this work we have presented an on-line vision-based engagement assessment solution that can be extended to work in different platforms for simulating complex interaction scenarios monitoring several VFOA with a maker-less technology. It provides some benefits like the decrement of the system complexity as well as the increment of the naturalness of the interaction.  
 
-Furthermore, the solution presented can be extended to work in different platforms for simulating complex interaction scenarios monitoring several VFOA without employment of intrusive sensors. Although it has not been tested in a real scenario with several subjects at the same time, the approach allows to handle such situations too.
+Furthermore, although it has not been tested in a real scenario with several subjects at the same time, the approach also allows to handle such situations too.
 
-%Future work & Limitations
-On one hand, several future work need to be considered in the future. The most relevant one, the fact that the positions of the VFOA need to be known in advance and defined as static \textit{tf} frames. Moreover the gaze information acquired during the interactions can also be useful to develop actively the concept gaze-aware robot, where not only the robot knows where you look at, but shares the same subject's VFOA when the activity state allows it. 
+During the case study, results show that it is possible to distinguish between long and short feedback episodes based on the gaze shift and depending on the previous attempts performed by the subject. As a result, gaze-shift together with the number of attempts becomes a reliable indicator candidate in the assessment of the engagement during the activity.
 
-On the other hand, the main limitations of this approach are based on the fact that the eye gaze information is neglected which induces a certain amount of error, as well as the noise induced by the 3D pose estimation computed from face landmarkers.
+Additionally, both the gaze shift and the correctness of the feedback seem to be strictly correlated with the learning gain during the activity as they go in decrement after each attempt provided by the subjects. Despite the fact that the results are encouraging, there is a need of validation with a greater amount of subject's.
+
+Regarding to the approach used, some limitations need to be considered. The most relevant one, the fact that the positions of the VFOA need to be known in advance and defined as static \textit{tf} frames. Moreover the gaze information acquired during the interactions can also be useful to develop actively the concept gaze-aware robot, where not only the robot knows where the subject looks at, but shares the same subject's VFOA when the activity state allows it. 
+
+Moreover, other limitations are based on the fact that the eye gaze information is neglected which induces a certain amount of error, as well as the noise induced by the 3D pose estimation computed from face landmarkers.
 
 %ACKNOWLEDGMENTS are optional
 \section*{Acknowledgments}
