@@ -67,7 +67,7 @@ In this research, we address the problem of tracking the children's engagement b
 
 \section{Research Questions}
 
-The participants' VFOA acquisition is the only dependent variable. This includes their gaze times and patterns of looking or not looking to the targets and the synchrony on the movements. This data extracted from an RGB camera was also coded post-hoc to quantify some of these measurements.
+The participants' VFOA acquisition is the only dependent variable. This includes their gaze times and patterns of looking or not looking to the targets. This data extracted from an RGB camera was also coded post-hoc to quantify some of these measurements.
 
 We predict that there will be no generalizable pattern of participant's VFOA behavior for different scenarios such as multiple subjects, necessitating in situ VFOA estimation capabilities to enable robots to adapt in the specific scenarios. However, we believe that off-line pattern identification can lead to a better understanding of the children progression as well as engagement level assessment in face-to-face long term interactions.
 
@@ -292,7 +292,7 @@ It is important to consider that in some occasions during the interaction, none 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\columnwidth]{bitmap}
+    \includegraphics[width=0.7\columnwidth]{bitmap}
     \caption{\small Cosine similarity matrix between real and cap-tured VFOA using a 10 sec. window size computation. The correspondent numbers are shown in figure \ref{fig:realCaptured}.}
     \label{fig:bitmap}
 \end{figure}
@@ -302,20 +302,25 @@ A relevant trend that can be observed is the continuous `look for approval' situ
 Once the turn-taking is established, a pattern becomes visible during the subject's feedback, when an attempt is performed: Such pattern shows a high intermittent gaze frequency from the tablet to the selection. It also reveals that the subject is using the demonstration model in the selection tablet to provide a better answer to the robot. In fact, subjects decrease the response time after each shift as well as the gaze frequency towards the model suggesting an assimilation over time. Moreover, when a new demonstration is selected for playing, the same behavior is replicated (see yellow boxes in figure \ref{fig:realExpected}).
 \\
 \subsection{Focus of attention distribution}
-Additional information of the head pose can be obtained for the evaluation of the VFOA distribution. Figure \ref{heatmap} show the most salient focuses of attention where the peaks are located. These peaks are mainly projected between the triangle composed by the robot, the writing tablet and the selection tablet using an unsupervised K-means clustering method as figure \ref{kmeans} reveals, considering the observers as negligible.
+Additional information of the head pose can be obtained for the evaluation of the VFOA distribution. Figure \ref{fig:heatmap} shows the most salient focuses of attention where the peaks are located. These peaks are mainly projected between the triangle composed by the robot, the writing tablet and the selection tablet using an unsupervised K-means clustering method reveals, considering the observers as negligible VFOA.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\columnwidth]{heatmap}
-    \caption{\small 2D histogram of subject 4 head movements. (head yaw on x-axis, pitch on y-axis). In red, peaks representing the most salient zones.}
-    \label{heatmap}
-\end{figure}
+% Workaround to do subfigure since the packege looks not to work
+\begin{figure}
+  \centering
+  \begin{tabular}{@{}c@{}}
+    \includegraphics[width=.7\linewidth,height=100pt]{heatmap} \\
+    \small (a)  2D histogram.
+  \end{tabular}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\columnwidth]{kmeans}
-    \caption{\small K-means clustering of the head movements.}
-    \label{kmeans}
+  \vspace{\floatsep}
+
+  \begin{tabular}{@{}c@{}}
+    \includegraphics[width=.7\linewidth,height=100pt]{kmeans} \\
+    \small (b) K-means clustering.
+  \end{tabular}
+
+  \caption{ \small Subject 4 head movements. (head yaw on x-axis, pitch on y-axis).}
+  \label{fig:heatmap}
 \end{figure}
 
 \subsection{Engagement assessment}
@@ -324,17 +329,21 @@ If we consider the case shown in section \ref{fromFaceTo}, evaluating the subjec
 However, a high amount of gaze shift (figure \ref{fig:gazeR}) towards the demonstration provided can reveal that the challenge is too big or no gaze, the exactly the opposite. In this case, the robot response can be adapted to the situation. Similar, but least relevant results are obtained using the correctness (figure \ref{fig:errorR}) of the child's feedback after each attempt. 
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.9\columnwidth]{gazeR}
-    \caption{\small Linear regression of all subject attempts against the occurrences of a gaze shift from the writing tablet towards the model provided. The gray region defines the confidence interval.}
-    \label{fig:gazeR}
-\end{figure}
+  \centering
+  \begin{tabular}{@{}c@{}}
+    \includegraphics[width=.7\linewidth,height=100pt]{gazeR} \\
+    \small (a) Occurrences of a gaze shift.
+  \end{tabular}\label{fig:gazeR}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\columnwidth]{errorR}
-    \caption{\small Linear regression of all subject attempts against the word correctness, measured as the average euclidean distance of each leter in its corresponding eigenspace with respect to a reference leter. The gray region defines the confidence interval.}
-    \label{fig:errorR}
+  \vspace{\floatsep}
+
+  \begin{tabular}{@{}c@{}}
+    \includegraphics[width=.7\linewidth,height=100pt]{errorR} \\
+    \small (b) Word correctness.
+  \end{tabular}\label{fig:errorR}
+
+  \caption{ \small Linear regression of all subject attempts against the gaze shift tablet-model (a) and the correctness as the average euclidean distance of each letter in its corresponding eigenspace with respect to a reference letter (b). The gray region defines the confidence interval.}
+  
 \end{figure}
 
 
