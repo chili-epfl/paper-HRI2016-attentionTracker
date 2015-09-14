@@ -48,8 +48,7 @@ robot to account and react to the user's changing engagement in real-time.
 
 \keywords{Human-Robot Interaction; Social Robotics; Attention Assessment; Engagement; Computer Vision.}
 
-\section{Introduction}
-
+\section{Introduction: Attention and Engagement}
 In the recent years, research is pushing forward in building intelligent systems
 and environments that try to maximize the benefits of cooperation with humans
 based on verbal and non-verbal communication. The interaction between social
@@ -92,7 +91,7 @@ in~\cite{argyle1969social}. In this way, in situ Visual Focus of Attention
 (VFOA) estimation is advantageous to human-robot interaction and a major
 contribution towards a better understanding of the interaction quality.
 
-\subsection{Importance in learning environments}
+\paragraph{Motivation: Impact on Learning}
 
 Education and learning environments are interesting application fields for
 research on attention assessment, since sustaining children's engagement over
@@ -121,8 +120,7 @@ technique, being based on a regular, low-end RGB camera, avoids the use of
 otherwise typically invasive technologies such as eyetrackers, that would
 negatively impact the natural of the interaction.
 
-\subsection{Related Work}
-
+\subsection*{Engagement and Attention: Related Work}
 The notion of engagement has actively been studied in a diverse set of domains,
 and several variables and social signals have been proposed in the literature to
 quantify and study it in social interactions.
@@ -162,9 +160,18 @@ quantitative evaluation of the outcome provided using a first person RGB sensor
 approach. Moreover, this monitoring activity has been supporting our research in
 child-robot interaction for learning and instruction purposes.
 
+\fixme{Litterature review on visual attention...?}
 
-\subsection{Research Questions}
+According to \cite{stiefelhagen2002tracking} the head orientation's contribution
+in overall gaze direction is 68.9\% showing agreement between both measurements.
+In addition, it shows that the head orientation alone can get an average
+accuracy of 88.7\% detecting the focus of attention in a meeting application
+scenario using a head-mounted display with eye and head tracking.
 
+
+\subsection*{Overview of the Article}
+
+\paragraph{Real-Time Assessment of Visual Focus of Attention}
 The participants' VFOA acquisition is the only dependent variable. This includes
 their gaze times and patterns of looking or not looking to the targets. This
 data extracted from an RGB camera was also coded post-hoc to quantify some of
@@ -177,7 +184,15 @@ scenarios. However, we believe that off-line pattern identification can lead to
 a better understanding of the children progression as well as engagement level
 assessment in face-to-face long term interactions.
 
-\section{Approach}
+\paragraph{Experimental Validation of the Approach}
+
+\fixme{TBD}
+
+\paragraph{From Attention to Engagement}
+
+\fixme{TBD}
+
+\section{Attention Assessment}
 
 We propose a adaptive model based solution to approach head pose estimation that
 finds correspondences between facial landmarks points and their respective
@@ -267,7 +282,10 @@ s  \; m' = P \; M'
 \label{eq:p}
 \end{equation}
 
-\subsection{Setting the \textit{tf} Frame}
+\subsection{Acquiring the View of Attention}
+
+\paragraph{Setting the \textit{tf} Frame}\fixme{tf is ROS specific: we should
+not write the article in a ROS specific way}
 The second step is to use the matrix [R|t] to set the correct translation and
 orientation of the \textit{tf} frame which represents the face in the 3D space.
 In order to achieve that it is necessary first, to set the origin defined by the
@@ -296,7 +314,8 @@ However, it is necessary to consider the cases where the division is performed
 by 0 (in 180\degree rotation about the y-axis for instance) or when \textit{qw}
 becomes close to zero.
 
-\subsection{Defining the Field of View}
+\paragraph{Computing the Field of Attention}
+
 The third step is to generate a representation of the field of view whose origin
 and orientation are the ones defined by the face detection \textit{tf} frame. 
 
@@ -352,13 +371,19 @@ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
 
 % Schema to clarify this?
 
-\section{Case Study}
+\paragraph{Acquiring the Focus of Attention}
+
+Explain that: other modules have to provide the sitation assessment (what
+is where?) in terms of published frames, and a last module compute the
+intersection of the VFOA and these frames\fixme{TBD}
+
+\section{Experimental Validation}
 
 The presented method have been successfully employed in a real child-robot
 interaction situation where the robot tries to engage the child in handwriting
 tasks using learning by teaching paradigm.
 
-\subsection{Experimental Set-up}
+\subsection{Experimental Procedure}
 
 The target of this study were 6 children with ages compressed between 5 and 6
 years old. The experiments were developed individually and consisted on a
@@ -429,7 +454,7 @@ experimenter and the observers located in the diagonal.
 \end{figure}
 
 
-\section{Results}
+\subsection{Results}
 
 In this work, head orientation is used to predict a person's focus of attention
 in face-to-face interactions. Therefore, we assume that head pose is a reliable
@@ -443,13 +468,8 @@ based on its head position, several important questions arise:
 \item How can we evaluate the engagement of the children based on the focus of attention?\newline
 \end{enumerate}
 
-\subsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
+\subsubsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
 
-According to \cite{stiefelhagen2002tracking} the head orientation's contribution
-in overall gaze direction is 68.9\% showing agreement between both measurements.
-In addition, it shows that the head orientation alone can get an average
-accuracy of 88.7\% detecting the focus of attention in a meeting application
-scenario using a head-mounted display with eye and head tracking.
 
 Our results for a peer-to-peer work scenarios using an approach based on RGB
 camera are summarized in table \ref{tab:results} where the \textit{expected} is
@@ -493,7 +513,7 @@ conditions, occlusions with the hands and the face angle with respect to the
 camera, looking to the experimenter for instance, are factors that contribute to
 reduce the tracking accuracy.
 
-\subsection{Subject's Focus of Attention Analysis}
+\subsubsection{Subject's Focus of Attention Analysis}
 
 \begin{figure*}
     \centering
@@ -570,7 +590,7 @@ an assimilation over time. Moreover, when a new demonstration is selected for
 playing, the same behavior is replicated (see yellow boxes in figure
 \ref{fig:realExpected}).
 
-\subsection{Focus of attention distribution}
+\subsubsection{Focus of attention distribution}
 
 Additional information of the head pose can be obtained for the evaluation of
 the VFOA distribution. Figure \ref{fig:heatmap} shows the most salient focuses
@@ -598,7 +618,8 @@ observers as negligible VFOA.
   \label{fig:heatmap}
 \end{figure}
 
-\subsection{Engagement assessment}
+\section{Discussion and Conclusion}
+\subsection{From Attention to Engagement Assessment}
 
 If we consider the case shown in section \ref{fromFaceTo}, evaluating the
 subject's progression together with the time on task may be an indicator of
@@ -651,8 +672,8 @@ able to progress over time, produces the contrary effect.
 
 %Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
+\subsection{Conclusion}
 
-\section{Conclusions}
 In this work we have presented an on-line vision-based engagement assessment
 solution that can be extended to work in different platforms for simulating
 complex interaction scenarios monitoring several VFOA with a maker-less
