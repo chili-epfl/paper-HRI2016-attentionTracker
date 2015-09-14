@@ -182,7 +182,14 @@ behavior for different scenarios such as multiple subjects, necessitating in
 situ VFOA estimation capabilities to enable robots to adapt in the specific
 scenarios. However, we believe that off-line pattern identification can lead to
 a better understanding of the children progression as well as engagement level
-assessment in face-to-face long term interactions.
+assessment in face-to-face long term interactions.\fixme{I did not understand
+this paragraph}
+
+\fixme{Underline difference between field of attention and focus of attention}
+
+\fixme{State the hypothesis: head-pose estimation provides a good-enough
+approximation of the gaze direction, and in turn of the field of attention, and
+in turn of the focus of attention}
 
 \paragraph{Experimental Validation of the Approach}
 
@@ -192,7 +199,9 @@ assessment in face-to-face long term interactions.
 
 \fixme{TBD}
 
-\section{Attention Assessment}
+\section{Visual Attention Assessment}
+
+\subsection{Overview of the Technique}
 
 We propose a adaptive model based solution to approach head pose estimation that
 finds correspondences between facial landmarks points and their respective
@@ -379,9 +388,15 @@ intersection of the VFOA and these frames\fixme{TBD}
 
 \section{Experimental Validation}
 
-The presented method have been successfully employed in a real child-robot
-interaction situation where the robot tries to engage the child in handwriting
-tasks using learning by teaching paradigm.
+As presented above, we use the (6D) head pose as an approximation of the
+actual gaze direction, and we approximate from here the participant's field of
+attention. The assumption that such an approximation of the field of attention
+allows to derive the actual focus of attention is the core hypothesis that we
+ought to validate.
+
+This section presents such an experimental validation, set in the context of a
+real child-robot interaction scenario where the robot tries to engage a child in
+handwriting tasks using learning by teaching paradigm.
 
 \subsection{Experimental Procedure}
 
@@ -455,18 +470,6 @@ experimenter and the observers located in the diagonal.
 
 
 \subsection{Results}
-
-In this work, head orientation is used to predict a person's focus of attention
-in face-to-face interactions. Therefore, we assume that head pose is a reliable
-marker of the attention focus during a social interaction, in both cases
-human-human, human-robot. Since we estimate where the subject is looking at
-based on its head position, several important questions arise:
-
-\begin{enumerate}
-\item Which head pose estimation tracking rate can we achieve during a real case scenario?  
-\item How accurate can we predict where the subject is looking at based on the head pose estimation?
-\item How can we evaluate the engagement of the children based on the focus of attention?\newline
-\end{enumerate}
 
 \subsubsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
 
