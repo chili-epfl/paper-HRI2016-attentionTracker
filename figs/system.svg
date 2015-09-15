@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="632px"
+   height="243px"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="system.pdf">
+  <metadata
+     id="metadata154">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview152"
+     showgrid="false"
+     inkscape:zoom="1.3068049"
+     inkscape:cx="366.26446"
+     inkscape:cy="27.822644"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6" />
+  <defs
+     id="defs4" />
+  <g
+     transform="translate(0.5,0.5)"
+     id="g6">
+    <rect
+       x="1"
+       y="1"
+       width="629"
+       height="240"
+       rx="36"
+       ry="36"
+       fill="#e8ffff"
+       stroke="#000000"
+       pointer-events="none"
+       id="rect8" />
+    <rect
+       x="167"
+       y="41"
+       width="140"
+       height="140"
+       rx="21"
+       ry="21"
+       fill="#fff2cc"
+       stroke="#d6b656"
+       pointer-events="none"
+       id="rect10" />
+    <rect
+       x="12"
+       y="41"
+       width="140"
+       height="140"
+       rx="21"
+       ry="21"
+       fill="#f8cecc"
+       stroke="#b85450"
+       pointer-events="none"
+       id="rect12" />
+    <rect
+       x="321"
+       y="41"
+       width="140"
+       height="140"
+       rx="21"
+       ry="21"
+       fill="#d5e8d4"
+       stroke="#82b366"
+       pointer-events="none"
+       id="rect14" />
+    <rect
+       x="476"
+       y="41"
+       width="140"
+       height="140"
+       rx="21"
+       ry="21"
+       fill="#dae8fc"
+       stroke="#6c8ebf"
+       pointer-events="none"
+       id="rect16" />
+    <rect
+       x="331"
+       y="56"
+       width="120"
+       height="40"
+       rx="6"
+       ry="6"
+       pointer-events="none"
+       id="rect18"
+       stroke="#82b366"
+       fill="#d5e8d4" />
+    <g
+       transform="translate(332,50)"
+       id="g20">
+      <switch
+         id="switch22">
+        <foreignObject
+           pointer-events="all"
+           width="118"
+           height="31"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject24">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 118px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">Intrinsic/Extrinsic<xhtml:br />
+camera parameters<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="59"
+           y="22"
+           font-size="12px"
+           id="text26"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">Intrinsic/Extrinsic</text>
+      </switch>
+    </g>
+    <rect
+       x="177"
+       y="91"
+       width="120"
+       height="20"
+       rx="3"
+       ry="3"
+       fill="#fff2cc"
+       stroke="#d6b656"
+       pointer-events="none"
+       id="rect28" />
+    <g
+       transform="translate(221,91)"
+       id="g30">
+      <switch
+         id="switch32">
+        <foreignObject
+           pointer-events="all"
+           width="32"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject34">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 32px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">dlib<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="16"
+           y="14"
+           font-size="12px"
+           id="text36"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">dlib</text>
+      </switch>
+    </g>
+    <rect
+       x="177"
+       y="117"
+       width="120"
+       height="20"
+       rx="3"
+       ry="3"
+       fill="#fff2cc"
+       stroke="#d6b656"
+       pointer-events="none"
+       id="rect38" />
+    <g
+       transform="translate(187,121)"
+       id="g40">
+      <switch
+         id="switch42">
+        <foreignObject
+           pointer-events="all"
+           width="99"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject44">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 99px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">Face landmarks<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="50"
+           y="10"
+           font-size="12px"
+           id="text46"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">Face landmarks</text>
+      </switch>
+    </g>
+    <rect
+       x="485.90213"
+       y="91.902138"
+       width="120.19573"
+       height="19.373814"
+       rx="4.50734"
+       ry="2.9060721"
+       pointer-events="none"
+       id="rect48"
+       style="fill:#dae8fc;stroke:#6c8ebf;stroke-width:0.80426806" />
+    <g
+       transform="translate(530,95)"
+       id="g50">
+      <switch
+         id="switch52">
+        <foreignObject
+           pointer-events="all"
+           width="31"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject54">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 31px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">rviz<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="16"
+           y="10"
+           font-size="12px"
+           id="text56"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">rviz</text>
+      </switch>
+    </g>
+    <rect
+       x="331"
+       y="150"
+       width="120"
+       height="20"
+       rx="3"
+       ry="3"
+       fill="#d5e8d4"
+       stroke="#82b366"
+       pointer-events="none"
+       id="rect58" />
+    <g
+       transform="translate(361,154)"
+       id="g60">
+      <switch
+         id="switch62">
+        <foreignObject
+           pointer-events="all"
+           width="59"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject64">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 59px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">OpenCV<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="30"
+           y="10"
+           font-size="12px"
+           id="text66"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">OpenCV</text>
+      </switch>
+    </g>
+    <rect
+       x="331"
+       y="103"
+       width="120"
+       height="40"
+       rx="6"
+       ry="6"
+       fill="#d5e8d4"
+       stroke="#82b366"
+       pointer-events="none"
+       id="rect68" />
+    <g
+       transform="translate(343,99)"
+       id="g70">
+      <switch
+         id="switch72">
+        <foreignObject
+           pointer-events="all"
+           width="95"
+           height="31"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject74">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 95px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">Anthropometric<xhtml:br />
+face model<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="48"
+           y="22"
+           font-size="12px"
+           id="text76"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">Anthropometric</text>
+        <text
+           x="48"
+           y="22"
+           font-size="12px"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica"
+           id="text3193">nthropometric</text>
+        <text
+           xml:space="preserve"
+           style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="285.42899"
+           y="-55.437805"
+           id="text3189"
+           sodipodi:linespacing="125%"
+           transform="translate(-343.5,-109.5)"><tspan
+             sodipodi:role="line"
+             id="tspan3191"
+             x="285.42899"
+             y="-55.437805" /></text>
+      </switch>
+    </g>
+    <rect
+       x="496"
+       y="11"
+       width="100"
+       height="20"
+       fill="none"
+       stroke="none"
+       pointer-events="none"
+       id="rect78" />
+    <g
+       transform="translate(501,15)"
+       id="g80">
+      <switch
+         id="switch82">
+        <foreignObject
+           pointer-events="all"
+           width="90"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject84">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; overflow: hidden; max-height: 16px; max-width: 96px; width: 90px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">VISUALIZATION</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="45"
+           y="14"
+           font-size="12px"
+           id="text86"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">VISUALIZATION</text>
+      </switch>
+    </g>
+    <path
+       d="M 521 31 L 521 31"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="none"
+       id="path88" />
+    <path
+       d="M 521 31 L 521 31 L 521 31 L 521 31 Z"
+       fill="#000000"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="none"
+       id="path90" />
+    <rect
+       x="33"
+       y="11"
+       width="100"
+       height="20"
+       fill="none"
+       stroke="none"
+       pointer-events="none"
+       id="rect92" />
+    <g
+       transform="translate(44,15)"
+       id="g94">
+      <switch
+         id="switch96">
+        <foreignObject
+           pointer-events="all"
+           width="79"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject98">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; overflow: hidden; max-height: 16px; max-width: 96px; width: 79px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">ACQUISITION</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="40"
+           y="14"
+           font-size="12px"
+           id="text100"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">ACQUISITION</text>
+      </switch>
+    </g>
+    <rect
+       x="180"
+       y="1"
+       width="117"
+       height="39"
+       fill="none"
+       stroke="none"
+       pointer-events="none"
+       id="rect102" />
+    <g
+       transform="translate(186,15)"
+       id="g104">
+      <switch
+         id="switch106">
+        <foreignObject
+           pointer-events="all"
+           width="105"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject108">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; overflow: hidden; max-height: 35px; max-width: 113px; width: 105px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">FACE DETECTION<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="53"
+           y="14"
+           font-size="12px"
+           id="text110"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">FACE DETECTION</text>
+      </switch>
+    </g>
+    <rect
+       x="341"
+       y="11"
+       width="100"
+       height="20"
+       fill="none"
+       stroke="none"
+       pointer-events="none"
+       id="rect112" />
+    <g
+       transform="translate(355,15)"
+       id="g114">
+      <switch
+         id="switch116">
+        <foreignObject
+           pointer-events="all"
+           width="73"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject118">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; overflow: hidden; max-height: 16px; max-width: 96px; width: 73px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">ESTIMATION</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="37"
+           y="14"
+           font-size="12px"
+           id="text120"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">ESTIMATION</text>
+      </switch>
+    </g>
+    <rect
+       x="485.90216"
+       y="117.90214"
+       width="120.19572"
+       height="19.373814"
+       rx="4.50734"
+       ry="2.9060721"
+       pointer-events="none"
+       id="rect122"
+       style="fill:#dae8fc;stroke:#6c8ebf;stroke-width:0.80426806" />
+    <g
+       transform="translate(510,121)"
+       id="g124">
+      <switch
+         id="switch126">
+        <foreignObject
+           pointer-events="all"
+           width="72"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject128">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 72px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">Launch file<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="36"
+           y="10"
+           font-size="12px"
+           id="text130"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">Launch file</text>
+      </switch>
+    </g>
+    <rect
+       x="22"
+       y="94"
+       width="120"
+       height="40"
+       rx="6"
+       ry="6"
+       fill="#f8cecc"
+       stroke="#b85450"
+       pointer-events="none"
+       id="rect132" />
+    <g
+       transform="translate(43,96)"
+       id="g134">
+      <switch
+         id="switch136">
+        <foreignObject
+           pointer-events="all"
+           width="77"
+           height="31"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject138">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 77px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">ROS/gscam <xhtml:br />
+package<xhtml:br />
+</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="39"
+           y="22"
+           font-size="12px"
+           id="text140"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">ROS gscam</text>
+        <text
+           x="39"
+           y="22"
+           font-size="12px"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica"
+           id="text3135">package</text>
+        <text
+           x="39"
+           y="22"
+           font-size="12px"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica"
+           id="text3133">OS gscam</text>
+      </switch>
+    </g>
+    <rect
+       x="16"
+       y="191"
+       width="599"
+       height="30"
+       rx="4.5"
+       ry="4.5"
+       fill="#e1d5e7"
+       stroke="#9673a6"
+       pointer-events="none"
+       id="rect142" />
+    <g
+       transform="translate(296,200)"
+       id="g144">
+      <switch
+         id="switch146">
+        <foreignObject
+           pointer-events="all"
+           width="38"
+           height="16"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           id="foreignObject148">
+          <xhtml:div
+             style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 38px; white-space: normal; text-align: center;">
+            <xhtml:div
+               style="display:inline-block;text-align:inherit;text-decoration:inherit;">ROS</xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="19"
+           y="10"
+           font-size="12px"
+           id="text150"
+           style="font-size:12px;text-anchor:middle;fill:#000000;font-family:Helvetica">ROS</text>
+      </switch>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="340.02521"
+       y="87.159294"
+       id="text3181"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3183"
+         x="340.02521"
+         y="87.159294"
+         style="font-size:12px;font-family:Helvetica;-inkscape-font-specification:Helvetica">camera parameters</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="360.13745"
+       y="134.57291"
+       id="text3181-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3183-4"
+         x="360.13745"
+         y="134.57291"
+         style="font-size:12px;font-family:Helvetica;-inkscape-font-specification:Helvetica">face model</tspan></text>
+  </g>
+</svg>
