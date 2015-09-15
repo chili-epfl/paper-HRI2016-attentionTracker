@@ -48,7 +48,8 @@ robot to account and react to the user's changing engagement in real-time.
 
 \keywords{Human-Robot Interaction; Social Robotics; Attention Assessment; Engagement; Computer Vision.}
 
-\section{Introduction: Attention and Engagement}
+\section{Introduction}
+
 %In the recent years, research is pushing forward in building intelligent systems
 %and environments that try to maximize the benefits of cooperation with humans
 %based on verbal and non-verbal communication. The interaction between social
@@ -73,7 +74,7 @@ speech recognition~\cite{brick2007incremental} or task
 learning~\cite{calinon2007learning} are amongst the current major research
 directions, existing literature tends to evaluate each of these algorithms in
 their own metric space, without considering the overall interaction quality.
-Along this line, Anzalone \etal~\cite{anzalone} have recently argued in favor of
+Along this line, Anzalone~\etal~\cite{anzalone} have recently argued in favor of
 such a global evaluation, and propose to assess these algorithms in term of
 their capability to obtain the desired effect in a human-robot interaction
 context, and they correspondingly propose metrics build around the measurement
@@ -83,13 +84,7 @@ Engagement describes a cognitive, affective (specifically intrinsic motivation),
 and behavioral state of interaction with a computer application that ``makes the
 user want to be there" \cite{OBrien:2010}. Engaging interactions were thought to
 involve intrinsic interest, interactivity, perceived control and choice,
-functionality, motivation and attention. In fact,
-\cite{yarbus1967eye,barber1976perception} suggest that human's attention is
-highly correlated with what they look at, and the existing relationship between
-gaze and attention during social interaction has been exposed
-in~\cite{argyle1969social}. In this way, in situ Visual Focus of Attention
-(VFoA) estimation is advantageous to human-robot interaction and a major
-contribution towards a better understanding of the interaction quality.
+functionality, motivation and attention.
 
 \paragraph{Motivation: Impact on Learning}
 
@@ -120,18 +115,38 @@ technique, being based on a regular, low-end RGB camera, avoids the use of
 otherwise typically invasive technologies such as eyetrackers, that would
 negatively impact the natural of the interaction.
 
-\subsection*{Engagement and Attention: Related Work}
+\subsection*{Attention and Engagement: Related Work}
 
 \paragraph{Head Tracking and Visual Attention}
 
-Technique for head pose estimation: based on depth
-sensing~\cite{fanelli2012real}.
+The relations between one's focus of attention and what he/she is looking at has
+long been established~\cite{yarbus1967eye,barber1976perception}, and more
+specifically, the existing relationship between gaze and attention during social
+interaction and the related gaze patterns, belongs to classic textbooks
+like~\cite{argyle1969social}. As such, measuring the direction of gaze is
+a natural proxy to estimate the (visual) focus of attention of a social agent.
+
+However, performing such a measure on a robot, in real-time, and in ecologically
+valid environments (which rules out bulky or invasive apparatus like
+eye-trackers, or techniques requiring fine calibration and/or static
+interactions) remains a key challenge in the field of Human-Robot Interaction.
+
+The current state-of-the-art techniques found in HRI that operate both on-line
+and during field experiments rely on head pose
+estimation, most often based on depth sensors (RGB-D). Fanelli~\etal provides a
+overview of these approaches in~\cite{fanelli2012real}. While fairly robust, these
+techniques remain CPU intensive for a limited accuracy.
 
 In our work, we rely on recent advances on template-based face
-alignement~\cite{kazemi2014one} that allows fast (in the order of
-a few milliseconds) face features extraction on 2D images, that we found to be fairly
-robust to real-world lighting conditions and occlusions naturally occuring in child-robot
-interactions.
+alignment~\cite{kazemi2014one} that allows fast (in the order of a few
+milliseconds) face features extraction on 2D images, that we found to be fairly
+robust to real-world lighting conditions and occlusions naturally occurring in
+child-robot interactions.
+
+
+In this way, in situ Visual Focus of Attention
+(VFoA) estimation is advantageous to human-robot interaction and a major
+contribution towards a better understanding of the interaction quality.
 
 
 
