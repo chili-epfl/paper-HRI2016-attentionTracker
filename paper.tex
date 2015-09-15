@@ -121,6 +121,24 @@ otherwise typically invasive technologies such as eyetrackers, that would
 negatively impact the natural of the interaction.
 
 \subsection*{Engagement and Attention: Related Work}
+
+\paragraph{Head Tracking and Visual Attention}
+
+Technique for head pose estimation: based on depth
+sensing~\cite{fanelli2012real}.
+
+In our work, we rely on recent advances on template-based face
+alignement~\cite{kazemi2014one} that allows fast (in the order of
+a few milliseconds) face features extraction on 2D images, that we found to be fairly
+robust to real-world lighting conditions and occlusions naturally occuring in child-robot
+interactions.
+
+
+
+\cite{kennedy2015head} -> it does not work!
+
+\paragraph{Engagement}
+
 The notion of engagement has actively been studied in a diverse set of domains,
 and several variables and social signals have been proposed in the literature to
 quantify and study it in social interactions.
@@ -152,6 +170,12 @@ as a determined factor for the assessment. A recent study \cite{anzalone} with
 social robots in face to face scenarios proposed a set of metrics based on
 non-verbal cues but manifesting some possible limitations in long-term
 scenarios.
+
+In~\cite{baxter2014tracking}, Baxter~\etal posit that the measure of the
+direction and timing of gaze in child-robot interactions is a proxy for
+engagement and attribution of social agency, However, they conduct these
+measures as post-hoc analyses. This work suggests a path forward for real-time
+assessment of engagement.
 
 In this research, we address the problem of tracking the children's engagement
 based on their VFOA and current performed task during a long term child-robot
@@ -705,7 +729,14 @@ relevant one, the fact that the positions of the VFOA need to be known in
 advance and defined as static \textit{tf} frames in the system. Moreover, it is
 important to notice that eye gaze information is neglected which induces a
 certain amount of error, as well as the noise induced by the 3D pose estimation
-computed from face landmarkers.
+computed from face features.
+
+In that regards, it is interesting to put this work on human-robot interaction
+in perspective with previous research conducted on ape-human interaction by
+Tomasello~\etal~\cite{tomasello2007reliance}: they show that apes rely primarily
+on the head pose to estimate the focus of attention of a human partner, in to contrast
+to human children who primarily rely on eye direction. From this perspective,
+our robot mimics attention tracking mechanism comparable to the ones found in apes.
 
 Gaze information acquired during the interactions is not only useful to detect
 and predict engagement, but also allows the possibility to develop actively the
