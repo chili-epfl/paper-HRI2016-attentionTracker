@@ -28,13 +28,13 @@
 
 Successfully sustaining face-to-face interaction between humans and robots
 mandates fine perception of each other attentional focus. Along this line, we
-present a novel technique to assess the visual focus of attention (VFOA) based
+present a novel technique to assess the visual focus of attention (VFoA) based
 on accurate, real-time head pose estimation with monocular camera. The software
 is fully open-source and can readily be adopted on a wide range of social
 robots. We propose an in-depth evaluation of the technique, using manual video
 annotations as ground truth, and show that our system reaches high level of
 accuracy in a real-world face-to-face interaction scenario. We finally suggest how
-to derive a metric of engagement from the monitoring of the VFOA, allowing the
+to derive a metric of engagement from the monitoring of the VFoA, allowing the
 robot to account and react to the user's changing engagement in real-time.
 
 \end{abstract}
@@ -88,7 +88,7 @@ functionality, motivation and attention. In fact,
 highly correlated with what they look at, and the existing relationship between
 gaze and attention during social interaction has been exposed
 in~\cite{argyle1969social}. In this way, in situ Visual Focus of Attention
-(VFOA) estimation is advantageous to human-robot interaction and a major
+(VFoA) estimation is advantageous to human-robot interaction and a major
 contribution towards a better understanding of the interaction quality.
 
 \paragraph{Motivation: Impact on Learning}
@@ -178,7 +178,7 @@ measures as post-hoc analyses. This work suggests a path forward for real-time
 assessment of engagement.
 
 In this research, we address the problem of tracking the children's engagement
-based on their VFOA and current performed task during a long term child-robot
+based on their VFoA and current performed task during a long term child-robot
 interaction in a learning context, first. And second, we provide qualitative and
 quantitative evaluation of the outcome provided using a first person RGB sensor
 approach. Moreover, this monitoring activity has been supporting our research in
@@ -196,14 +196,15 @@ scenario using a head-mounted display with eye and head tracking.
 \subsection*{Overview of the Article}
 
 \paragraph{Real-Time Assessment of Visual Focus of Attention}
-The participants' VFOA acquisition is the only dependent variable. This includes
+
+The participants' VFoA acquisition is the only dependent variable. This includes
 their gaze times and patterns of looking or not looking to the targets. This
 data extracted from an RGB camera was also coded post-hoc to quantify some of
 these measurements.
 
-We predict that there will be no generalizable pattern of participant's VFOA
+We predict that there will be no generalizable pattern of participant's VFoA
 behavior for different scenarios such as multiple subjects, necessitating in
-situ VFOA estimation capabilities to enable robots to adapt in the specific
+situ VFoA estimation capabilities to enable robots to adapt in the specific
 scenarios. However, we believe that off-line pattern identification can lead to
 a better understanding of the children progression as well as engagement level
 assessment in face-to-face long term interactions.\fixme{I did not understand
@@ -231,7 +232,7 @@ We propose a adaptive model based solution to approach head pose estimation that
 finds correspondences between facial landmarks points and their respective
 locations in a face model. We use the open-source library
 dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton
-of the subject's face and then, use the obtained landmarkers to calculate the
+of the subject's face and then, use the obtained features to calculate the
 head pose orientation estimation (see figure \ref{system}). In this way, we can
 estimate what the subject was looking at and obtain an \textit{rviz} 3D scene
 representation as it is executed as a ROS (Robot Operating System) node that can
@@ -244,7 +245,7 @@ positions of participants in the scene.
 
 \begin{figure}[h!]
     \centering
-    %\includegraphics[width=0.9\columnwidth]{system}
+    \includegraphics[width=0.9\columnwidth]{system}
     \caption{\small System overview showing the most relevant components involved in the estimation.}
     \label{system}
 \end{figure}
@@ -253,7 +254,7 @@ positions of participants in the scene.
 \begin{figure}
     \centering
     \includegraphics[width=0.9\columnwidth]{rviz_camera}
-    \caption{\small Rviz screenshot showing Nao, camera (Nao's feet), face detected with its field of view (gray cone) and blue marker intersecting as current VFOA.}
+    \caption{\small Rviz screenshot showing Nao, camera (Nao's feet), face detected with its field of view (gray cone) and blue marker intersecting as current VFoA.}
     \label{rviz}
 \end{figure}
 
@@ -362,7 +363,7 @@ each eye splitting the vertical range into $ 60\degree $ the upper region and $
 present implementation, the first approach explained has been chosen
 representing the field of view using a cone with such dimensions.
 
-Assuming that the \textit{tf} frames representing the robotic agent and the VFOA
+Assuming that the \textit{tf} frames representing the robotic agent and the VFoA
 candidates are static, need to be monitored. This task consists on evaluating
 the intersection between the \textit{tf} frames and the field of view: If one
 focus of attention is within the region defined by the field of view, we assume
@@ -408,7 +409,7 @@ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
 
 Explain that: other modules have to provide the sitation assessment (what
 is where?) in terms of published frames, and a last module compute the
-intersection of the VFOA and these frames\fixme{TBD}
+intersection of the VFoA and these frames\fixme{TBD}
 
 \section{Experimental Validation}
 
@@ -525,15 +526,15 @@ similarity also shown in table \ref{tab:results}.
 	\label{tab:results}
 \end{table}
 
-The results has proved that the VFOA prediction accuracy in the tracking is not
+The results has proved that the VFoA prediction accuracy in the tracking is not
 only conditioned by the subject's amount of movement, but also by the speed of
 the same movements: Restless children externalize greater levels of movement
-decreasing the VFOA prediction accuracy. 
+decreasing the VFoA prediction accuracy. 
 
 For instance, subjects 1,4 and 5 despite the fact that the tracking accuracy is
-in the average, the bad precision in the captured VFOA suggests that such
+in the average, the bad precision in the captured VFoA suggests that such
 children are highly likely to modify the gaze direction without head move
-intervention reducing dramatically the overlap between captured and real VFOA.
+intervention reducing dramatically the overlap between captured and real VFoA.
 
 Additionally, several recurrent computer vision challenges such as the lighting
 conditions, occlusions with the hands and the face angle with respect to the
@@ -545,21 +546,21 @@ reduce the tracking accuracy.
 \begin{figure*}
     \centering
     \includegraphics[width=1.8\columnwidth]{realExpected}
-    \caption{\small In blue, real VFOA of subject 4 accoding to two observer's
-    assessment. In cyan, the matching between the real and the obtained VFOA. In
+    \caption{\small In blue, real VFoA of subject 4 accoding to two observer's
+    assessment. In cyan, the matching between the real and the obtained VFoA. In
     yellow, the repeated pattern in turn-taking and in orange, the experimenter's
     suggestion to choose a new word.}
 
     \label{fig:realExpected}
     
-    % Maybe we should add the expected VFOA
+    % Maybe we should add the expected VFoA
 \end{figure*}
 
 \begin{figure*}
     \centering
     \includegraphics[width=1.81\columnwidth]{realCaptured}
-    \caption{\small Real VFOA of subject 4 accoding to two observer's
-    assessment. In green, the obtained VFOA using our aproach and in cyan, the
+    \caption{\small Real VFoA of subject 4 accoding to two observer's
+    assessment. In green, the obtained VFoA using our aproach and in cyan, the
     mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
 
     \label{fig:realCaptured}
@@ -593,7 +594,7 @@ be easily identified by setting a horizontal threshold to the field of view.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\columnwidth]{bitmap}
-    \caption{\small Cosine similarity matrix between real and cap-tured VFOA
+    \caption{\small Cosine similarity matrix between real and cap-tured VFoA
     using a 10 sec. window size computation. The correspondent numbers are shown
     in figure \ref{fig:realCaptured}.}
     \label{fig:bitmap}
@@ -620,14 +621,14 @@ playing, the same behavior is replicated (see yellow boxes in figure
 \subsubsection{Focus of attention distribution}
 
 Additional information of the head pose can be obtained for the evaluation of
-the VFOA distribution. Figure \ref{fig:heatmap} shows the most salient focuses
+the VFoA distribution. Figure \ref{fig:heatmap} shows the most salient focuses
 of attention where the peaks are located. These peaks are mainly projected
 between the triangle composed by the robot, the writing tablet and the selection
 tablet using an unsupervised K-means clustering method reveals, considering the
-observers as negligible VFOA.
+observers as negligible VFoA.
 
 % Workaround to do subfigure since the packege looks not to work
-\begin{figure}
+\begin{figure}[th!]
   \centering
   \begin{tabular}{@{}c@{}}
     \includegraphics[width=.7\linewidth,height=100pt]{heatmap} \\
@@ -703,7 +704,7 @@ able to progress over time, produces the contrary effect.
 
 In this work we have presented an on-line vision-based engagement assessment
 solution that can be extended to work in different platforms for simulating
-complex interaction scenarios monitoring several VFOA with a maker-less
+complex interaction scenarios monitoring several VFoA with a maker-less
 technology. It provides some benefits like the decrement of the system
 complexity as well as the increment of the naturalness of the interaction due to
 the use of an RGB sensor.  
@@ -725,7 +726,7 @@ these results are encouraging, there is a need of validation with a greater
 amount of subjects.
 
 Regarding to the approach used, some limitations need to be considered. The most
-relevant one, the fact that the positions of the VFOA need to be known in
+relevant one, the fact that the positions of the VFoA need to be known in
 advance and defined as static \textit{tf} frames in the system. Moreover, it is
 important to notice that eye gaze information is neglected which induces a
 certain amount of error, as well as the noise induced by the 3D pose estimation
@@ -741,7 +742,7 @@ our robot mimics attention tracking mechanism comparable to the ones found in ap
 Gaze information acquired during the interactions is not only useful to detect
 and predict engagement, but also allows the possibility to develop actively the
 concept gaze-aware robot. In other words, make the system able to estimate where
-the subject looks at, but also imitate the same subject's VFOA when the activity
+the subject looks at, but also imitate the same subject's VFoA when the activity
 state allows it. 
 
 %ACKNOWLEDGMENTS are optional
