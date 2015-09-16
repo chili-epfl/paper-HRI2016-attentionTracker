@@ -122,9 +122,18 @@ negatively impact the natural of the interaction.
 The relations between one's focus of attention and what he/she is looking at has
 long been established~\cite{yarbus1967eye,barber1976perception}, and more
 specifically, the existing relationship between gaze and attention during social
-interaction and the related gaze patterns, belongs to classic textbooks
-like~\cite{argyle1969social}. As such, measuring the direction of gaze is
-a natural proxy to estimate the (visual) focus of attention of a social agent.
+interaction, and the related gaze patterns, has been part of classic textbooks
+like~\cite{argyle1969social} since decades. As such, there is little doubt that
+measuring the direction of gaze is a useful proxy to estimate the (visual) focus
+of attention of a social agent, and indeed this is one of the basic tool used in
+social psychology.
+
+Estimating attention using gaze is certainly not new to robotics either. A
+recent survey by Ruhland~\etal~\cite{ruhland2015review} presents in a synthetic
+way eye gaze research in HCI and social robotics, and is an essential read in
+that regard. It remains however an active field of research, as illustrated by
+several recent publications~\cite{baxter2014tracking,anzalone,kennedy2015head}:
+as attention tracking is essential in human-robot interaction
 
 However, performing such a measure on a robot, in real-time, and in ecologically
 valid environments (which rules out bulky or invasive apparatus like
@@ -241,12 +250,64 @@ in turn of the focus of attention}
 
 \section{Visual Attention Assessment}
 
-\subsection{Overview of the Technique}
+\subsection{Head Pose Estimation}
 
-We propose a adaptive model based solution to approach head pose estimation that
-finds correspondences between facial landmarks points and their respective
-locations in a face model. We use the open-source library
-dlib\footnote{http://dlib.net} \cite{dlib09}, to detect and extract the skeleton
+As explained, we derive the visual field of attention from the head pose. Our
+technique only involves a single monocular RGB camera for used for facial
+feature extraction, and a static simplified 3D mesh of a human head
+(Figure~\ref{head_pose}). 68 facial features are extracted using a fast
+template-based face alignment algorithm by Kazemi and
+Sullivan~\cite{kazemi2014one}, as implemented in the open-source {\tt dlib}
+library\footnote{http://dlib.net}~\cite{dlib09}.  Eight of these features are
+matched to their 3D counterparts and we rely on an iterative $PnP$ algorithm
+(OpenCV's implementation) to compute the translation and rotation of the head
+with respect to the camera frame. With this approach, knowing the intrinsic
+parameters of the camera (calibrated camera) is required for an accurate
+estimation of the absolute 3D localization of the head.
+
+Besides being fast, the face alignment algorithm has been found to perform well,
+including in a range of difficult situations (occlusions, head angle) as
+encountered in field experiments.  Figure~\ref{head_pose_real_world} shows a
+selection of such difficult scenes on one child.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\linewidth]{head_pose}
+    \caption{The 6D head pose is estimated by fitting a 3D model of an
+        adult head (left) onto the detected 2D features of the face (right). We
+        rely on an iterative $PnP$ algorithm, using 8 correspondence pairs
+        (three are depicted: the sellion -- the nasal depression --, the left
+        tragion and the menton).}
+
+    \label{head_pose}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{head_pose_real_world}
+    \caption{Head pose results on images captured during a field experiment.
+    Detection of face features (and therefore, estimation of the pose) is robust
+    to significant occlusions and face rotations.}
+    \label{head_pose_real_world}
+\end{figure}
+
+
+
+
+
+\subsection{Field of Attention}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{field_of_attention}
+    \caption{\small The visual field of attention is approximated to a
+        20$\degree$ cone, spanning from the head's sellion. The objects whose 3D
+    pose intersect with this cone are considered \emph{in focus}.}
+    \label{rviz}
+\end{figure}
+
+
+, to detect and extract the skeleton
 of the subject's face and then, use the obtained features to calculate the
 head pose orientation estimation (see figure \ref{system}). In this way, we can
 estimate what the subject was looking at and obtain an \textit{rviz} 3D scene
@@ -257,81 +318,6 @@ advantage of simplicity and integration with robotic systems, but also becomes
 accurate enough for general purposes in face-to-face interactions. In addition,
 it allows us to model complex environments, handling different number and
 positions of participants in the scene.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\columnwidth]{system}
-    \caption{\small System overview showing the most relevant components involved in the estimation.}
-    \label{system}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\columnwidth]{rviz_camera}
-    \caption{\small Rviz screenshot showing Nao, camera (Nao's feet), face detected with its field of view (gray cone) and blue marker intersecting as current VFoA.}
-    \label{rviz}
-\end{figure}
-
-\subsection{Estimating Head Pose}
-The first step is to estimate the head pose using the pin-hole model shown in
-equation \ref{eq:pinHole}. As mentioned above, dlib library facilitates the task
-by providing the 2D points \textit{m'} that composes the face silhouette.
-However, it is enough with obtaining eight spread points, such as right and left
-eyes, right and left tragions, sellion or nasal depression zone, pronasale or
-center of the nose, stomion or center of the mouth and menton.
-
-Likewise, the 3D face model is needed. The proposed head pose estimation method
-would work best with a 3D face model of the query subject itself. When a 3D face
-model of the subject is not available, as in many practical situations, a
-generic 3D face model can be used. This is an estimation of the same
-anthropometric points \textit{M'} (for North American Caucasians) in the 3D
-space \cite{farkas1994anthropometry}. Moreover, the intrinsic camera parameters
-are necessary to be able to compose its matrix \textit{A}. The components are
-expanded in equation \ref{eq:pinHole2}.	
-
-\begin{equation}
-s  \; m' = A [R|t] M'
-\label{eq:pinHole}
-\end{equation}
-\begin{equation}
-s
-\begin{bmatrix}
-x \\
-y \\
-1
-\end{bmatrix}
-=
-\begin{bmatrix}
-f_x & 0 & c_x  \\
-0 & f_y & c_y  \\
-0 & 0 & 1 
-\end{bmatrix}
-\begin{bmatrix}
-r_{11} & r_{12} & r_{13} & t_x  \\
-r_{21} & r_{22} & r_{23} & t_y  \\
-r_{31} & r_{32} & r_{33} & t_z  
-\end{bmatrix}
-\begin{bmatrix}
-X \\
-Y \\
-Z \\
-1
-\end{bmatrix}
-\label{eq:pinHole2}
-\end{equation}
-
-Finally, the matrix of extrinsic parameters [R|t] is obtained by joining the
-rotation matrix R (calculated from the rotation vector) and translation vector
-\textit{t}. The result is a matrix projection \textbf{P} which maps a point in
-the 3D space onto a point in the 2D image plane solving equation \ref{eq:p}.
-
-\begin{equation}
-s  \; m' = P \; M'
-\label{eq:p}
-\end{equation}
-
-\subsection{Acquiring the View of Attention}
 
 \paragraph{Setting the \textit{tf} Frame}\fixme{tf is ROS specific: we should
 not write the article in a ROS specific way}
@@ -368,15 +354,19 @@ becomes close to zero.
 The third step is to generate a representation of the field of view whose origin
 and orientation are the ones defined by the face detection \textit{tf} frame. 
 
-Defining accurately the human field of view in the implementation is a must.
-Holmqvist in \cite{holmqvist2011eye} specifies that the visual human range is $
+The breadth of the human field of attention has been discussed in the
+literature.
+Holmqvist in~\cite{holmqvist2011eye} specifies that the visual human
+range\fixme{field of view or field of attention?} is $
 \pm  40\degree $ in the horizontal and $ \pm 25\degree $ in the vertical. In
 \cite{walker1980clinical} Spector provides a more detailed specification for
 each eye splitting the vertical range into $ 60\degree $ the upper region and $
 75\degree $ the lower one. Moreover, the horizontal range gets separated in $
-60\degree $ inwards (towards the nose) and $ 95\degree $ outwards. In the
+60\degree $ inwards (towards the nose) and $ 95\degree $ outwards. In robotics,
+Sisbot\etal~\cite{sisbot2011situation} use a cone of 30$\degree$. In the
 present implementation, the first approach explained has been chosen
-representing the field of view using a cone with such dimensions.
+representing the field of view using a cone with such dimensions\fixme{which
+one? 40deg? 25deg?}.
 
 Assuming that the \textit{tf} frames representing the robotic agent and the VFoA
 candidates are static, need to be monitored. This task consists on evaluating
@@ -507,6 +497,16 @@ experimenter and the observers located in the diagonal.
     \caption{\small Graphical representation of the set-up and the possible children focuses of attention in the scene, in red.}
     \label{drawSetup}
 \end{figure}
+
+\subsection{System Implementation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{system}
+    \caption{\small System overview showing the most relevant components involved in the estimation.}
+    \label{system}
+\end{figure}
+
 
 
 \subsection{Results}
