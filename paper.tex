@@ -747,6 +747,23 @@ important to notice that eye gaze information is neglected which induces a
 certain amount of error, as well as the noise induced by the 3D pose estimation
 computed from face features.
 
+Besides, our approach does not account for visual occlusions when computing the
+focus of attention: any frame within the cone of the visual field of attention
+is considered as \emph{in focus}. In reality, some of the frames may be visually
+occluded and thus not seen by the subject. Computing actual visibility requires
+more general situation assessment capabilities, and in particular (approximate)
+3D models of the surrounding objects so that visibility testing may be
+performed, as done in~\cite{sisbot2011situation} for instance. Our experimental
+setting did not lead to any specific visual occlusions, and we did not developed
+this capability.
+
+Compared to intrusive hardware like head mounted
+displays, eye-trackers or wearables for instance, this approach has a clear
+advantage of simplicity and integration with robotic systems, but also becomes
+accurate enough for general purposes in face-to-face interactions. In addition,
+it allows us to model complex environments, handling different number and
+positions of participants in the scene.
+
 In that regards, it is interesting to put this work on human-robot interaction
 in perspective with previous research conducted on ape-human interaction by
 Tomasello~\etal~\cite{tomasello2007reliance}: they show that apes rely primarily
