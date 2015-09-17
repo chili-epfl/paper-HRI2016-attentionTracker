@@ -48,6 +48,10 @@ robot to account and react to the user's changing engagement in real-time.
 
 \keywords{Human-Robot Interaction; Social Robotics; Attention Assessment; Engagement; Computer Vision.}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Introduction}
 
 %In the recent years, research is pushing forward in building intelligent systems
@@ -140,26 +144,32 @@ valid environments (which rules out bulky or invasive apparatus like
 eye-trackers, or techniques requiring fine calibration and/or static
 interactions) remains a key challenge in the field of Human-Robot Interaction.
 
-The current state-of-the-art techniques found in HRI that operate both on-line
-and during field experiments rely on head pose
-estimation, most often based on depth sensors (RGB-D). Fanelli~\etal provides a
-overview of these approaches in~\cite{fanelli2012real}. While fairly robust, these
-techniques remain CPU intensive for a limited accuracy.
+Looking at techniques that both operate on-line and have been deployed in field
+experiments, one finds that most approaches rely on head pose estimation alone
+(no eye gaze tracking) and are most often based on depth sensors (RGB-D) .
+Fanelli~\etal provides a overview of these approaches in~\cite{fanelli2012real},
+and recent examples include~\cite{baxter2014tracking} or~\cite{anzalone}.
 
-In our work, we rely on recent advances on template-based face
-alignment~\cite{kazemi2014one} that allows fast (in the order of a few
-milliseconds) face features extraction on 2D images, that we found to be fairly
-robust to real-world lighting conditions and occlusions naturally occurring in
-child-robot interactions.
+Approaches based on monocular 2D vision have been explored as
+well~\cite{peters2010investigating}, with however limited robustness to
+occlusions or lightning conditions, and over-reliance on tracking to maintain
+real-time performances.  Our work relies on recent advances on template-based
+face alignment~\cite{kazemi2014one} that allows fast (in the order of a few
+milliseconds) facial features extraction on 2D images, combined with 3D model
+fitting, to obtain a fast, robust and stable 6D head pose estimate, that was
+successfully deployed in field experiments involving child-robot interactions.
 
+We then derive the field of attention from the head pose: according
+to~\cite{stiefelhagen2002tracking} the head orientation's contribution in
+overall gaze direction is 68.9\% showing agreement between both measurements.
+In addition, it shows that the head orientation alone can get an average
+accuracy of 88.7\% detecting the focus of attention in a meeting application
+scenario using a head-mounted display with eye and head tracking.
 
-In this way, in situ Visual Focus of Attention
-(VFoA) estimation is advantageous to human-robot interaction and a major
-contribution towards a better understanding of the interaction quality.
-
-
-
-\cite{kennedy2015head} -> it does not work!
+While previous preliminary research in HRI seemed to indicate that deriving
+attentional focus from head pose alone would not be accurate
+enough~\cite{kennedy2015head}, we found in our case acceptable levels of
+agreement between the robot observation and manual post-hoc annotations.
 
 \paragraph{Engagement}
 
@@ -176,7 +186,7 @@ use of the weight distribution using a pressure sensitive chair has reported
 results. But it is in the computer vision field where major contributions have
 been done. 
 
-In \cite{peters2010investigating} approach, a model of user's interest and
+In~\cite{peters2010investigating} approach, a model of user's interest and
 engagement with a virtual agent displaying shared attention behavior, by using
 eye gaze and head direction information is proposed. Similarly, in
 \cite{nakano2010estimating} an approach to estimate the user's conversational
@@ -207,14 +217,6 @@ interaction in a learning context, first. And second, we provide qualitative and
 quantitative evaluation of the outcome provided using a first person RGB sensor
 approach. Moreover, this monitoring activity has been supporting our research in
 child-robot interaction for learning and instruction purposes.
-
-\fixme{Litterature review on visual attention...?}
-
-According to \cite{stiefelhagen2002tracking} the head orientation's contribution
-in overall gaze direction is 68.9\% showing agreement between both measurements.
-In addition, it shows that the head orientation alone can get an average
-accuracy of 88.7\% detecting the focus of attention in a meeting application
-scenario using a head-mounted display with eye and head tracking.
 
 
 \subsection*{Overview of the Article}
@@ -247,6 +249,10 @@ in turn of the focus of attention}
 \paragraph{From Attention to Engagement}
 
 \fixme{TBD}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Visual Attention Assessment}
 
@@ -306,50 +312,6 @@ selection of such difficult scenes on one child.
     \label{rviz}
 \end{figure}
 
-
-, to detect and extract the skeleton
-of the subject's face and then, use the obtained features to calculate the
-head pose orientation estimation (see figure \ref{system}). In this way, we can
-estimate what the subject was looking at and obtain an \textit{rviz} 3D scene
-representation as it is executed as a ROS (Robot Operating System) node that can
-be seen in figure \ref{rviz}. Compared to intrusive hardware like head mounted
-displays, eye-trackers or wearables for instance, this approach has a clear
-advantage of simplicity and integration with robotic systems, but also becomes
-accurate enough for general purposes in face-to-face interactions. In addition,
-it allows us to model complex environments, handling different number and
-positions of participants in the scene.
-
-\paragraph{Setting the \textit{tf} Frame}\fixme{tf is ROS specific: we should
-not write the article in a ROS specific way}
-The second step is to use the matrix [R|t] to set the correct translation and
-orientation of the \textit{tf} frame which represents the face in the 3D space.
-In order to achieve that it is necessary first, to set the origin defined by the
-vector \textit{t}. Second, the matrix \textit{R} needs to be reformulated into a
-quaternion as shown in equation \ref{eq:quat} due to the smoothly interpolation
-between them.
-
-\begin{equation}
-\begin{bmatrix}
-qw \\
-qx \\
-qy \\
-qz
-\end{bmatrix}
-=
-\begin{bmatrix}
-\sqrt{1 + r_{11} + r_{22} + r_{33}} /2 \\
-(r_{32} - r_{23})/( 4 \cdot qw) \\
-(r_{13} - r_{31})/( 4 \cdot qw) \\
-(r_{21} - r_{12})/( 4 \cdot qw)
-\end{bmatrix}
-\label{eq:quat}
-\end{equation}
-\\
-However, it is necessary to consider the cases where the division is performed
-by 0 (in 180\degree rotation about the y-axis for instance) or when \textit{qw}
-becomes close to zero.
-
-\paragraph{Computing the Field of Attention}
 
 The third step is to generate a representation of the field of view whose origin
 and orientation are the ones defined by the face detection \textit{tf} frame. 
@@ -415,6 +377,12 @@ d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
 Explain that: other modules have to provide the sitation assessment (what
 is where?) in terms of published frames, and a last module compute the
 intersection of the VFoA and these frames\fixme{TBD}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Experimental Validation}
 
@@ -494,7 +462,7 @@ experimenter and the observers located in the diagonal.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\columnwidth]{drawSetup}
-    \caption{\small Graphical representation of the set-up and the possible children focuses of attention in the scene, in red.}
+    \caption{\small \textbf{Experimental setting} Graphical representation of the set-up and the possible children focuses of attention in the scene, in red.}
     \label{drawSetup}
 \end{figure}
 
@@ -508,6 +476,12 @@ experimenter and the observers located in the diagonal.
 \end{figure}
 
 
+, to detect and extract the skeleton
+of the subject's face and then, use the obtained features to calculate the
+head pose orientation estimation (see figure \ref{system}). In this way, we can
+estimate what the subject was looking at and obtain an \textit{rviz} 3D scene
+representation as it is executed as a ROS (Robot Operating System) node that can
+be seen in figure \ref{rviz}. 
 
 \subsection{Results}
 
@@ -520,13 +494,15 @@ the focus of attention that given the state of the system, it is likely to
 attract the subject's gaze. In the same manner, the \textit{captured} is the
 focus of attention our approach provides and the \textit{real}, the ground truth
 of the subject's gaze direction based on manual annotations from two evaluators
-with an average reliability of $ \alpha = .89 $.
+with an average reliability of $ \alpha = .89 $\fixme{Is that Cronbach alpha or
+Krippendorff's alpha?}.
 
 In order to calculate the inter-rater reliability between the two measurements
-(real-captured and real-expected), the overlap percentage between the two curves
+(real-captured and real-expected), the overlap percentage between the two
+curves\fixme{which curve?}
 has been computed. A more reliable measurement in terms of time shifting between
 the real and captured focuses of attention is provided using the cosine
-similarity also shown in table \ref{tab:results}. 
+similarity\fixme{this needs to be better justified: why not a Cronbach alpha?} also shown in table~\ref{tab:results}. 
 
 \begin{table}[h!]
 	\centering
@@ -560,11 +536,12 @@ reduce the tracking accuracy.
 
 \begin{figure*}
     \centering
-    \includegraphics[width=1.8\columnwidth]{realExpected}
-    \caption{\small In blue, real VFoA of subject 4 accoding to two observer's
-    assessment. In cyan, the matching between the real and the obtained VFoA. In
-    yellow, the repeated pattern in turn-taking and in orange, the experimenter's
-    suggestion to choose a new word.}
+    \includegraphics[width=\linewidth]{matches}
+    \caption{\small \textbf{Comparison of computed focus of attention \vs ground
+        truth} during a 20+ min face-to-face child-robot interaction.
+        In orange (top line), the focus of attention as computed by the robot;
+        in blue (bottom line), the focus of attention as manually annotated. The
+    bottom graph shows agreements.}
 
     \label{fig:realExpected}
     
@@ -660,6 +637,12 @@ observers as negligible VFoA.
   \caption{ \small Subject 4 head movements. (head yaw on x-axis, pitch on y-axis).}
   \label{fig:heatmap}
 \end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Discussion and Conclusion}
 \subsection{From Attention to Engagement Assessment}
