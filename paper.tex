@@ -501,13 +501,13 @@ similarity\fixme{this needs to be better justified: why not a Cronbach alpha?} a
 
 \begin{table}[h!]
 	\centering
-    \caption{Tracking accuracy in face-to-face scenario\fixme{std dev needed!}}
-	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
-	\small Track(\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small86.4 \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small92.7 \\ \hline
-	\begin{tabular}{@{}c@{}}\small Real vs \\ \small captured(\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small72.8 \\ \hline
-	\begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.89 & \small0.8 \\ \hline
+    \caption{\textbf{Results of attention tracking accuracy}. \emph{Head pose} is the percentage of total time during which the head pose of the participant was successfully estimated;}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+        \small \textbf{Subject} & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & Std dev\\ \hline
+        \small Head pose (\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small86.4 & \\ \hline
+            \begin{tabular}{@{}c@{}}\small Groundtruth \vs \\ \small robot (\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small72.8 & \\ \hline
+        \begin{tabular}{@{}c@{}}\small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
+            \begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.89 & \small0.8 & \\ \hline
 	\end{tabular}
 	\label{tab:results}
 \end{table}
@@ -704,14 +704,34 @@ the user's focus of attention can not be estimated (Algorithm~\ref{alg:with-me-n
 line~\ref{algline:skiplosttrack}, third condition), typically because the user's
 face is not visible at those times.
 
+\begin{table}[h!]
+	\centering
+    \caption{\textbf{Results of attention tracking accuracy}. \emph{Head pose} is the percentage of total time during which the head pose of the participant was successfully estimated;}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+        \small \textbf{Subject} & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & Std dev\\ \hline
+        \begin{tabular}{@{}c@{}}\small Groundtruth vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small92.7 & \\ \hline
+        \begin{tabular}{@{}c@{}}\small Groundtruth \\ \small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
+            \begin{tabular}{@{}c@{}}\small Robot vs \\ \small expected(\%)\end{tabular} &  & & & & & & & \\ \hline
+        \begin{tabular}{@{}c@{}}\small Robot \\ \small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
+	\end{tabular}
+	\label{tab:results}
+\end{table}
+
+
 \begin{figure*}
     \centering
-    \includegraphics[width=1.81\columnwidth]{realCaptured}
-    \caption{\small Real VFoA of subject 4 accoding to two observer's
-    assessment. In green, the obtained VFoA using our approach and in cyan, the
-    matching between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
+    \includegraphics[width=\linewidth]{with-me-ness}
+    \caption{\small \textbf{With-me-ness}. Evolution of the level of
+    \emph{with-me-ness} over a 20min long child-robot interaction. The diagram
+    is identical to Figure~\ref{fig:realExpected} with the \emph{expected}
+    attentional targets added in green. The bottom curves represent the levels
+    of with-me-ness (since the beginning of the interaction), computed following
+    Algorithm~\ref{alg:with-me-ness}. The blue line is with-me-ness as estimated by
+    the robot, the orange line is with-me-ness computed from manually annotated
+    focuses of attention. The ``holes'' in the with-me-ness computed by the
+    robot correspond to period of time where the child's face is not detected.}
 
-    \label{fig:realCaptured}
+    \label{fig:with-me-ness}
 \end{figure*}
 
 If we consider the case shown in section \ref{fromFaceTo}, evaluating the
