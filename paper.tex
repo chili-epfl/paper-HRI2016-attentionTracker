@@ -1,5 +1,9 @@
 \documentclass{sig-alternate}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
 \usepackage[draft,nomargin,footnote]{fixme}
 
 \usepackage{xspace}
@@ -627,12 +631,84 @@ observers as negligible VFoA.
 
 \section{With-me-ness}
 
+The concept of \emph{with-me-ness} has been introduced in the field of
+\emph{Computer Supported Collaborative Learning} (CSCL) by Sharma~\etal
+in~\cite{sharma2014me}. Sharma~\etal introduce this concept in an attempt to
+answer a recurrent teacher's question: {\it ``how much are the students with
+me?''}. They distinguish what they call \emph{perceptual with-me-ness} (the
+student follows what the teacher refers to with deictic gestures) from
+\emph{conceptual with-me-ness} (the student follows what the teacher refers to
+verbally), and they show in an eye-tracking study that \emph{conceptual
+with-me-ness} in particular correlates with better learning performance. This
+also relates to the concept of gaze cross-recurrence that has been shown to
+reflect the quality of the interaction~\cite{jermann2012effects} in
+collaborative learning tasks.
+
+Sharma~\etal simply define \emph{conceptual with-me-ness} as the normalized
+percentage of time during which the student's gaze overlapped the areas of
+teaching slides currently referred to by the teacher.
+In order to apply it to human-robot interactions, we propose to extend this
+concept, and to define \emph{conceptual with-me-ness} as the normalized
+ratio of time that the human interactant focuses its attention on the
+attentional target expected by the robot for the current task (or sub-task).
+
+
+\begin{algorithm}[h!]
+    \centering
+
+    \begin{algorithmic}[1]
+    \Procedure{Compute With-me-ness} {}
+    \State $d_w, d_e \gets 0$
+    \State $t \gets t_{start}$
+    \Repeat
+    \If{$task(t) \neq$ nil \textbf{and} \par
+    \hskip\algorithmicindent$F(task(t)) \neq \varnothing$ \textbf{and} \par
+    \hskip\algorithmicindent $f(t) \neq$ nil } \label{algline:skiplosttrack}
+    \If{$f(t) \in F(task(t))$}
+            \State $d_w \gets d_w + 1$
+        \EndIf
+        \State $d_e \gets d_e + 1$
+    \EndIf
+    \State $t \gets t + 1$
+    \Until{$t = t_{end}$}
+
+    \State $\mathcal{W}_{[start, end]} \gets \frac{d_w}{d_e}$
+    \State \Return $\mathcal{W}_{[start, end]}$
+    \EndProcedure
+
+    \end{algorithmic}
+
+    \caption{\textbf{Computation of \emph{with-me-ness}}. $d_w$ stands for the duration
+        the human is \emph{with} the robot, $d_e$ stands for the duration where
+        the human would be \emph{expected to be with} the robot, $task(t)$
+        represents the task performed by the robot at time $t$ (possibly none),
+        $F(task)$ represents the (possibly empty) set of expected attentional
+        targets associated to task $task$, $f(t)$ represents the actual focus of
+        attention measured at time $t$. $\mathcal{W}_{[start, end]}$ represents
+        the level of \emph{with-me-ness} from $t_{start}$ to $t_{end}$.}
+    \label{alg:with-me-ness}
+\end{algorithm}
+
+Algorithm~\ref{alg:with-me-ness} provides a formal way of computing the level of
+with-me-ness $\mathcal{W}$ between two time points $[t_{start}, t_{end}]$. A
+notable difference with the original definition by Sharma~\etal is that, at a
+given time $t$, the task $task(t)$ performed by the robot may elicit more than
+one attentional target; thus, at a given time, more than one location can be
+regarded as possible \emph{expected} focuses of attention for the human. For
+example, a robot which is writing, could typically elicit gazes to its hand as
+well as to its head. A human looking at either of these locations would be
+considered to be \emph{with} the robot in terms of interaction. Also notable, we
+exclude from the computation of $\mathcal{W}$ all of the periods of time where
+the user's focus of attention can not be estimated (Algorithm~\ref{alg:with-me-ness},
+line~\ref{algline:skiplosttrack}, third condition), typically because the user's
+face is not visible at those times.
+
 \begin{figure*}
     \centering
     \includegraphics[width=1.81\columnwidth]{realCaptured}
     \caption{\small Real VFoA of subject 4 accoding to two observer's
-    assessment. In green, the obtained VFoA using our aproach and in cyan, the
-    mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
+    assessment. In green, the obtained VFoA using our approach and in cyan, the
+    matching between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
 
     \label{fig:realCaptured}
 \end{figure*}
