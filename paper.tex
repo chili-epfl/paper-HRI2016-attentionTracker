@@ -74,57 +74,106 @@ suited for operational, real-time assessment of an on-going interaction.
 %\cite{Tielman:2014, Lim:2014}, specifically with children, manifesting a more
 %positive attitude over time.
 
-In order to build intelligent agents, it is necessary to equip them with a range
+Building capable social agents requires to equip them with a range
 of perceptual capabilities: while face and object tracking and
-recognition~\cite{Zhao:2003, Jafri:2014}, path planning~\cite{Galceran:2013},
-speech recognition~\cite{brick2007incremental} or task
-learning~\cite{calinon2007learning} are amongst the current major research
+recognition, path planning, speech recognition or task learning are some of the current major research
 directions, existing literature tends to evaluate each of these algorithms in
-their own metric space, without considering the overall interaction quality.
-Along this line, Anzalone~\etal~\cite{anzalone} have recently argued in favor of
-such a global evaluation, and propose to assess these algorithms in term of
-their capability to obtain the desired effect in a human-robot interaction
-context, and they correspondingly propose metrics build around the measurement
+their own metric space, without considering the interaction quality at a global
+level: Anzalone~\etal~\cite{anzalone} have recently argued in favor of
+such a global evaluation, and they propose to assess these algorithms in term of
+their capability to \emph{obtain the desired effect} in a human-robot interaction
+context. They correspondingly propose metrics build around the measurement
 of \emph{engagement} as indicator of the quality of the experience.
 
-Engagement describes a cognitive, affective (specifically intrinsic motivation),
-and behavioral state of interaction with a computer application that ``makes the
-user want to be there" \cite{OBrien:2010}. Engaging interactions were thought to
-involve intrinsic interest, interactivity, perceived control and choice,
-functionality, motivation and attention.
+``Engagement'', the cognitive, affective and behavioral state of interaction
+with a computer application that ``makes the user want to be
+there"~\cite{OBrien:2010}, has actively been studied in a diverse set of
+domains, and specifically in robotics, several variables and social signals have been proposed in the
+literature to quantify it. A recent review of these is in~\cite{ivaldi2015towards}.
 
-\paragraph{Motivation: Impact on Learning}
+%In a learning context, the evaluation of response times in relation with
+%correctness has been proposed~\cite{Beck} to provide estimate the user's 
+%engagement, with however large inter-subject and environment variability.
+%Biometric measurements have also been proposed, like the use the weight
+%distribution of the user on a pressure-sensitive
+%chair~\cite{Chipman07postureas}.
 
-Education and learning environments are interesting application fields for
-research on attention assessment, since sustaining children's engagement over
-time is a key variable to ensure effective learning (see for
-instance~\cite{Umbach}), and they indeed motivate this research. In fact, the
-use of robots in education comes with the potential to engage the child in
-meta-cognition through the learning by teaching paradigm, wherein a student
-takes the role of a teacher and experiences stronger educational benefits as a
-result (such as in \cite{Palinscar1984}).
+For instance, \cite{Castellano:2009} proposes to predict children's level of
+engagement by integrating in a Bayesian model non-verbal cues (gaze and smiles)
+with the current state of the interaction. While they report high level of
+accuracy, their approach requires post-hoc video annotations, and is not
+applicable to on-line engagement assessment. Similarly,
+Baxter~\etal~\cite{baxter2014tracking} posit that the measure of the direction
+and timing of gaze in child-robot interactions is a proxy for engagement and
+attribution of social agency. However, they also conduct these measures as
+post-hoc analyses.  \cite{peters2010investigating} model the user's interest and
+engagement with a virtual agent by tracking eye gaze and head direction.
+Similarly, \cite{ishii2011combining} estimates the user's engagement with a
+conversational agent based on the analysis of gaze patterns.
+In~\cite{Rich:2010}, a computational model based on the recognition of
+connection events such as directed gaze, mutual facial gaze is proposed. Not
+relying on gaze, \cite{Sanghvi:2011} focus only on the back or trunk posture as
+a determining factor for the assessment. A recent study~\cite{anzalone} with
+social robots in face-to-face scenarios proposed a set of metrics based on
+non-verbal cues but manifesting some possible limitations in long-term
+scenarios.
 
-While~\cite{zhao2012learning} recommends the development of a teachable agent
-that is actively, rather than passively, engaged in the learning by teaching
-interaction, the increased learning gain results attained
-in~\cite{okita2006observation} were done so even with the pupil being taught
-having been instructed to not contribute much information. This suggests that it
-may not be necessary, from a learning by teaching point of view, for the
-teachable agent to participate actively in the interaction to incite educational
-benefits. However, from an engagement point of view, this may not necessarily be
-true.
+The variety of these approaches reflects the fact that \emph{engagement} remains
+a broad concept, fairly ill-defined and thus difficult to operationalize.
+Therefore, instead of introducing ``yet another metric of engagement'', we
+propose in this paper to introduce the more specific concept of
+``\emph{with-me-ness}'': to what extend the human remains ``with me'', the
+robot, during our interaction.
 
-The goal of this research is therefore to \textbf{evaluate the quality of an
-interaction} using the \textbf{visual focus of attention as an engagement
-indicator}. We validate our approach with field experiments conducted in the
-educational context of the CoWriter project~\cite{Hood:2015}, where our
-technique, being based on a regular, low-end RGB camera, avoids the use of
-otherwise typically invasive technologies such as eyetrackers, that would
-negatively impact the natural of the interaction.
+We assess this level of ``with-me-ness'' by combining real-time estimation of the
+attentional focus of the human with the expected, {\it a priori} focus
+requested by the task, as decided by the robot.
 
-\subsection*{Attention and Engagement: Related Work}
+As such, this article is organized in three sections: we first present a novel
+method for on-line estimation of the focus of attention based on fast 6D head
+pose estimation. We then present an extensive validation of this approach based on
+a real-world field experiment with 6 children. We finally show how to compute in
+real-time ``with-me-ness'' to provide a new \emph{in-the-moment} measurement of
+the quality of interaction, and compare levels computed by the robot with a
+ground truth based on manual post-hoc annotations.
 
-\paragraph{Head Tracking and Visual Attention}
+%\paragraph{Motivation: Impact on Learning}
+%
+%Education and learning environments are interesting application fields for
+%research on attention assessment, since sustaining children's engagement over
+%time is a key variable to ensure effective learning (see for
+%instance~\cite{Umbach}), and they indeed motivate this research. In fact, the
+%use of robots in education comes with the potential to engage the child in
+%meta-cognition through the learning by teaching paradigm, wherein a student
+%takes the role of a teacher and experiences stronger educational benefits as a
+%result (such as in \cite{Palinscar1984}).
+%
+%While~\cite{zhao2012learning} recommends the development of a teachable agent
+%that is actively, rather than passively, engaged in the learning by teaching
+%interaction, the increased learning gain results attained
+%in~\cite{okita2006observation} were done so even with the pupil being taught
+%having been instructed to not contribute much information. This suggests that it
+%may not be necessary, from a learning by teaching point of view, for the
+%teachable agent to participate actively in the interaction to incite educational
+%benefits. However, from an engagement point of view, this may not necessarily be
+%true.
+%
+%The goal of this research is therefore to \textbf{evaluate the quality of an
+%interaction} using the \textbf{visual focus of attention as an engagement
+%indicator}. We validate our approach with field experiments conducted in the
+%educational context of the CoWriter project~\cite{Hood:2015}, where our
+%technique, being based on a regular, low-end RGB camera, avoids the use of
+%otherwise typically invasive technologies such as eyetrackers, that would
+%negatively impact the natural of the interaction.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Visual Attention Assessment}
+
+\subsection{Related Work}
 
 The relations between one's focus of attention and what he/she is looking at has
 long been established~\cite{yarbus1967eye,barber1976perception}, and more
@@ -174,90 +223,6 @@ attentional focus from head pose alone would not be accurate
 enough~\cite{kennedy2015head}, we found in our case acceptable levels of
 agreement between the robot observation and manual post-hoc annotations.
 
-\paragraph{Engagement}
-
-The notion of engagement has actively been studied in a diverse set of domains,
-and several variables and social signals have been proposed in the literature to
-quantify and study it in social interactions.
-
-The evaluation of response times to provide an estimation of the user's
-engagement based on the correctness has been proposed in a learning context
-\cite{Beck} before. However, several aspects like the inter-subject variability
-or the environment complexity make it hardly applicable in a child-robot
-interaction. Additionally, other techniques \cite{Chipman07postureas} like the
-use of the weight distribution using a pressure sensitive chair has reported
-results. But it is in the computer vision field where major contributions have
-been done. 
-
-In~\cite{peters2010investigating} approach, a model of user's interest and
-engagement with a virtual agent displaying shared attention behavior, by using
-eye gaze and head direction information is proposed. Similarly, in
-\cite{nakano2010estimating} an approach to estimate the user's conversational
-engagement with a conversational agent based on analysis of gaze patterns was
-implemented. Other significant work \cite{Castellano:2009} focus on feature
-evaluation related to the user's non-verbal behavior, the task and the
-companion's affective reactions are identified to predict the children's level
-of engagement using a Bayesian model.
-
-Some few studies have proposed approaches for the detection of engagement with a
-robot. In \cite{Rich:2010} a computational model based on the recognition of
-connection events such as directed gaze, mutual facial gaze is proposed. In this
-context, some other \cite{Sanghvi:2011} focus only on the back or trunk posture
-as a determined factor for the assessment. A recent study \cite{anzalone} with
-social robots in face to face scenarios proposed a set of metrics based on
-non-verbal cues but manifesting some possible limitations in long-term
-scenarios.
-
-In~\cite{baxter2014tracking}, Baxter~\etal posit that the measure of the
-direction and timing of gaze in child-robot interactions is a proxy for
-engagement and attribution of social agency, However, they conduct these
-measures as post-hoc analyses. This work suggests a path forward for real-time
-assessment of engagement.
-
-In this research, we address the problem of tracking the children's engagement
-based on their VFoA and current performed task during a long term child-robot
-interaction in a learning context, first. And second, we provide qualitative and
-quantitative evaluation of the outcome provided using a first person RGB sensor
-approach. Moreover, this monitoring activity has been supporting our research in
-child-robot interaction for learning and instruction purposes.
-
-
-\subsection*{Overview of the Article}
-
-\paragraph{Real-Time Assessment of Visual Focus of Attention}
-
-The participants' VFoA acquisition is the only dependent variable. This includes
-their gaze times and patterns of looking or not looking to the targets. This
-data extracted from an RGB camera was also coded post-hoc to quantify some of
-these measurements.
-
-We predict that there will be no generalizable pattern of participant's VFoA
-behavior for different scenarios such as multiple subjects, necessitating in
-situ VFoA estimation capabilities to enable robots to adapt in the specific
-scenarios. However, we believe that off-line pattern identification can lead to
-a better understanding of the children progression as well as engagement level
-assessment in face-to-face long term interactions.\fixme{I did not understand
-this paragraph}
-
-\fixme{Underline difference between field of attention and focus of attention}
-
-\fixme{State the hypothesis: head-pose estimation provides a good-enough
-approximation of the gaze direction, and in turn of the field of attention, and
-in turn of the focus of attention}
-
-\paragraph{Experimental Validation of the Approach}
-
-\fixme{TBD}
-
-\paragraph{From Attention to Engagement}
-
-\fixme{TBD}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Visual Attention Assessment}
 
 \subsection{Head Pose Estimation}
 
@@ -399,6 +364,28 @@ This section presents such an experimental validation, set in the context of a
 real child-robot interaction scenario where the robot tries to engage a child in
 handwriting tasks using learning by teaching paradigm.
 
+\paragraph{Real-Time Assessment of Visual Focus of Attention}
+
+The participants' VFoA acquisition is the only dependent variable. This includes
+their gaze times and patterns of looking or not looking to the targets. This
+data extracted from an RGB camera was also coded post-hoc to quantify some of
+these measurements.
+
+We predict that there will be no generalizable pattern of participant's VFoA
+behavior for different scenarios such as multiple subjects, necessitating in
+situ VFoA estimation capabilities to enable robots to adapt in the specific
+scenarios. However, we believe that off-line pattern identification can lead to
+a better understanding of the children progression as well as engagement level
+assessment in face-to-face long term interactions.\fixme{I did not understand
+this paragraph}
+
+\fixme{Underline difference between field of attention and focus of attention}
+
+\fixme{State the hypothesis: head-pose estimation provides a good-enough
+approximation of the gaze direction, and in turn of the field of attention, and
+in turn of the focus of attention}
+
+
 \subsection{Experimental Procedure}
 
 The target of this study were 6 children with ages compressed between 5 and 6
@@ -509,7 +496,7 @@ similarity\fixme{this needs to be better justified: why not a Cronbach alpha?} a
 
 \begin{table}[h!]
 	\centering
-	\caption{Tracking accuracy in face-to-face scenario}
+    \caption{Tracking accuracy in face-to-face scenario\fixme{std dev needed!}}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
 	\small Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg\\ \hline
 	\small Track(\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small86.4 \\ \hline
@@ -549,16 +536,6 @@ reduce the tracking accuracy.
     \label{fig:realExpected}
     
     % Maybe we should add the expected VFoA
-\end{figure*}
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=1.81\columnwidth]{realCaptured}
-    \caption{\small Real VFoA of subject 4 accoding to two observer's
-    assessment. In green, the obtained VFoA using our aproach and in cyan, the
-    mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
-
-    \label{fig:realCaptured}
 \end{figure*}
 
 According to figure \ref{fig:realExpected} several findings can be analyzed in
@@ -647,8 +624,17 @@ observers as negligible VFoA.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Discussion and Conclusion}
-\subsection{From Attention to Engagement Assessment}
+\section{With-me-ness}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1.81\columnwidth]{realCaptured}
+    \caption{\small Real VFoA of subject 4 accoding to two observer's
+    assessment. In green, the obtained VFoA using our aproach and in cyan, the
+    mathing between them. Finally, the correspondent numbers with figure \ref{fig:bitmap}.}
+
+    \label{fig:realCaptured}
+\end{figure*}
 
 If we consider the case shown in section \ref{fromFaceTo}, evaluating the
 subject's progression together with the time on task may be an indicator of
@@ -701,7 +687,12 @@ able to progress over time, produces the contrary effect.
 
 %Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
-\subsection{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Discussion and Conclusion}
 
 In this work we have presented an on-line vision-based engagement assessment
 solution that can be extended to work in different platforms for simulating
