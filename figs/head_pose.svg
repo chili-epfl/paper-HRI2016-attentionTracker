@@ -26,11 +26,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.55266018"
-     inkscape:cx="999.47286"
-     inkscape:cy="478.65534"
+     inkscape:zoom="2.2106407"
+     inkscape:cx="492.87591"
+     inkscape:cy="690.29694"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g4355"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -87,16 +87,16 @@
       </g>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="-607.31104"
-         y="647.25159"
+         style="font-style:normal;font-weight:normal;font-size:34.57170868px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="-606.78357"
+         y="643.18036"
          id="text4365"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
            id="tspan4367"
-           x="-607.31104"
-           y="647.25159"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:FlamaLight;-inkscape-font-specification:'FlamaLight Medium';fill:#ffffff">(0,0)</tspan></text>
+           x="-606.78357"
+           y="643.18036"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10;fill:#ffffff">(0,0)</tspan></text>
     </g>
     <g
        transform="translate(-11,455)"
@@ -477,7 +477,7 @@
            inkscape:transform-center-y="-167.60931" />
       </g>
       <g
-         transform="translate(191.37981,402.76622)"
+         transform="matrix(0.81905696,0,0,0.81905696,120.28093,403.14466)"
          id="g4339">
         <text
            xml:space="preserve"
@@ -490,7 +490,7 @@
              id="tspan4337"
              x="-414.32187"
              y="52.091499"
-             style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:FlamaLight;-inkscape-font-specification:'FlamaLight Medium'">(0,0,0)</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10">(0,0,0)</tspan></text>
       </g>
     </g>
   </g>
