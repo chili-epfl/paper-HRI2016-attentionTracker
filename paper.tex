@@ -1,11 +1,17 @@
 \documentclass{sig-alternate}
 
+\usepackage{hyperref}
+
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
 \usepackage{booktabs}
 
 \usepackage[draft,nomargin,footnote]{fixme}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc}
 
 \usepackage{xspace}
 \newcommand{\eg}{\textit{e.g.}\xspace}
@@ -177,6 +183,7 @@ ground truth based on manual post-hoc annotations.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Visual Attention Assessment}
+\label{sec:vfoa}
 
 \subsection{Related Work}
 
@@ -342,127 +349,155 @@ hereafter are actually taken as static with respect to the robot.
 As presented above, we use the (6D) head pose as an approximation of the
 actual gaze direction, and we approximate from here the participant's field of
 attention. The assumption that such an approximation of the field of attention
-allows to derive the actual focus of attention is the core hypothesis that we
-ought to validate.
-
-This section presents such an experimental validation, set in the context of a
-real child-robot interaction scenario where the robot tries to engage a child in
-handwriting tasks using learning by teaching paradigm.
-
-\paragraph{Real-Time Assessment of Visual Focus of Attention}
-
-The participants' VFoA acquisition is the only dependent variable. This includes
-their gaze times and patterns of looking or not looking to the targets. This
-data extracted from an RGB camera was also coded post-hoc to quantify some of
-these measurements.
-
-We predict that there will be no generalizable pattern of participant's VFoA
-behavior for different scenarios such as multiple subjects, necessitating in
-situ VFoA estimation capabilities to enable robots to adapt in the specific
-scenarios. However, we believe that off-line pattern identification can lead to
-a better understanding of the children progression as well as engagement level
-assessment in face-to-face long term interactions.\fixme{I did not understand
-this paragraph}
-
-\fixme{Underline difference between field of attention and focus of attention}
-
-\fixme{State the hypothesis: head-pose estimation provides a good-enough
-approximation of the gaze direction, and in turn of the field of attention, and
-in turn of the focus of attention}
+allows to derive the actual focus of attention forms the hypothesis that we
+want to validate experimentally. The experiment involves child-robot
+interactions in the context of handwriting remediation.
+This section details the experimental procedure and presents our results.
 
 
 \subsection{Experimental Procedure}
 
-The target of this study were 6 children with ages compressed between 5 and 6
-years old. The experiments were developed individually and consisted on a
-writing activity by turns and one story telling performed by the robot at a
-given time of the interaction. All this performed in a over all 18 minutes
-interaction average time.
-
-Figure~\ref{fig:realSetup} illustrates our general experimental setup: a
-face-to-face child-robot interaction with an (autonomous) Aldebran's {\sc nao}
-robot.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\columnwidth]{realSetup}
-    \caption{\small Our experimental setup: face-to-face interaction with a {\sc
-            nao} robot.  The robot writes on the tactile tablet, the child then
-            corrects the robot by directly overwriting its letters on the tablet
-            with a stylus. An adult (either a therapist or an experimenter,
-            depending on the studies), remains next to the child to guide the work. 
-            A second tablet allows to choose demonstrations and the camera captures the subject's face.}
-    \label{fig:realSetup}
-\end{figure}
-
-A tactile tablet (with a custom application) is used for both the robot and the
-child to write: during a typical round, the child requests the robot to write
-something (a single letter, a number or a full word), and push the tablet
-towards the robot, the robot writes on the tablet by gesturing the writing (but
-without actually physically touching the tablet), the child then pull back the
-tablet, corrects the robot's attempt by writing him/herself on top or next to
-the robot's writing, and ``send'' his/her demonstration to the robot by pressing
-a small button on the tablet. The robot ``learns'' from this demonstration and
-tries again.
-
-Since the child is assumed to take on the role of the teacher, we had to ensure
-(s)he would be able to manage by him/herself the turn-taking and the overall
-progression of the activity (moving to the next letter or word). In our design,
-the turn-taking relies on the robot prompting for feedback once it is done with
-its writing (simple sentences like ``What do you think?''), and pressing on a
-small robot icon on the tablet once the child has finished correcting. In our
-experiments, both were easy to grasp for children.
-
-Implementing such a system raises several challenges that are discussed in
-detail in \cite{Hood:2015}.
-
-An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The
-camera was located at 5 cm from the center of Nao's feet and its holder was tied
-to a wood base for stability purposes. Thus, the camera's objective was 9 cm
-above and $ 40\degree $ inclination with respect to the surface of the table to
-maximize the detection during the writing time. However, Nao's camera could have
-been used, always considering the \textit{tf} frame matrix update according to
-the head orientation.
-
-The subjects were typically located 50 cm away from the robot with the first
-tablet in front and the second one 30 cm to the left of the first one. In the
-same way, the experimenter was located around 60 cm to the left of the subject.
-Finally, two observers were located far away from the interaction field to
-manually assess the state of the interaction.
-
-Figure \ref{drawSetup} allows us to intuitively identify several focuses of
-attention along the interaction such as the two tablets, the robot, the
-experimenter and the observers located in the diagonal.
+The experiment, part of the CoWriter project~\cite{Hood:2015}, involves a robot
+which tries to engage a child in handwriting tasks using a \emph{learning by teaching}
+paradigm (\ie the child is the teacher, and he/she attempts to improve the
+robot's handwriting). A tactile tablet is used as writing support.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\columnwidth]{experimental_setup}
-    \caption{\small \textbf{Experimental setting}. The areas of interest (AOI)
-    of potential focuses of attention are circled in red.}
-    \label{drawSetup}
+    \caption{\small \textbf{Experimental setup}: face-to-face interaction with a {\sc
+            nao} robot. The robot writes on the tactile tablet, the child then
+            corrects the robot by directly overwriting its letters on the tablet
+            with a stylus. The facilitator remains next to the child to guide the work. 
+            The secondary tablet allows the child to tell the robot what to
+            write. The areas of interest -- corresponding to potential target of
+            attention -- are circled in red with their name.}
+    \label{fig:setup}
 \end{figure}
 
+
+Figures~\ref{fig:setup} and~\ref{fig:realSetup} illustrate the experimental setup: a face-to-face
+child-robot interaction with an (autonomous) Aldebran's {\sc nao} robot, in
+presence of a facilitator (one of the researchers).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\columnwidth]{realSetup}
+    \caption{\small Picture of the interaction with one of the children.}
+    \label{fig:realSetup}
+\end{figure}
+
+
+The dependent variable is the measurement of the participants' VFoA, assessed in
+terms of what are the attentional targets of the child over time. The face of the child
+is acquired through a fixed webcam (Logitech {\sf c920}), placed on the table
+(see Figure~\ref{fig:setup}), and the attentional targets are then computed as
+presented in section~\ref{sec:vfoa}.
+
+%An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The
+%camera was located at 5 cm from the center of Nao's feet and its holder was tied
+%to a wood base for stability purposes. Thus, the camera's objective was 9 cm
+%above and $ 40\degree $ inclination with respect to the surface of the table to
+%maximize the detection during the writing time. However, Nao's camera could have
+%been used, always considering the \textit{tf} frame matrix update according to
+%the head orientation.
+
+The subjects were typically located 50 cm away from the robot with the primary
+(writing) tablet in front and the secondary one 30 cm to the left of the first
+one.  The facilitator was located about 60 cm to the left of the subject.
+Finally, two observers were located further away from the interaction field.
+Figure~\ref{fig:setup} indicates accordingly the location of main areas of
+interest (the two tablets, the robot, the facilitator and the observers).
+
+\subsection{Experimental Procedure}
+
+Six children (ages 5 to 6\fixme{boys? girls?}) were enrolled for this study.
+The study took place at school, in a separate room (the computer
+lab). The participants were chosen by the teacher, and would come one after the
+other for a face-to-face interaction with a {\sc Nao} robot (average duration:
+18 min, $SD:$ \fixme{stddev?}).
+
+The experiment is organized in rounds of writing: during a typical round, the
+child requests the robot to write something (a single letter, a number or a full
+word), and pushes a tactile tablet (equipped with a custom application that we
+developed) towards the robot; the robot writes on the tablet by mimicking the
+writing gesture (but without actually physically touching the tablet); the child
+then pull back the tablet, corrects the robot's attempt by writing him/herself
+on top or next to the robot's writing, and ``send'' his/her demonstration to the
+robot by pressing a small button on the tablet. The robot learns from this
+demonstration and tries again. The child continues the turn-taking until he/she
+decides to train the robot on another word. Details on the rationale and
+implementation of this study can be found in~\cite{Hood:2015}.
+
+\fixme{how many rounds for each child?}
+
+Besides, once per interaction, the robot did interrupt the handwriting task to
+propose to tell a funny story. The story-telling lasted in average \fixme{how
+long?} min, and the turn-based hand-writing task continued afterwards. The
+intended purpose of the story-telling episode was to locally trigger a different
+set of gaze behaviors.
+
 \subsection{System Implementation}
+
 \label{sec:system}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.9\columnwidth]{system}
-    \caption{\small System overview showing the most relevant components involved in the estimation.}
-    \label{system}
+
+\resizebox{0.9\linewidth}{!}{%
+
+\begin{tikzpicture}[
+    >=latex,
+    node distance=2cm,
+    every edge/.style={draw, very thick},
+    redarrow/.style={fill=Red, draw=Red},
+    greenarrow/.style={fill=GreenYellow, draw=GreenYellow},
+    yellowarrow/.style={fill=BurntOrange, draw=BurntOrange},
+    cmpt/.style={draw, align=center, rounded corners, inner sep=5pt, font=\sf, fill=black!20},
+    label/.style={midway, align=left, font=\scriptsize\sf, fill=white, above,opacity=0,text opacity=1}]
+
+%    \node at (0,0)[cmpt, fill=Cyan!50, text width=2.7cm] (tactile) {tactile interaction \\ manager};
+
+    \node at (0,0) [cmpt, fill=Green!50] (tf) {tf};
+    \node [cmpt, fill=YellowOrange!50, left=of tf] (attention) {attention tracking};
+    \node [above=0.6cm of attention, text width=2.7cm,align=center] (input) {\tt /image \\ /camera\_info \\ dlib {\sf faces model} \\ {\sf 3D face template}};
+    \node [cmpt, right=of tf] (static) {static pose publishers};
+    \node [above=0.6cm of static, text width=2.7cm,align=center] (staticposes) {\sf locations of \\areas of interest};
+    \node [cmpt, above=0.6cm of tf] (pose) {robot state publisher};
+    \node [cmpt, fill=YellowOrange!50, below=0.6cm of tf] (focus) {focus estimation};
+    \node [below=0.6cm of focus] (output) {\tt /frames\_in\_focus};
+
+    \path (staticposes) edge [->] (static);
+    \path (static) edge [->] (tf);
+    \path (input) edge [->] (attention);
+    \path (attention) edge [->] (tf);
+    \path (pose) edge [->]  (tf);
+    \path (tf) edge [->]  (focus);
+    \path (focus) edge [->]  (output);
+
+\end{tikzpicture}
+}
+
+    \caption{\small ROS nodes involved in the VFoA estimation (yellow nodes were developed for this work).}
+    \label{fig:system}
 \end{figure}
 
+The experiment was carried with an Aldebaran's {\sc Nao} robot, using ROS as a
+middleware to build the attention estimation pipeline
+(Figure~\ref{fig:system}). Head pose estimation builds on the {\tt dlib} and
+OpenCV libraries, while pose transformations are handled by the {\sc tf}
+library. The implementation is open-source and available at
+\url{https://github.com/chili-epfl/attention-tracker}.
 
-, to detect and extract the skeleton
-of the subject's face and then, use the obtained features to calculate the
-head pose orientation estimation (see figure \ref{system}). In this way, we can
-estimate what the subject was looking at and obtain an \textit{rviz} 3D scene
-representation as it is executed as a ROS (Robot Operating System) node that can
-be seen in figure \ref{rviz}. 
+Please refer to~\cite{Hood:2015} for the implementation of the hand-writing
+activity.
 
 \subsection{Results}
 
 \subsubsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
+(note that the focus of attention
+was separately hand-coded, {\it post-hoc}, from the video recording of the
+interaction).
 
 
 Our results for a peer-to-peer work scenarios using an approach based on RGB
@@ -564,8 +599,8 @@ be easily identified by setting a horizontal threshold to the field of view.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\columnwidth]{bitmap}
-    \caption{\small Cosine similarity matrix between real and cap-tured VFoA
-    using a 10 sec. window size computation. The correspondent numbers are shown
+    \caption{\small Cosine similarity matrix between ground-truth and robot-measured VFoA
+    using a 10 sec. window size. The correspondent numbers are shown
     in figure \ref{fig:realCaptured}.}
     \label{fig:bitmap}
 \end{figure}
