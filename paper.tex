@@ -244,10 +244,11 @@ with respect to the camera frame. With this approach, knowing the intrinsic
 parameters of the camera (calibrated camera) is required for an accurate
 estimation of the absolute 3D localization of the head.
 
-Besides being fast, the face alignment algorithm has been found to perform well,
-including in a range of difficult situations (occlusions, head angle) as
-encountered in field experiments.  Figure~\ref{head_pose_real_world} shows a
-selection of such difficult scenes on one child.
+Besides being fast, the face alignment algorithm has been found to perform well
+in terms of robustness, including in a range of difficult situations
+(occlusions, head angle) as encountered in field experiments.
+Figure~\ref{head_pose_real_world} shows a selection of such difficult scenes with
+one child.
 
 \begin{figure}[t]
     \centering
@@ -256,7 +257,7 @@ selection of such difficult scenes on one child.
         adult head (left) onto the detected 2D features of the face (right). We
         rely on an iterative $PnP$ algorithm, using 8 correspondence pairs
         (three are depicted: the sellion -- the nasal depression --, the left
-        tragion and the menton).}
+        tragion and the menton). The 3D origin of the head is set at the sellion.}
 
     \label{head_pose}
 \end{figure}
@@ -270,11 +271,7 @@ selection of such difficult scenes on one child.
     \label{head_pose_real_world}
 \end{figure}
 
-
-
-
-
-\subsection{Field of Attention}
+\subsection{Field \& Focus of Attention}
 
 \begin{figure}
     \centering
@@ -282,76 +279,59 @@ selection of such difficult scenes on one child.
     \caption{\small The visual field of attention is approximated to a
         20$\degree$ cone, spanning from the head's sellion. The objects whose 3D
     pose intersect with this cone are considered \emph{in focus}.}
-    \label{rviz}
+    \label{fig:vfoa}
 \end{figure}
 
+We model the field of attention as the central region of the field of view.
+The field of view itself is approximated to a cone spanned from the nasal
+depression (sellion) of the human face.
 
-The third step is to generate a representation of the field of view whose origin
-and orientation are the ones defined by the face detection \textit{tf} frame. 
+The width of the human field of attention has been discussed in the literature.
+Holmqvist~\cite{holmqvist2011eye} specifies that the visual human
+range\fixme{field of view or field of attention?} is $ \pm  40\degree $ in the
+horizontal and $ \pm 25\degree $ in the vertical.
+In~\cite{walker1980clinical}, Spector provides a more detailed specification
+for each eye splitting the vertical range into $ 60\degree $ the upper region
+and $ 75\degree $ the lower one. Moreover, the horizontal range gets separated
+in $ 60\degree $ inwards (towards the nose) and $ 95\degree $ outwards.
+Previous work on visual perspective taking for social robotics
+application~\cite{sisbot2011situation} propose to use a cone of 30$\degree$ of
+aperture. In the present implementation, the first approach explained has been
+chosen representing the field of view using a cone with such
+dimensions\fixme{which one? 40deg? 25deg?}.
 
-The breadth of the human field of attention has been discussed in the
-literature.
-Holmqvist in~\cite{holmqvist2011eye} specifies that the visual human
-range\fixme{field of view or field of attention?} is $
-\pm  40\degree $ in the horizontal and $ \pm 25\degree $ in the vertical. In
-\cite{walker1980clinical} Spector provides a more detailed specification for
-each eye splitting the vertical range into $ 60\degree $ the upper region and $
-75\degree $ the lower one. Moreover, the horizontal range gets separated in $
-60\degree $ inwards (towards the nose) and $ 95\degree $ outwards. In robotics,
-Sisbot\etal~\cite{sisbot2011situation} use a cone of 30$\degree$. In the
-present implementation, the first approach explained has been chosen
-representing the field of view using a cone with such dimensions\fixme{which
-one? 40deg? 25deg?}.
+We then approximate the visual focus of attention (VFoA) of the human to the
+objects which lie inside the field of attention (Figure~\ref{fig:vfoa}). At a
+given time, more than one object can therefore be \emph{in focus}.
 
-Assuming that the \textit{tf} frames representing the robotic agent and the VFoA
-candidates are static, need to be monitored. This task consists on evaluating
-the intersection between the \textit{tf} frames and the field of view: If one
-focus of attention is within the region defined by the field of view, we assume
-the subject is looking at it. In order to solve such operation mathematically it
-is necessary to compute the transformation matrix between the coordinate frames
-to be able to locate the monitored frames \textit{A} in the subject's coordinate
-system \textit{B} (see equation \ref{eq:transform}).
+Our implementation has two limitations: objects are approximated to their origin
+(\ie objects are either in or out of the field of attention), and we do not
+check actual visibility: one object could be hidden by another, it would still
+be considered as in focus. We did not address these limitations since our
+experimental setup (involving relatively small objects with no occlusions) did
+not require it. Techniques for a more complete assessment of the visual
+perspective can be found in~\cite{sisbot2011situation} for instance.
 
-\begin{equation}
-v' = B(A^{-1})v
-\label{eq:transform}
-\end{equation}
+Within these limitations, computing if object $A(x_A,y_A,z_A)$ is in the field
+of attention of the human requires first to transform the coordinates
+$A(X_A,Y_A,Z_A)$ into the frame of the face, and then to verify the following
+inequality (with $fov$ the aperture, and assuming that the main axis of the
+field of attention is aligned on the face's $\vec{x}$):
 
-where \textit{v} is a point in \textit{A} that becomes v' in coordinate system
-\textit{B}. However, in practice there are, at least, three different
-\textit{tf} frames involved in the transformation (subject-camera, camera-base,
-base-focus). Following the transformation result, the distance of the monitored
-frame with respect to the x-axis face \textit{tf} frame, $ d_{x_{axis}} $,
-representing the subject's face can be computed as simple as in equation
-\ref{eq:pitagoras}. Always considering the x-axis as the one defining the face's
-orientation and thus field of view's main axis.
+\begin{align}
+    \sqrt{Y_A^2 + Z_A^2} < tan\left(\frac{fov}{2}\right) \cdot X_A
+\label{eq:fov}
+\end{align}
 
-\begin{equation}
-d_{x_{axis}} = \sqrt{t_y^2 + t_z^2}
-\label{eq:pitagoras}
-\end{equation}
-
-It is necessary to compare the distance acquired $ d_{x_{axis}} $ with the
-radius of the field of view at the target \textit{tf} frame x-coordinate $
-r_{fov} $ as shown in equation \ref{eq:fovtf}.
-
-\begin{equation}
-r_{fov} = tan\left(\frac{fov}{2}\right) \cdot t_x
-\label{eq:fovtf}
-\end{equation}
-
-where \textit{fov} is the aperture angle of the field of view. Finally, if $
-d_{x_{axis}}<r_{fov} $, the target is within the subject's field of view.
-
-% Schema to clarify this?
-
-\paragraph{Acquiring the Focus of Attention}
-
-Explain that: other modules have to provide the sitation assessment (what
-is where?) in terms of published frames, and a last module compute the
-intersection of the VFoA and these frames\fixme{TBD}
-
-
+Our approach assumes that the poses of the objects of interest are available to
+the system: as described in section~\ref{sec:system}, our implementation relies
+on the ROS {\sc tf} framework to manage and make available to all software
+modules the list of poses of existing objects (represented as {\it frames}), and
+dedicated perception modules are in charged of publishing up-to-date
+informations regarding the location of the points of interest (the so-called
+\emph{situation assessment}). Due to the nature of the experiment, most of the
+points of interest considered for the experimental validation presented
+hereafter are actually taken as static with respect to the robot.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -463,6 +443,7 @@ experimenter and the observers located in the diagonal.
 \end{figure}
 
 \subsection{System Implementation}
+\label{sec:system}
 
 \begin{figure}[h!]
     \centering
