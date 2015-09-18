@@ -3,6 +3,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+\usepackage{booktabs}
 
 \usepackage[draft,nomargin,footnote]{fixme}
 
@@ -499,18 +500,28 @@ has been computed. A more reliable measurement in terms of time shifting between
 the real and captured focuses of attention is provided using the cosine
 similarity\fixme{this needs to be better justified: why not a Cronbach alpha?} also shown in table~\ref{tab:results}. 
 
-\begin{table}[h!]
-	\centering
-    \caption{\textbf{Results of attention tracking accuracy}. \emph{Head pose} is the percentage of total time during which the head pose of the participant was successfully estimated;}
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
-        \small \textbf{Subject} & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & Std dev\\ \hline
-        \small Head pose (\%) & \small88.2 & \small83.5 & \small90.5 & \small83.1 & \small87.9 & \small85.0 & \small86.4 & \\ \hline
-            \begin{tabular}{@{}c@{}}\small Groundtruth \vs \\ \small robot (\%)\end{tabular} & \small61.1 & \small85.5 & \small80.8 & \small62.2 & \small63.4 & \small83.9 & \small72.8 & \\ \hline
-        \begin{tabular}{@{}c@{}}\small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
-            \begin{tabular}{@{}c@{}}\small Cosine \\ \small affinity \end{tabular} & \small0.73 & \small0.82 & \small0.87 & \small0.73 & \small0.77 & \small0.89 & \small0.8 & \\ \hline
-	\end{tabular}
-	\label{tab:results}
-\end{table}
+\begin{table*}[h!]
+    \centering
+    \caption{\textbf{Results of attention tracking accuracy}. \emph{Head pose
+    tracking} is the percentage of total time of successful detection of the
+    head pose; \emph{Ground-truth/robot match} is the percentage of matching time
+    between manually annotated focus of attention (ground-truth) and robot's
+    computed focus of attention.}
+
+    \begin{tabular}{p{5.5cm}cccccccc}
+        \toprule
+        {\bf Subject} & 1 & 2 & 3 & 4 & 5 & 6 & {\bf Avg.} & {\it SD} \\
+        \midrule
+        {\bf Head pose tracking} (\%) & 88.2 & 83.5 & 90.5 & 83.1 & 87.9 & 85.0 & {\bf 86.4} & {\it 3.0} \\ 
+        \midrule
+        {\bf Ground-truth/robot match} (\%) & 61.1 & 85.5 & 80.8 & 62.2 & 63.4 & 83.9 & {\bf 72.8} & {\it 11.7}\\
+        {\bf Cronbach's $\alpha$} &  & & & & & & & \\
+        {\bf Cosine affinity} & 0.73 & 0.82 & 0.87 & 0.73 & 0.77 & 0.89 & {\bf 0.8} & {\it 0.07} \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:results}
+\end{table*}
+
 
 The results has proved that the VFoA prediction accuracy in the tracking is not
 only conditioned by the subject's amount of movement, but also by the speed of
@@ -705,16 +716,21 @@ line~\ref{algline:skiplosttrack}, third condition), typically because the user's
 face is not visible at those times.
 
 \begin{table}[h!]
-	\centering
-    \caption{\textbf{Results of attention tracking accuracy}. \emph{Head pose} is the percentage of total time during which the head pose of the participant was successfully estimated;}
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
-        \small \textbf{Subject} & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & Std dev\\ \hline
-        \begin{tabular}{@{}c@{}}\small Groundtruth vs \\ \small expected(\%)\end{tabular} & \small92.6 & \small88.8  & \small95.8 & \small93.1 & \small96.5 & \small89.6 & \small92.7 & \\ \hline
-        \begin{tabular}{@{}c@{}}\small Groundtruth \\ \small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
-            \begin{tabular}{@{}c@{}}\small Robot vs \\ \small expected(\%)\end{tabular} &  & & & & & & & \\ \hline
-        \begin{tabular}{@{}c@{}}\small Robot \\ \small Agreement ($\alpha$)\end{tabular} &  & & & & & & & \\ \hline
-	\end{tabular}
-	\label{tab:results}
+    \centering
+    \caption{\textbf{Levels of with-me-ness}. For each subject, the with-me-ness level is reported over the whole interaction.}
+    \begin{tabular}{p{2cm}cccccccc}
+        \toprule
+        \textbf{Subject} & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & SD \\
+        \midrule
+        %Ground-truth \vs expected (\%) & 92.6 & 88.8  & 95.8 & 93.1 & 96.5 & 89.6 & 92.7 & \\ \hline
+        $\mathcal{W}_{groundtruth}$ &  & & & & & & & \\ 
+        {\it Cronbach's $\alpha$} &  & & & & & & & \\
+        \midrule
+        $\mathcal{W}_{robot}$ &  & & & & & & & \\
+        {\it Cronbach's $\alpha$} &  & & & & & & & \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:results-with-me-ness}
 \end{table}
 
 
