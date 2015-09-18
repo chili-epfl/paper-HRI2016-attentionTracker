@@ -437,6 +437,7 @@ long?} min, and the turn-based hand-writing task continued afterwards. The
 intended purpose of the story-telling episode was to locally trigger a different
 set of gaze behaviors.
 
+
 \subsection{System Implementation}
 
 \label{sec:system}
@@ -489,16 +490,16 @@ OpenCV libraries, while pose transformations are handled by the {\sc tf}
 library. The implementation is open-source and available at
 \url{https://github.com/chili-epfl/attention-tracker}.
 
-Please refer to~\cite{Hood:2015} for the implementation of the hand-writing
-activity.
+The implementation of the hand-writing activity itself has been previously
+presented in~\cite{Hood:2015}.
 
 \subsection{Results}
 
-\subsubsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
-(note that the focus of attention
-was separately hand-coded, {\it post-hoc}, from the video recording of the
-interaction).
+We performed a {\it post-hoc} coding the video records to manually of the
+interaction were (note that the focus of attention was separately hand-coded,
+{\it post-hoc}, from the video recording of the interaction).
 
+\subsubsection{From Face Detection to Focus of Attention} \label{fromFaceTo}
 
 Our results for a peer-to-peer work scenarios using an approach based on RGB
 camera are summarized in table \ref{tab:results} where the \textit{expected} is
