@@ -533,7 +533,7 @@ similarity\fixme{this needs to be better justified: why not a Cronbach alpha?} a
         {\bf Head pose tracking} (\%) & 88.2 & 83.5 & 90.5 & 83.1 & 87.9 & 85.0 & {\bf 86.4} & {\it 3.0} \\ 
         \midrule
         {\bf Ground-truth/robot match} (\%) & 61.1 & 85.5 & 80.8 & 62.2 & 63.4 & 83.9 & {\bf 72.8} & {\it 11.7}\\
-        {\bf Cronbach's $\alpha$} &  & & & & & & & \\
+        {\bf Cronbach's $\alpha$} & 0.63 & 0.81 & 0.82 & 0.59 & 0.64 & 0.78 & {\bf0.71} & {\it0.10}\\
         {\bf Cosine affinity} & 0.73 & 0.82 & 0.87 & 0.73 & 0.77 & 0.89 & {\bf 0.8} & {\it 0.07} \\
         \bottomrule
     \end{tabular}
@@ -548,8 +548,9 @@ decreasing the VFoA prediction accuracy.
 
 For instance, subjects 1,4 and 5 despite the fact that the tracking accuracy is
 in the average, the bad precision in the captured VFoA suggests that such
-children are highly likely to modify the gaze direction without head move
-intervention reducing dramatically the overlap between captured and real VFoA.
+children are highly likely to modify the gaze direction without head movement
+intervention reducing dramatically the overlap between the manually annotated 
+focus of attention and robot's computed focus of attention.
 
 Additionally, several recurrent computer vision challenges such as the lighting
 conditions, occlusions with the hands and the face angle with respect to the
