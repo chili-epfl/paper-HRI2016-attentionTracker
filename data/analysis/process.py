@@ -10,8 +10,8 @@ from simplesvg import Scene, Line
 
 elan_file = "../4.eaf"
 
-tier = "Attention focus"
-#tier = "Robot state"
+#tier = "Attention focus"
+tier = "Robot state"
 
 eaf = pympi.Elan.Eaf(elan_file)
 
@@ -25,7 +25,7 @@ annotation2foa = {"Waiting for feedback": ("Tablet", "Secondary tablet", "Facili
         "facilitator": ("Facilitator",),
         "selection": ("Secondary tablet",),
         "observer": ("Observer",),
-        "paper": ("Other",), # is that correct?
+        "paper": ("Secondary tablet",), # is that correct?
         "other": ("Other",)}
 
 
