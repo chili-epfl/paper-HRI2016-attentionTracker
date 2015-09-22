@@ -534,7 +534,7 @@ the least successful tracking).
 
     \begin{tabular}{p{5.5cm}cccccccc}
         \toprule
-        {\bf Subject} & 1 & 2 & 3 & 4 & 5 & 6 & {\bf Avg.} & {\it SD} \\
+        {\bf Subject} & 1 & 2 & 3 & 4 & 5 & 6 & {\bf M} & {\it SD} \\
         \midrule
         {\bf Head pose tracking} (\%) & 88.2 & 83.5 & 90.5 & 83.1 & 87.9 & 85.0 & {\bf 86.4} & {\it 3.0} \\ 
         \midrule
@@ -700,13 +700,13 @@ one attentional target; thus, at a given time, more than one location can be
 regarded as possible \emph{expected} focuses of attention for the human. For
 example, a robot which is writing, could typically elicit gazes to its hand as
 well as to its head. A human looking at either of these locations would be
-considered to be \emph{with} the robot in terms of interaction. Also notable, we
-exclude from the computation of $\mathcal{W}$ all of the periods of time where
-the user's focus of attention can not be estimated (Algorithm~\ref{alg:with-me-ness},
+considered to be \emph{with} the robot in terms of interaction\footnote{As
+future work, this could easily be extended into a probabilistic model of
+attention expectations.}. Also notable, we exclude from the computation of
+$\mathcal{W}$ all of the periods of time where the user's focus of attention can
+not be estimated (Algorithm~\ref{alg:with-me-ness},
 line~\ref{algline:skiplosttrack}, third condition), typically because the user's
 face is not visible at those times.
-
-\fixme{mention somewhere probabilistic extensions of withmeness}
 
 \subsection{Experimental Interpretation}
 
@@ -716,8 +716,16 @@ performed. For instance, while the robot was waiting for the child's handwriting
 demonstration, the expected attentional target was the tablet (since the child
 was supposed to write there), and while the robot was writing itself, the
 attentional targets we expected to be either on the tablet or on the robot.
-These expected targets, forming together the robot's attentional {\it a priori},
-are depicted on Figure~\ref{fig:with-me-ness} as the green lines.
+These expected targets, forming altogether the robot's attentional {\it a
+priori}, are depicted on Figure~\ref{fig:with-me-ness} as the green lines. They
+are used to compute the with-me-ness. With-me-ness can be calculated over the
+whole interaction (Table~\ref{tab:results-with-me-ness}) or over shorter time
+windows (bottom graph on Figure~\ref{fig:with-me-ness}). Shorter time windows
+are interesting for two purposes: to analyse the level of with-me-ness in
+relation to specific interaction episodes; to allow a measurement of
+with-me-ness by the robot \emph{over the course} of the interaction
+(\emph{in-the-moment} measurement). In this later case, one may typically want
+to consider a sliding time window.
 
 \begin{figure*}
     \centering
@@ -747,17 +755,18 @@ are depicted on Figure~\ref{fig:with-me-ness} as the green lines.
 
     \begin{tabular}{p{1cm}cccccccc}
         \toprule
-        Subject & 1 & 2 & 3 & 4 & 5 & 6 & Avg. & SD \\
+        Subject & 1 & 2 & 3 & 4 & 5 & 6 & {\bf M} & {\it SD} \\
         \midrule
-        $\mathcal{W}_{g.truth}$ & 92.6 & 88.8  & 95.8 & 93.1 & 96.5 & 89.6 & 92.7 & 3.1 \\ 
-        $\mathcal{W}_{robot}$ & 89.6 & 84.4 & 86.6 & 72.8 & 81.9 & 79.7 & 82.5 & 5.4 \\
+        $\mathcal{W}_{g.truth}$ & 92.6 & 88.8  & 95.8 & 93.1 & 96.5 & 89.6 & {\bf 92.7} & {\it 3.1} \\ 
+        $\mathcal{W}_{robot}$ & 89.6 & 84.4 & 86.6 & 72.8 & 81.9 & 79.7 & {\bf 82.5} & {\it 5.4} \\
         \bottomrule
     \end{tabular}
     \label{tab:results-with-me-ness}
 \end{table}
 
-According to figure \ref{fig:with-me-ness} several findings can be analyzed in
-detail. The matching curve (cyan color) shows the overlapping between the
+Figure~\ref{fig:with-me-ness} can be further analyzed:\fixme{This paragraph
+needs to be adapted}
+The matching curve (cyan color) shows the overlapping between the
 expected and the real focuses of attention. As can be noticed there is a
 fluctuation at the beginning of the interaction as well as just before the
 activity switching. These chaotic gaze manifestation is what we call an
