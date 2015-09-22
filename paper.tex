@@ -860,12 +860,13 @@ able to progress over time, produces the contrary effect.
 
 \section{Discussion and Conclusion}
 
-In this work we have presented an on-line vision-based engagement assessment
-solution that can be extended to work in different platforms for simulating
-complex interaction scenarios monitoring several VFoA with a maker-less
-technology. It provides some benefits like the decrement of the system
-complexity as well as the increment of the naturalness of the interaction due to
-the use of an RGB sensor.  
+As hinted by the title of this article, we have presented here how a robot can
+effectively assess in real-time and with a regular camera the focus of attention
+of its interactant, and how we can, in turn, combine it with the robot's {\it a priori}
+about the interaction to build a straight-forward (yet novel in HRI) metric of
+\emph{with-me-ness} over the course of the interaction.
+
+\paragraph{Practicality and Relevance of 2D Methods for Head Pose Estimation}
 
 Furthermore, although it has not been tested in a real scenario with several
 subjects at the same time, the approach also allows to handle such situations
@@ -914,13 +915,47 @@ on the head pose to estimate the focus of attention of a human partner, in to co
 to human children who primarily rely on eye direction. From this perspective,
 our robot mimics attention tracking mechanism comparable to the ones found in apes.
 
-Gaze information acquired during the interactions is not only useful to detect
-and predict engagement, but also allows the possibility to develop actively the
-concept gaze-aware robot. In other words, make the system able to estimate where
-the subject looks at, but also imitate the same subject's VFoA when the activity
-state allows it. 
+%Gaze information acquired during the interactions is not only useful to detect
+%and predict engagement, but also allows the possibility to develop actively the
+%concept gaze-aware robot. In other words, make the system able to estimate where
+%the subject looks at, but also imitate the same subject's VFoA when the activity
+%state allows it. 
 
-%ACKNOWLEDGMENTS are optional
+\paragraph{With-me-ness: yet another metric of engagement?}
+
+Borrowing the neologism from the field of CSCL, we have also introduced here
+\emph{with-me-ness} as a measure of ``how much the user in \emph{with} the robot during
+a task''. Interestingly, this can be measured over the course the interaction,
+thus providing the robot with a relatively high-level social construct,
+undoubtedly related to engagement.
+
+One may reasonably wonder how different is \emph{with-me-ness} from \emph{joint
+attention} on one hand, and from \emph{engagement} on the other hand.
+With-me-ness is related to both, with however noteworthy nuances: (Triadic) \emph{joint
+attention} is understood as the cognitive realization of a shared attention to
+an object, itself building on a shared perception of that object (\ie joint attention
+builds on a \emph{perceptual} alignment of two agents). \emph{Conceptual
+with-me-ness} as proposed by Sharma~\etal is on the other hand \emph{referential}: ``you are
+\emph{with} me if you focus on what I refer to, either explicitly or
+implicitly''. We propose to understand it here in a slightly broader way, that
+better reflect the \emph{interaction}: ``you are \emph{with} me if you focus on
+what is important for the interactive task at hand.''
+
+On the other hand, with-me-ness is only a precursor of engagement: it
+does not say much about the cognitive commitment of a user to an interaction. A
+user may closely adhere to the injunctions of the robot (or, actually, of the
+experimenters) without being \emph{engaged} into the interaction. This is
+typically seen in child-robot interaction: children will attempt to closely
+follow what they are asked to do -- which may \emph{look like} they are engaged
+into the interaction -- while they merely \emph{obey orders}.
+
+One of the strength of with-me-ness is its objectivity: we can formalize it, and
+as such, it is valuable to assess and compare how users are willing or able to
+interact with a robot. Besides, we have hopefully demonstrated in this article
+that with-me-ness is an operational \emph{in-the-moment} metric that can be also
+used as feed-back to the robot controller to build richer, more adaptive
+interactive behaviors for our robots.
+
 \section*{Acknowledgments}
 
 This research was partially supported by the Funda\c{c}\~{a}o para a Ci\^{e}ncia
