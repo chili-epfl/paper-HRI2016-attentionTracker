@@ -511,9 +511,14 @@ overlap between the ground-truth and the robot's estimate, the
 inter-judge agreement (Cronbach's $\alpha$) and the cosine similarity
 matrix.
 
-The cosine similarity is a more reliable measurement between the ground-truth
-and the robot measure of the focus of attention as it accounts for temporal
-delays.\fixme{this needs to be better justified/explained.}.
+The Cronbach's $\alpha$ can be defined as an average of the correlations between 
+the items or values at the same time step \textit{t}. Therefore, results can vary 
+significantly if both sets of values are time shifted. However,
+the cosine similarity becomes a useful measurement in this case as it accounts 
+for temporal delays. Specifically, the ground-truth values acquired though human 
+annotations may not match the measurements of the focuses of attention computed 
+by the robot at the exactly same time step \textit{t} even though the correspondent
+curves may look very similar in shape.
 
 \subsection{Results}
 
