@@ -45,7 +45,7 @@ camera.  Using manual video annotations as ground truth, we show that our system
 reaches satisfactory levels of accuracy in a real-world face-to-face interaction
 scenario.
 
-We then propose to introduce the concept of ``with-me-ness'', borrowed from the
+We secondly propose to introduce the concept of ``with-me-ness'', borrowed from the
 field of {\it Computer-Supported Collaborative Learning}, as an
 \emph{in-the-moment} measurement of the quality of interaction. We argue that
 this new metric, more specific than the broad concept of engagement, may be well
@@ -212,7 +212,7 @@ Looking at techniques that both operate on-line and have been deployed in field
 experiments, one finds that most approaches rely on head pose estimation alone
 (no eye gaze tracking) and are most often based on depth sensors (RGB-D) .
 Fanelli~\etal provides a overview of these approaches in~\cite{fanelli2012real},
-and recent examples include~\cite{baxter2014tracking} or~\cite{anzalone}.
+and recent examples include~\cite{baxter2014tracking, anzalone}.
 
 Approaches based on monocular 2D vision have been explored as
 well~\cite{peters2010investigating}, with however limited robustness to
@@ -293,22 +293,18 @@ We model the field of attention as the central region of the field of view.
 The field of view itself is approximated to a cone spanned from the nasal
 depression (sellion) of the human face.
 
-The width of the human field of view has been discussed in the literature.
-Holmqvist~\cite{holmqvist2011eye} specifies that the visual human
-range is $ \pm  40\degree $ in the
-horizontal and $ \pm 25\degree $ in the vertical.
-In~\cite{walker1980clinical}, Spector provides a more detailed specification
-for each eye splitting the vertical range into $ 60\degree $ the upper region
-and $ 75\degree $ the lower one. Moreover, the horizontal range gets separated
-in $ 60\degree $ inwards (towards the nose) and $ 95\degree $ outwards.
-Previous work on visual perspective taking for social robotics
-application~\cite{sisbot2011situation} propose to use a cone of 30$\degree$ of
-aperture. In the present implementation, the first approach explained has been
-chosen representing the field of view using a cone with an elliptical cross section 
-and the dimensions stated by Holmqvist.
+The dimensions of the human field of view have been measured at different level
+of accuracy. Holmqvist~\cite{holmqvist2011eye} models it with an horizontal
+aperture of $ \pm 40\degree $ and a vertical aperture of $ \pm 25\degree $,
+while Spector~\cite{walker1980clinical} for instance suggests $60\degree$ up,
+$75\degree$ down, $60\degree$ inwards (towards the nose) and $95\degree$
+outwards.  Previous work on visual perspective taking for social
+robotics~\cite{sisbot2011situation} simply use a cone of $30\degree$.  In this
+work, we follow Holmqvist and thus model the field of view as a cone with an elliptical
+cross-section of $80\degree$ by $50\degree$.
 
 We then approximate the visual focus of attention (VFoA) of the human to the
-objects which lie inside the field of attention (Figure~\ref{fig:vfoa}). At a
+objects which lay inside this field of view (Figure~\ref{fig:vfoa}). At a
 given time, more than one object can therefore be \emph{in focus}.
 
 Our implementation has two limitations: objects are approximated to their origin
@@ -415,8 +411,7 @@ interest (the two tablets, the robot, the facilitator and the observers).
 Six children (ages 5 to 6, 3 boys, 3 girls) were enrolled for this study.
 The study took place at school, in a separate room (the computer
 lab). The participants were chosen by the teacher, and would come one after the
-other for a face-to-face interaction with a {\sc Nao} robot (average duration:
-19.6 min, $SD=1.58$).
+other for a face-to-face interaction with a {\sc Nao} robot ($M=19.6$ min, $SD=1.58$).
 
 The experiment is organized in rounds of writing: during a typical round, the
 child requests the robot to write something (a single letter, a number or a full
@@ -488,7 +483,10 @@ The experiment was carried with an Aldebaran's {\sc Nao} robot, using ROS as a
 middleware to build the attention estimation pipeline (Figure~\ref{fig:system}).
 Head pose estimation, presented in section~\ref{sec:vfoa}, builds on the {\tt
 dlib} and OpenCV libraries; the pose transformations are handled by the ROS {\sc
-tf} library. The implementation is open-source and available at
+tf} library. The same {\sc tf} library is used to represent as individual frames
+the possible point of interests: an object is considered to be in focus when its
+frame lays within the field of attention of the participant
+(Figure~\ref{fig:vfoa}).  The implementation is open-source and available at
 \url{https://github.com/chili-epfl/attention-tracker}.
 
 The implementation of the hand-writing activity itself has been presented by
