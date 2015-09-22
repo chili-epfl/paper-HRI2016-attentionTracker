@@ -866,11 +866,7 @@ of its interactant, and how we can, in turn, combine it with the robot's {\it a 
 about the interaction to build a straight-forward (yet novel in HRI) metric of
 \emph{with-me-ness} over the course of the interaction.
 
-\paragraph{Practicality and Relevance of 2D Methods for Head Pose Estimation}
-
-Furthermore, although it has not been tested in a real scenario with several
-subjects at the same time, the approach also allows to handle such situations
-too.
+\paragraph{Head Pose to Assess Attention: is it Relevant?}
 
 %During the case study, results show that it is possible to distinguish between
 %long and short feedback episodes based on the gaze shift and depending on the
@@ -884,29 +880,19 @@ too.
 %these results are encouraging, there is a need of validation with a greater
 %amount of subjects.
 
-Regarding to the approach used, some limitations need to be considered. The most
-relevant one, the fact that the positions of the VFoA need to be known in
-advance and defined as static \textit{tf} frames in the system. Moreover, it is
-important to notice that eye gaze information is neglected which induces a
-certain amount of error, as well as the noise induced by the 3D pose estimation
-computed from face features.
+We already stated the main limitations of our approach to estimation of the
+focus of attention: eye gaze information is neglected and we do not perform
+actual visibility check of the in focus objects (we simply approximate them to
+their origins, ignoring possible occlusions).
 
-Besides, our approach does not account for visual occlusions when computing the
-focus of attention: any frame within the cone of the visual field of attention
-is considered as \emph{in focus}. In reality, some of the frames may be visually
-occluded and thus not seen by the subject. Computing actual visibility requires
-more general situation assessment capabilities, and in particular (approximate)
-3D models of the surrounding objects so that visibility testing may be
-performed, as done in~\cite{sisbot2011situation} for instance. Our experimental
-setting did not lead to any specific visual occlusions, and we did not developed
-this capability.
-
-Compared to intrusive hardware like head mounted
-displays, eye-trackers or wearables for instance, this approach has a clear
-advantage of simplicity and integration with robotic systems, but also becomes
-accurate enough for general purposes in face-to-face interactions. In addition,
-it allows us to model complex environments, handling different number and
-positions of participants in the scene.
+The first issue is shared with most of the other vision (2D or 3D) or motion
+capture techniques for gaze estimation. In that regard, our approach does not
+perform worst or better than others. In fact, based on our results, relying
+purely on head pose estimation to estimate gaze direction leads to real-world
+results that are worth being considered and used: they may not match manual
+annotations, but they are definitely a valuable \emph{in-the-moment} input for
+the robot, and we hope to see more works relying on those to build adaptive
+robot controllers in the coming years.
 
 In that regards, it is interesting to put this work on human-robot interaction
 in perspective with previous research conducted on ape-human interaction by
@@ -914,6 +900,12 @@ Tomasello~\etal~\cite{tomasello2007reliance}: they show that apes rely primarily
 on the head pose to estimate the focus of attention of a human partner, in to contrast
 to human children who primarily rely on eye direction. From this perspective,
 our robot mimics attention tracking mechanism comparable to the ones found in apes.
+
+Besides, our approach relies on a simple, non-intrusive sensor (a RGB camera on
+the robot) and an open-source, fast pose estimation algorithm\fixme{test on Nao!
+how fast is it actually?}: we also hope that this may contribute to a widespread
+adoption of such a technique on a range of robots, including the common {\sc
+Nao} platform.
 
 %Gaze information acquired during the interactions is not only useful to detect
 %and predict engagement, but also allows the possibility to develop actively the
