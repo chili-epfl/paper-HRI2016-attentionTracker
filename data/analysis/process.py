@@ -15,17 +15,21 @@ tier_expected = "Robot state"
 
 eaf = pympi.Elan.Eaf(elan_file)
 
-annotation2foa = {"Waiting for feedback": ("Tablet", "Secondary tablet", "Facilitator"),
+annotation2foa = {
+        ##### Robot state #####
+        "Waiting for feedback": ("Tablet", "Secondary tablet"),
         "Writing word": ("Tablet", "Robot"),
         "Waiting for word to write": ("Secondary tablet",),
         "Story telling": ("Robot",),
         "Presentation": ("Robot",),
+        "Bye": ("Robot",),
+        ##### Attention focus #####
         "robot": ("Robot",),
         "tablet": ("Tablet",),
         "facilitator": ("Facilitator",),
         "selection": ("Secondary tablet",),
         "observer": ("Observer",),
-        "paper": ("Secondary tablet",), # is that correct?
+        "paper": ("Secondary tablet",), 
         "other": ("Other",)}
 
 
