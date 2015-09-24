@@ -99,8 +99,8 @@ of \emph{engagement} as indicator of the quality of the experience.
 ``Engagement'', the cognitive, affective and behavioral state of interaction
 with a computer application that ``makes the user want to be
 there"~\cite{OBrien:2010}, has actively been studied in a diverse set of
-domains, and specifically in robotics, several variables and social signals have been proposed in the
-literature to quantify it. A recent review of these is in~\cite{ivaldi2015towards}.
+domains. Specifically in robotics, several variables and social signals have been proposed in the
+literature to quantify it. A recent review of these is presented in~\cite{ivaldi2015towards}.
 
 %In a learning context, the evaluation of response times in relation with
 %correctness has been proposed~\cite{Beck} to provide estimate the user's 
@@ -122,29 +122,29 @@ engagement with a virtual agent by tracking eye gaze and head direction.
 Similarly, \cite{ishii2011combining} estimates the user's engagement with a
 conversational agent based on the analysis of gaze patterns.
 In~\cite{Rich:2010}, a computational model based on the recognition of
-connection events such as directed gaze, mutual facial gaze is proposed. Not
+\emph{connection} events such as directed gaze, mutual facial gaze is proposed. Not
 relying on gaze, \cite{Sanghvi:2011} focus only on the back or trunk posture as
-a determining factor for the assessment. A recent study~\cite{anzalone} with
-social robots in face-to-face scenarios proposed a set of metrics based on
-non-verbal cues but manifesting some possible limitations in long-term
+a determining factor for the assessment. Dinally, a recent study with
+social robots in face-to-face scenarios~\cite{anzalone} explores a set of metrics based on
+non-verbal cues but they also underline possible limitations in long-term
 scenarios.
 
 The variety of these approaches reflects the fact that \emph{engagement} remains
 a broad concept, fairly ill-defined and thus difficult to operationalize.
 Therefore, instead of introducing ``yet another metric of engagement'', we
 propose in this paper to introduce the more specific concept of
-``\emph{with-me-ness}'': to what extend the human remains ``with me'', the
-robot, during our interaction.
+``\emph{with-me-ness}'': to what extend the human is ``with me'', the
+robot, during the interaction.
 
 We assess this level of ``with-me-ness'' by combining real-time estimation of the
 attentional focus of the human with the expected, {\it a priori} focus
-requested by the task, as decided by the robot.
+requested by the task, as estimated by the robot.
 
-As such, this article is organized in three sections: we first present a novel
+This article is organized in three sections: we first present a novel
 method for on-line estimation of the focus of attention based on fast 6D head
-pose estimation. We then present an extensive validation of this approach based on
-a real-world field experiment with 6 children. We finally show how to compute in
-real-time ``with-me-ness'' to provide a new \emph{in-the-moment} measurement of
+pose estimation. We then propose to validate this approach with 
+a real-world field experiment with children. We finally show how to compute
+``with-me-ness'' over the course of the interaction to provide a new \emph{in-the-moment} measurement of
 the quality of interaction, and compare levels computed by the robot with a
 ground truth based on manual post-hoc annotations.
 
@@ -187,7 +187,7 @@ ground truth based on manual post-hoc annotations.
 
 \subsection{Related Work}
 
-The relations between one's focus of attention and what he/she is looking at has
+The relation between one's focus of attention and what he/she is looking at has
 long been established~\cite{yarbus1967eye,barber1976perception}, and more
 specifically, the existing relationship between gaze and attention during social
 interaction, and the related gaze patterns, has been part of classic textbooks
@@ -196,21 +196,18 @@ measuring the direction of gaze is a useful proxy to estimate the (visual) focus
 of attention of a social agent, and indeed this is one of the basic tool used in
 social psychology.
 
-Estimating attention using gaze is certainly not new to robotics either. A
+Estimating attention using gaze is not new to robotics either. A
 recent survey by Ruhland~\etal~\cite{ruhland2015review} presents in a synthetic
-way eye gaze research in HCI and social robotics, and is an essential read in
-that regard. It remains however an active field of research, as illustrated by
+way eye gaze research in HCI and social robotics. It remains however an active field of research, as illustrated by
 several recent publications~\cite{baxter2014tracking,anzalone,kennedy2015head}:
-as attention tracking is essential in human-robot interaction
-
-However, performing such a measure on a robot, in real-time, and in ecologically
+performing such a measure on a robot, in real-time, and in ecologically
 valid environments (which rules out bulky or invasive apparatus like
 eye-trackers, or techniques requiring fine calibration and/or static
-interactions) remains a key challenge in the field of Human-Robot Interaction.
+interactions) remains a challenge in HRI.
 
 Looking at techniques that both operate on-line and have been deployed in field
 experiments, one finds that most approaches rely on head pose estimation alone
-(no eye gaze tracking) and are most often based on depth sensors (RGB-D) .
+(no eye gaze tracking) and are generally based on depth sensors (RGB-D) .
 Fanelli~\etal provides a overview of these approaches in~\cite{fanelli2012real},
 and recent examples include~\cite{baxter2014tracking, anzalone}.
 
@@ -220,32 +217,31 @@ occlusions or lightning conditions, and over-reliance on tracking to maintain
 real-time performances.  Our work relies on recent advances on template-based
 face alignment~\cite{kazemi2014one} that allows fast (in the order of a few
 milliseconds) facial features extraction on 2D images, combined with 3D model
-fitting, to obtain a fast, robust and stable 6D head pose estimate, that was
+fitting, to obtain a fast, robust and stable 6D head pose estimate, that we
 successfully deployed in field experiments involving child-robot interactions.
 
-We then derive the field of attention from the head pose: according
-to~\cite{stiefelhagen2002tracking} the head orientation's contribution in
-overall gaze direction is 68.9\% showing agreement between both measurements.
-In addition, it shows that the head orientation alone can get an average
-accuracy of 88.7\% detecting the focus of attention in a meeting application
-scenario using a head-mounted display with eye and head tracking.
+We derive the field of attention from the head pose: this is supported by
+previous work, like~\cite{stiefelhagen2002tracking} that shows that the head orientation's contribution in
+overall gaze direction is 68.9\%, which further translates into a 88.7\%
+accuracy in estimating the focus of attention from head pose only in a
+particular meeting scenario (using eye and head tracking).
 
-While previous preliminary research in HRI seemed to indicate that deriving
+While previous preliminary research in HRI seemed on the contrary to indicate that deriving
 attentional focus from head pose alone would not be accurate
 enough~\cite{kennedy2015head}, we found in our case acceptable levels of
-agreement between the robot observation and manual post-hoc annotations.
-
+agreement between the robot observations and manual post-hoc annotations, as
+detailled hereafter.
 
 \subsection{Head Pose Estimation}
 
 As explained, we derive the visual field of attention from the head pose. Our
-technique only involves a single monocular RGB camera for used for facial
-feature extraction, and a static simplified 3D mesh of a human head
-(Figure~\ref{head_pose}). 68 facial features are extracted using a fast
+technique only involves a single monocular RGB camera used for facial
+feature extraction, and a static simplified 3D mesh of a human head.
+68 facial features are extracted using a fast
 template-based face alignment algorithm by Kazemi and
 Sullivan~\cite{kazemi2014one}, as implemented in the open-source {\tt dlib}
-library\footnote{http://dlib.net}~\cite{dlib09}.  Eight of these features are
-matched to their 3D counterparts and we rely on an iterative $PnP$ algorithm
+library~\cite{dlib09}.  Eight of these features are
+then matched to their 3D counterparts (Figure~\ref{head_pose}) and we rely on an iterative $PnP$ algorithm
 (OpenCV's implementation) to compute the translation and rotation of the head
 with respect to the camera frame. With this approach, knowing the intrinsic
 parameters of the camera (calibrated camera) is required for an accurate
@@ -253,7 +249,7 @@ estimation of the absolute 3D localization of the head.
 
 Besides being fast, the face alignment algorithm has been found to perform well
 in terms of robustness, including in a range of difficult situations
-(occlusions, head angle) as encountered in field experiments.
+(occlusions, large head rotations) as encountered in field experiments.
 Figure~\ref{head_pose_real_world} shows a selection of such difficult scenes with
 one child.
 
@@ -284,57 +280,55 @@ one child.
     \centering
     \includegraphics[width=0.9\columnwidth]{field_of_attention}
     \caption{\small The visual field of attention is approximated to a
-        20$\degree$ cone, spanning from the head's sellion. The objects whose 3D
+        40$\degree$ cone, spanning from the head's sellion. The objects whose 3D
     pose intersect with this cone are considered \emph{in focus}.}
     \label{fig:vfoa}
 \end{figure}
 
-We model the field of attention as the central region of the field of view.
-The field of view itself is approximated to a cone spanned from the nasal
-depression (sellion) of the human face.
+We model the field of attention as the central region of the field of view.  The
+field of view itself is approximated to a cone spanned from the nasal depression
+(sellion) of the human face. Different dimensions for the human field of view
+can be found in the litterature: Holmqvist~\cite{holmqvist2011eye} models it
+with an horizontal aperture of $ \pm 40\degree $ and a vertical aperture of $
+\pm 25\degree $, while Spector~\cite{walker1980clinical} for instance suggests
+$60\degree$ up, $75\degree$ down, $60\degree$ inwards (towards the nose) and
+$95\degree$ outwards.  Previous work on visual perspective taking for social
+robotics~\cite{sisbot2011situation} model the field of attention as a cone of
+$30\degree$. We retained in this work a slightly wider aperture of $40\degree$.
 
-The dimensions of the human field of view have been measured at different level
-of accuracy. Holmqvist~\cite{holmqvist2011eye} models it with an horizontal
-aperture of $ \pm 40\degree $ and a vertical aperture of $ \pm 25\degree $,
-while Spector~\cite{walker1980clinical} for instance suggests $60\degree$ up,
-$75\degree$ down, $60\degree$ inwards (towards the nose) and $95\degree$
-outwards.  Previous work on visual perspective taking for social
-robotics~\cite{sisbot2011situation} simply use a cone of $30\degree$.  In this
-work, we follow Holmqvist and thus model the field of view as a cone with an elliptical
-cross-section of $80\degree$ by $50\degree$.
-
-We then approximate the visual focus of attention (VFoA) of the human to the
-objects which lay inside this field of view (Figure~\ref{fig:vfoa}). At a
+We then approximate the visual \emph{focus} of attention (VFoA) of the human to the
+objects which lay inside this field of attention (Figure~\ref{fig:vfoa}). At a
 given time, more than one object can therefore be \emph{in focus}.
 
-Our implementation has two limitations: objects are approximated to their origin
-(\ie objects are either in or out of the field of attention), and we do not
+Our implementation has two limitations: objects are approximated to points
+(their origin), and we do not
 check actual visibility: one object could be hidden by another, it would still
 be considered as in focus. We did not address these limitations since our
 experimental setup (involving relatively small objects with no occlusions) did
-not require it. Techniques for a more complete assessment of the visual
-perspective can be found in~\cite{sisbot2011situation} for instance.
+not mandate it. Techniques for more accurate assessment of the visual
+perspective of the human peer can be found in~\cite{sisbot2011situation} for instance.
 
 Within these limitations, computing if object $A(x_A,y_A,z_A)$ is in the field
 of attention of the human requires first to transform the coordinates
 $A(X_A,Y_A,Z_A)$ into the frame of the face, and then to verify the following
-inequality (with $fov$ the aperture, and assuming that the main axis of the
-field of attention is aligned on the face's $\vec{x}$):
+simple inequality (with $fov$ the aperture, and assuming that the main axis
+$\vec{x}$ of the field of attention points forward):
 
 \begin{align}
     \sqrt{Y_A^2 + Z_A^2} < tan\left(\frac{fov}{2}\right) \cdot X_A
 \label{eq:fov}
 \end{align}
 
-Our approach assumes that the poses of the objects of interest are available to
+Our approach assumes that the pose of the objects of interest are available to
 the system: as described in section~\ref{sec:system}, our implementation relies
 on the ROS {\sc tf} framework to manage and make available to all software
 modules the list of poses of existing objects (represented as {\it frames}), and
 dedicated perception modules are in charged of publishing up-to-date
-informations regarding the location of the points of interest (the so-called
+informations regarding the location of the objects of interest (the so-called
 \emph{situation assessment}). Due to the nature of the experiment, most of the
 points of interest considered for the experimental validation presented
-hereafter are actually taken as static with respect to the robot.
+hereafter are static with respect to the robot, thus simplifying the scene
+perception.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -343,11 +337,11 @@ hereafter are actually taken as static with respect to the robot.
 \section{Experimental Validation}
 \label{sec:expe}
 
-As presented above, we use the (6D) head pose as an approximation of the
-actual gaze direction, and we approximate from here the participant's field of
-attention. The assumption that such an approximation of the field of attention
-allows to derive the actual focus of attention forms the hypothesis that we
-want to validate experimentally. The experiment involves child-robot
+As presented above, we use the 6D head pose as an approximation of the
+actual gaze direction, and we further approximate from here the participant's field of
+attention. The assumption that such an double approximation of the field of attention
+allows to derive the actual focus of attention needs to validated experimentally.
+Our proposed experiment involves child-robot
 interactions in the context of handwriting remediation.
 This section details the experimental procedure and presents our results.
 
@@ -364,7 +358,7 @@ robot's handwriting). A tactile tablet is used as writing support.
     \includegraphics[width=0.8\columnwidth]{experimental_setup}
     \caption{\small \textbf{Experimental setup}: face-to-face interaction with a {\sc
             nao} robot. The robot writes on the tactile tablet, the child then
-            corrects the robot by directly overwriting its letters on the tablet
+            corrects the robot by directly overwriting the words on the tablet
             with a stylus. The facilitator remains next to the child to guide the work. 
             The secondary tablet allows the child to tell the robot what to
             write. The areas of interest -- corresponding to potential target of
@@ -384,6 +378,13 @@ presence of a facilitator (one of the researchers).
     \label{fig:realSetup}
 \end{figure}
 
+The subjects were typically located 50 cm away from the robot with the primary
+(writing) tablet in front and the secondary one 30 cm to the left of the first
+one.  The facilitator was located about 60 cm to the left of the subject.
+Finally, two observers were located further away from the interaction field.
+Figure~\ref{fig:setup} indicates accordingly the location of main areas of
+interest (the two tablets, the robot, the facilitator and the observers).
+
 
 The dependent variable is the measurement of the participants' VFoA, assessed in
 terms of what are the attentional targets of the child over time. The face of the child
@@ -392,46 +393,38 @@ is acquired through a fixed webcam (Logitech {\sf c920}), placed on the table
 presented in section~\ref{sec:vfoa}.
 
 %An RGB camera has been used to acquire images of 640x480 pixels at 25 fps. The
-%camera was located at 5 cm from the center of Nao's feet and its holder was tied
+%camera was located at 5 cm from the center of nao's feet and its holder was tied
 %to a wood base for stability purposes. Thus, the camera's objective was 9 cm
 %above and $ 40\degree $ inclination with respect to the surface of the table to
-%maximize the detection during the writing time. However, Nao's camera could have
+%maximize the detection during the writing time. However, nao's camera could have
 %been used, always considering the \textit{tf} frame matrix update according to
 %the head orientation.
-
-The subjects were typically located 50 cm away from the robot with the primary
-(writing) tablet in front and the secondary one 30 cm to the left of the first
-one.  The facilitator was located about 60 cm to the left of the subject.
-Finally, two observers were located further away from the interaction field.
-Figure~\ref{fig:setup} indicates accordingly the location of main areas of
-interest (the two tablets, the robot, the facilitator and the observers).
 
 \subsection{Experimental Procedure}
 
 Six children (ages 5 to 6, 3 boys, 3 girls) were enrolled for this study.
 The study took place at school, in a separate room (the computer
 lab). The participants were chosen by the teacher, and would come one after the
-other for a face-to-face interaction with a {\sc Nao} robot ($M=19.6$ min, $SD=1.58$).
+other to interact with the robot (duration: $M=19.6$ min, $SD=1.58$).
 
-The experiment is organized in rounds of writing: during a typical round, the
+The interaction is organized in rounds of writing: during a typical round, the
 child requests the robot to write something (a single letter, a number or a full
-word), and pushes a tactile tablet (equipped with a custom application that we
-developed) towards the robot; the robot writes on the tablet by mimicking the
+word), and presents a tactile tablet (equipped with a custom writing
+application) to the robot; the robot writes on the tablet by mimicking the
 writing gesture (but without actually physically touching the tablet); the child
 then pull back the tablet, corrects the robot's attempt by writing him/herself
 on top or next to the robot's writing, and ``send'' his/her demonstration to the
 robot by pressing a small button on the tablet. The robot learns from this
 demonstration and tries again. The child continues the turn-taking until he/she
 decides to train the robot on another word. In total, the children performed in
-average 12.16 ($SD=2.61$) rounds of writing.
+average 12.16 ($SD=2.61$) rounds of writing (complete details on the rationale
+and implementation of this experiment can be found in~\cite{Hood:2015}).
+
 
 Besides, once per interaction, the robot interrupts the handwriting task to
-propose to tell a story (that lasted for about 2 min), and the turn-based
-hand-writing task continued afterwards. The intended purpose of the
-story-telling episode was to locally trigger a different set of gaze behaviors.
-
-Details on the rationale and implementation of this experiment can be found
-in~\cite{Hood:2015}.
+propose to tell a story (taking about 2 min), and the turn-based
+hand-writing task continues afterwards. The intended purpose of the
+story-telling episode is to locally trigger a different set of attention behaviors.
 
 
 \subsection{System Implementation}
@@ -465,10 +458,10 @@ in~\cite{Hood:2015}.
     \node [below=0.6cm of focus] (output) {\tt /frames\_in\_focus};
 
     \path (staticposes) edge [->] (static);
-    \path (static) edge [->] (tf);
+    \path (static) edge [->] node[label,below] {objects poses} (tf);
     \path (input) edge [->] (attention);
-    \path (attention) edge [->] (tf);
-    \path (pose) edge [->]  (tf);
+    \path (attention) edge [->] node[label,below] {child face} (tf);
+    \path (pose) edge [->] node[label,right] {robot pose} (tf);
     \path (tf) edge [->]  (focus);
     \path (focus) edge [->]  (output);
 
@@ -479,7 +472,7 @@ in~\cite{Hood:2015}.
     \label{fig:system}
 \end{figure}
 
-The experiment was carried with an Aldebaran's {\sc Nao} robot, using ROS as a
+The experiment was carried with an Aldebaran's {\sc nao} robot, using ROS as a
 middleware to build the attention estimation pipeline (Figure~\ref{fig:system}).
 Head pose estimation, presented in section~\ref{sec:vfoa}, builds on the {\tt
 dlib} and OpenCV libraries; the pose transformations are handled by the ROS {\sc
@@ -507,33 +500,27 @@ The manual coding forms our attentional \emph{ground-truth}.
 
 To assess the accuracy of the attention estimation by the robot, we computed
 over time (excluding the periods when the head is not detected) the
-overlap between the ground-truth and the robot's estimate, the
-inter-judge agreement (Cronbach's $\alpha$) and the cosine similarity
-matrix.
+overlap between the ground-truth and the robot's estimate and the
+inter-judge agreement (Cronbach's $\alpha$).
+%and the cosine similarity
+%matrix.
 
-The Cronbach's $\alpha$ can be defined as an average of the correlations between 
-the items or values at the same time step \textit{t}. Therefore, results can vary 
-significantly if both sets of values are time shifted. However,
-the cosine similarity becomes a useful measurement in this case as it accounts 
-for temporal delays. Specifically, the ground-truth values acquired though human 
-annotations may not match the measurements of the focuses of attention computed 
-by the robot at the exactly same time step \textit{t} even though the correspondent
-curves may look very similar in shape.
+%The Cronbach's $\alpha$ can be defined as an average of the correlations between 
+%the items or values at the same time step \textit{t}. Therefore, results can vary 
+%significantly if both sets of values are time shifted. However,
+%the cosine similarity becomes a useful measurement in this case as it accounts 
+%for temporal delays. Specifically, the ground-truth values acquired though human 
+%annotations may not match the measurements of the focuses of attention computed 
+%by the robot at the exactly same time step \textit{t} even though the correspondent
+%curves may look very similar in shape.
 
 \subsection{Results}
 
-The main results are reported in Table~\ref{tab:results} and
-Figure~\ref{fig:cosinematrix} (cosine similarity matrix);
-Figure~\ref{fig:realExpected} further gives a concrete picture of the
-ground-truth \vs computed attentional targets for subject 4 (the subject with
-the least successful tracking).
-
-
-\begin{table*}[h!]
+\begin{table*}[ht!]
     \centering
     \caption{\textbf{Attention tracking accuracy}. \emph{Head pose
     tracking} is the percentage of total time of successful detection of the
-    head pose; \emph{Ground-truth/robot match} is the percentage of matching time
+    head pose; \emph{Agreement} is the percentage of matching time
     between manually annotated focus of attention (ground-truth) and robot's
     computed focus of attention. Total duration: 117.6 min.}
 
@@ -543,24 +530,31 @@ the least successful tracking).
         \midrule
         {\bf Head pose tracking} (\%) & 88.2 & 83.5 & 90.5 & 83.1 & 87.9 & 85.0 & {\bf 86.4} & {\it 3.0} \\ 
         \midrule
-        {\bf Ground-truth/robot match} (\%) & 61.1 & 85.5 & 80.8 & 62.2 & 63.4 & 83.9 & {\bf 72.8} & {\it 11.7}\\
+        {\bf Agreement} (\%) & 61.1 & 85.5 & 80.8 & 62.2 & 63.4 & 83.9 & {\bf 72.8} & {\it 11.7}\\
         {\bf Cronbach's $\alpha$} & 0.63 & 0.81 & 0.82 & 0.59 & 0.64 & 0.78 & {\bf0.71} & {\it0.10}\\
-        {\bf Cosine affinity} & 0.73 & 0.82 & 0.87 & 0.73 & 0.77 & 0.89 & {\bf 0.8} & {\it 0.07} \\
+        %{\bf Cosine affinity} & 0.73 & 0.82 & 0.87 & 0.73 & 0.77 & 0.89 & {\bf 0.8} & {\it 0.07} \\
         \bottomrule
     \end{tabular}
     \label{tab:results}
 \end{table*}
 
-\begin{figure}[th!]
-    \centering
-    \includegraphics[width=0.7\columnwidth]{bitmap}
-    \caption{\small Cosine similarity matrix between ground-truth and robot-measured VFoA
-    using a 10 sec. window size. The correspondent numbers are shown
-    in figure \ref{fig:realCaptured}.}
-    \label{fig:cosinematrix}
-\end{figure}
+The main results are reported in Table~\ref{tab:results}
+%and Figure~\ref{fig:cosinematrix} (cosine similarity matrix);
+Figure~\ref{fig:realExpected} further gives a concrete picture of the
+ground-truth \vs computed attentional targets for subject 4 (the subject with
+the \emph{least} successful tracking).
 
-\begin{figure*}
+%
+%\begin{figure}[th!]
+%    \centering
+%    \includegraphics[width=0.7\columnwidth]{bitmap}
+%    \caption{\small Cosine similarity matrix between ground-truth and robot-measured VFoA
+%    using a 10 sec. window size. The correspondent numbers are shown
+%    in figure \ref{fig:realCaptured}.}
+%    \label{fig:cosinematrix}
+%\end{figure}
+
+\begin{figure*}[ht!]
     \centering
     \includegraphics[width=\linewidth]{matches-excerpt}
     \caption{\small \textbf{Comparison of computed focus of attention \vs ground
@@ -578,28 +572,26 @@ the least successful tracking).
 
 
 During the whole interaction, the head pose of the children was satisfactorily
-and consistently tracked (86\% of the time in average, $SD=3.0$), which is
-expected for a face-to-face interaction with a static head-tracking camera
+and consistently tracked (86\% of the time in average, $SD=3.0$). While this
+high score is expected for a face-to-face interaction with a static head-tracking camera
 (meaning that the child head would remain in the field of view of the camera
-most of the time). This is however comforting in terms of suitability of our
-approach for head pose estimation with children in field experiments.
-
-In our experiment, the primary causes of lost head pose were occlusions with the
+most of the time), this is still comforting in terms of suitability of our
+approach for head pose estimation with children in field experiments of this
+kind. Expectedly, the primary causes of lost head pose were occlusions with the
 hands (similar to the middle-bottom picture in
 Figure~\ref{head_pose_real_world}), close proximity with the tablet while
-writing, and gaze directed to the facilitator (sitting directly on the left of
+writing, and gaze directed to the facilitator (who was sitting directly on the left of
 the child, Figure~\ref{fig:realSetup}).
 
 In terms of attention tracking, two groups of children stand out of
 Table~\ref{tab:results}: the robot's estimate of the focus of attention for
 subjects 1, 4 and 5 has questionable agreement with the ground-truth (Cronbach's
 $\alpha$ close to 0.6), while for subjects 2, 3 and 6, we find a good agreement
-($\alpha$ close to 0.8). This does not correlate with the success rate of the
-head tracking itself, and, after further analysis of the videos, it rather
+($\alpha$ close to 0.8). After further analysis of the videos, it
 reflects that the first group of children rely more on their eyes to direct
-their gaze than the second group. However, and notwithstanding the small sample
-size, it is rather intriguing that the two groups appear so clearly separated.
-This certainly calls for further experimental investigation.
+their gaze than the second group. Note that, notwithstanding the small sample
+size, it is rather intriguing that the two groups appear so well distinct.
+This calls for further experimental investigation.
 
 %\subsubsection{Focus of attention distribution}
 %
@@ -673,11 +665,11 @@ attentional target expected by the robot for the current task (or sub-task).
     \hskip\algorithmicindent$F(task(t)) \neq \varnothing$ \textbf{and} \par
     \hskip\algorithmicindent $f(t) \neq$ nil } \label{algline:skiplosttrack}
     \If{$f(t) \in F(task(t))$}
-            \State $d_w \gets d_w + 1$
+            \State $d_w \gets d_w + \delta_t$
         \EndIf
-        \State $d_e \gets d_e + 1$
+        \State $d_e \gets d_e + \delta_t$
     \EndIf
-    \State $t \gets t + 1$
+    \State $t \gets t + \delta_t$
     \Until{$t = t_{end}$}
 
     \State $\mathcal{W}_{[start, end]} \gets \frac{d_w}{d_e}$
@@ -687,12 +679,12 @@ attentional target expected by the robot for the current task (or sub-task).
     \end{algorithmic}
 
     \caption{\textbf{Computation of \emph{with-me-ness}}. $d_w$ stands for the duration
-        the human is \emph{with} the robot, $d_e$ stands for the duration where
-        the human would be \emph{expected to be with} the robot, $task(t)$
+        the human is actually \emph{with} the robot, while $d_e$ stands for the
+        total time where the human would be \emph{expected to be with} the robot, $task(t)$
         represents the task performed by the robot at time $t$ (possibly none),
         $F(task)$ represents the (possibly empty) set of expected attentional
         targets associated to task $task$, $f(t)$ represents the actual focus of
-        attention measured at time $t$. $\mathcal{W}_{[start, end]}$ represents
+        attention of the human measured at time $t$. $\mathcal{W}_{[start, end]}$ represents
         the level of \emph{with-me-ness} from $t_{start}$ to $t_{end}$.}
     \label{alg:with-me-ness}
 \end{algorithm}
@@ -705,22 +697,21 @@ one attentional target; thus, at a given time, more than one location can be
 regarded as possible \emph{expected} focuses of attention for the human. For
 example, a robot which is writing, could typically elicit gazes to its hand as
 well as to its head. A human looking at either of these locations would be
-considered to be \emph{with} the robot in terms of interaction\footnote{As
-future work, this could easily be extended into a probabilistic model of
-attention expectations.}. Also notable, we exclude from the computation of
+considered to be \emph{with} the robot in terms of
+interaction\footnote{Considering a probabilistic model of
+attention expectations would be an interesting extension of this metric.}. Also notable, we exclude from the computation of
 $\mathcal{W}$ all of the periods of time where the user's focus of attention can
-not be estimated (Algorithm~\ref{alg:with-me-ness},
-line~\ref{algline:skiplosttrack}, third condition), typically because the user's
-face is not visible at those times.
+not be estimated (typically because the user's
+face is not visible at those times).
 
 \subsection{Experimental Interpretation}
 
-During the experiment presented above (section~\ref{sec:expe}), the robot
-controller associated a (set of) expected attentional targets to the task being
+Over the course of the experiment presented at section~\ref{sec:expe}, the robot
+controller would associate a set of expected attentional targets to the task being
 performed. For instance, while the robot was waiting for the child's handwriting
 demonstration, the expected attentional target was the tablet (since the child
 was supposed to write there), and while the robot was writing itself, the
-attentional targets we expected to be either on the tablet or on the robot.
+attentional targets were expected to be either on the tablet or on the robot.
 These expected targets, forming altogether the robot's attentional {\it a
 priori}, are depicted on Figure~\ref{fig:with-me-ness} as the green lines. They
 are used to compute the with-me-ness. With-me-ness can be calculated over the
@@ -729,7 +720,7 @@ windows (bottom graph on Figure~\ref{fig:with-me-ness}). Shorter time windows
 are interesting for two purposes: to analyse the level of with-me-ness in
 relation to specific interaction episodes; to allow a measurement of
 with-me-ness by the robot \emph{over the course} of the interaction
-(\emph{in-the-moment} measurement). In this later case, one may typically want
+(\emph{in-the-moment} measurement) -- in this later case, one may typically want
 to consider a sliding time window.
 
 \begin{figure*}
@@ -875,7 +866,7 @@ able to progress over time, produces the contrary effect.
 As hinted by the title of this article, we have presented here how a robot can
 effectively assess in real-time and with a regular camera the focus of attention
 of its interactant, and how we can, in turn, combine it with the robot's {\it a priori}
-about the interaction to build a straight-forward (yet novel in HRI) metric of
+about the interaction to build a metric of
 \emph{with-me-ness} over the course of the interaction.
 
 \paragraph{Head Pose to Assess Attention: is it Relevant?}
@@ -897,27 +888,26 @@ focus of attention: eye gaze information is neglected and we do not perform
 actual visibility check of the in focus objects (we simply approximate them to
 their origins, ignoring possible occlusions).
 
-The first issue is shared with most of the other vision (2D or 3D) or motion
-capture techniques for gaze estimation. In that regard, our approach does not
-perform worst or better than others. In fact, based on our results, relying
+While the first issue is shared with most of the other vision (2D or 3D) or motion
+capture techniques for real-time gaze estimation found in robotics,
+our results are positive: we shows that relying
 purely on head pose estimation to estimate gaze direction leads to real-world
-results that are worth being considered and used: they may not match manual
+measures that are worth being considered and used. They may not match manual
 annotations, but they are definitely a valuable \emph{in-the-moment} input for
-the robot, and we hope to see more works relying on those to build adaptive
-robot controllers in the coming years.
+the robot, reaching for certain children levels of accuracy traditionally
+considered as very good.
 
-In that regards, it is interesting to put this work on human-robot interaction
-in perspective with previous research conducted on ape-human interaction by
-Tomasello~\etal~\cite{tomasello2007reliance}: they show that apes rely primarily
+Interestingly, previous research conducted on ape-human interaction by
+Tomasello~\etal~\cite{tomasello2007reliance} shows that apes rely primarily
 on the head pose to estimate the focus of attention of a human partner, in to contrast
 to human children who primarily rely on eye direction. From this perspective,
 our robot mimics attention tracking mechanism comparable to the ones found in apes.
 
-Besides, our approach relies on a simple, non-intrusive sensor (a RGB camera on
-the robot) and an open-source, fast pose estimation algorithm\fixme{test on Nao!
-how fast is it actually?}: we also hope that this may contribute to a widespread
+Our approach relies on a simple, non-intrusive sensor (a RGB camera on
+the robot) and an open-source, fast pose estimation algorithm\fixme{test on nao!
+how fast is it actually?}: we hope that this may contribute to a widespread
 adoption of such a technique on a range of robots, including the common {\sc
-Nao} platform.
+nao} platform.
 
 %Gaze information acquired during the interactions is not only useful to detect
 %and predict engagement, but also allows the possibility to develop actively the
@@ -927,10 +917,11 @@ Nao} platform.
 
 \paragraph{With-me-ness: yet another metric of engagement?}
 
-Borrowing the neologism from the field of CSCL, we have also introduced here
+Borrowing the neologism from the field of CSCL, we have also introduced in this
+article
 \emph{with-me-ness} as a measure of ``how much the user in \emph{with} the robot during
-a task''. Interestingly, this can be measured over the course the interaction,
-thus providing the robot with a relatively high-level social construct,
+a task''. This can be acquired over the course the interaction,
+thus providing the robot with a real-time metric for relatively high-level social construct,
 undoubtedly related to engagement.
 
 One may reasonably wonder how different is \emph{with-me-ness} from \emph{joint
@@ -939,21 +930,22 @@ With-me-ness is related to both, with however noteworthy nuances: (Triadic) \emp
 attention} is understood as the cognitive realization of a shared attention to
 an object, itself building on a shared perception of that object (\ie joint attention
 builds on a \emph{perceptual} alignment of two agents). \emph{Conceptual
-with-me-ness} as proposed by Sharma~\etal is on the other hand \emph{referential}: ``you are
+with-me-ness} as proposed by Sharma~\etal is on the contrary \emph{referential}: ``you are
 \emph{with} me if you focus on what I refer to, either explicitly or
-implicitly''. We propose to understand it here in a slightly broader way, that
+implicitly''. We propose to understand it here in an even slightly broader sense, that
 better reflect the \emph{interaction}: ``you are \emph{with} me if you focus on
 what is important for the interactive task at hand.''
 
 On the other hand, with-me-ness is only a precursor of engagement: it
-does not say much about the cognitive commitment of a user to an interaction. A
+does not say much about the \emph{cognitive} commitment of a user to an interaction. A
 user may closely adhere to the injunctions of the robot (or, actually, of the
-experimenters) without being \emph{engaged} into the interaction. This is
+experimenters), with thus high levels of with-me-ness,  without being \emph{engaged} into the interaction. This is
 typically seen in child-robot interaction: children will attempt to closely
 follow what they are asked to do -- which may \emph{look like} they are engaged
 into the interaction -- while they merely \emph{obey orders}.
 
-One of the strength of with-me-ness is its objectivity: we can formalize it, and
+Compared to engagement, one of the strength of with-me-ness is its specificity:
+it is well-defined, we can formalize it, and
 as such, it is valuable to assess and compare how users are willing or able to
 interact with a robot. Besides, we have hopefully demonstrated in this article
 that with-me-ness is an operational \emph{in-the-moment} metric that can be also
