@@ -730,16 +730,14 @@ to consider a sliding time window.
     \centering
     \includegraphics[width=\linewidth]{with-me-ness}
     \caption{\small \textbf{With-me-ness}. Evolution of the level of
-        \emph{with-me-ness} over the whole $\approx$20min long interaction of
-        subject 4. \emph{Interaction Episodes} describe the distinct phases of
-        the interaction, and are discussed in the text. The central chart is
-        similar to Figure~\ref{fig:realExpected} with the \emph{expected}
-        attentional targets added in green. The bottom diagram represents the
-        levels of with-me-ness over successive windows of 30 seconds. The blue
-        line is with-me-ness as estimated by the robot, the orange line is
-        with-me-ness computed from manually annotated attentional targets. The
-        ``holes'' in the with-me-ness computed by the robot correspond to period of time
-        where the child's face is not detected.}
+        \emph{with-me-ness} over the whole $\approx$17min long interaction of
+        subject 2. The top chart is similar to Figure~\ref{fig:realExpected}
+        with the \emph{expected} attentional targets added in green. The bottom
+        diagram represents the instantaneous level of with-me-ness over a
+        sliding window of 30 seconds. The blue line is with-me-ness as estimated
+        by the robot, the orange line is with-me-ness computed from manually
+        annotated attentional targets.  Pearson's correlation between both: $r(973)=0.58, p =
+        2.2e^{-16}.$}
 
     \label{fig:with-me-ness}
 \end{figure*}
@@ -750,15 +748,14 @@ to consider a sliding time window.
     \caption{\textbf{Levels of with-me-ness}. For each subject, the with-me-ness
     level is reported over the whole interaction, either based on the
     ground-truth (\ie \emph{ground-truth with-me-ness}), or based on the focus of
-    attention measured by the robot. $\mathcal{W}_{robot}$ is strongly correlated to
-    $\mathcal{W}_{groundtruth}$: Pearson's $r(4)=0.50$.}
+    attention measured by the robot. Pearson's correlation: $r(4)=0.46$.}
 
     \begin{tabular}{p{1cm}cccccccc}
         \toprule
         Subject & 1 & 2 & 3 & 4 & 5 & 6 & {\bf M} & {\it SD} \\
         \midrule
-        $\mathcal{W}_{g.truth}$ & 79.3 & 82.6  & 90.5 & 87.9 & 90.7 & 83.6 & {\bf 85.8} & {\it 4.6} \\ 
-        $\mathcal{W}_{robot}$ & 52.5 & 55.5 & 74.1 & 52.6 & 60.0 & 66.4 & {\bf 60.2} & {\it 8.6} \\
+        $\mathcal{W}_{g.truth}$ & 79.4 & 81.6  & 90.5 & 87.9 & 90.7 & 80.9 & {\bf 85.2} & {\it 5.1} \\ 
+        $\mathcal{W}_{robot}$ & 52.6 & 55.3 & 74.3 & 52.9 & 59.5 & 63.9 & {\bf 59.8} & {\it 8.3} \\
         \bottomrule
     \end{tabular}
     \label{tab:results-with-me-ness}
