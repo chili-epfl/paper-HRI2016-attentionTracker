@@ -7,7 +7,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="473.47922"
+   height="484.56601"
    width="1668.2456"
    id="svg2"
    version="1.1"
@@ -105,13 +105,13 @@
      inkscape:window-height="1332"
      id="namedview8"
      showgrid="false"
-     inkscape:zoom="4.72"
-     inkscape:cx="1609.1278"
-     inkscape:cy="-40.367031"
+     inkscape:zoom="0.417193"
+     inkscape:cx="1005.0497"
+     inkscape:cy="65.347925"
      inkscape:window-x="1080"
      inkscape:window-y="534"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g14731"
+     inkscape:current-layer="g14162"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -120,7 +120,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="guides-h"
-     transform="translate(-2.9835643,-57.999993)">
+     transform="translate(-2.9835686,-46.913203)">
     <path
        inkscape:connector-curvature="0"
        id="path13834"
@@ -141,7 +141,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="matrix(1.25,0,0,-1.25,-818.1777,807.43566)"
+     transform="matrix(1.25,0,0,-1.25,-818.1777,818.52245)"
      inkscape:label="ink_ext_XXXXXX"
      id="g10">
     <g
@@ -302,43 +302,26 @@
        inkscape:groupmode="layer">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000054, 4.80000054;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 1061.3032,634.01796 0,-353.63206"
+         d="m 1061.3032,654.81796 0,-353.63206"
          id="path14180"
          inkscape:connector-curvature="0" />
       <path
          inkscape:connector-curvature="0"
          id="path14182"
-         d="m 1130.788,634.01796 0,-353.63206"
+         d="m 1130.788,654.81796 0,-353.63206"
          style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000054, 4.80000054;stroke-dashoffset:0;stroke-opacity:1" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000062, 4.80000062;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 1956.007,633.82427 0,-354.43462"
+         d="m 1956.007,654.62427 0,-354.43462"
          id="path14206"
          inkscape:connector-curvature="0" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000062, 4.80000062;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 1756.5117,633.82427 0,-354.43462"
+         d="m 1756.5117,654.62427 0,-354.43462"
          id="path14220"
          inkscape:connector-curvature="0" />
       <g
-         id="g14726"
-         transform="matrix(0.67256639,0,0,0.67256639,361.295,95.520351)">
-        <text
-           transform="scale(1,-1)"
-           sodipodi:linespacing="125%"
-           id="text14720"
-           y="-277.51569"
-           x="1086.0223"
-           style="font-style:normal;font-weight:normal;font-size:24.77025223px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           xml:space="preserve"><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10"
-             y="-277.51569"
-             x="1086.0223"
-             id="tspan14722"
-             sodipodi:role="line">A</tspan></text>
-      </g>
-      <g
-         transform="matrix(0.67256639,0,0,0.67256639,1113.009,94.808315)"
+         transform="matrix(0.67256639,0,0,0.67256639,1113.009,454.80831)"
          id="g14731">
         <text
            xml:space="preserve"
@@ -352,7 +335,73 @@
              id="tspan14735"
              x="1086.7352"
              y="-276.98111"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10">B</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10">D</tspan></text>
+      </g>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000054, 4.80000054;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 1324.388,654.81796 0,-353.63206"
+         id="path14743"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path14745"
+         d="m 1452.388,654.81796 0,-353.63206"
+         style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000054, 4.80000054;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         transform="matrix(0.67256639,0,0,0.67256639,653.49839,455.52035)"
+         id="g14751">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:24.77025223px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="1086.0223"
+           y="-277.51569"
+           id="text14753"
+           sodipodi:linespacing="125%"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             id="tspan14755"
+             x="1086.0223"
+             y="-277.51569"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10">C</tspan></text>
+      </g>
+      <g
+         id="g14757"
+         transform="matrix(0.67256639,0,0,0.67256639,361.14459,454.80831)">
+        <text
+           transform="scale(1,-1)"
+           sodipodi:linespacing="125%"
+           id="text14759"
+           y="-276.98111"
+           x="1086.7352"
+           style="font-style:normal;font-weight:normal;font-size:24.77025223px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10"
+             y="-276.98111"
+             x="1086.7352"
+             id="tspan14761"
+             sodipodi:role="line">A</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path14763"
+         d="m 1302.2277,654.81796 0,-353.63206"
+         style="fill:none;fill-rule:evenodd;stroke:#888a85;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.80000054, 4.80000054;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         id="g14765"
+         transform="matrix(0.67256639,0,0,0.67256639,577.09989,455.52035)">
+        <text
+           transform="scale(1,-1)"
+           sodipodi:linespacing="125%"
+           id="text14767"
+           y="-277.51569"
+           x="1086.0223"
+           style="font-style:normal;font-weight:normal;font-size:24.77025223px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10"
+             y="-277.51569"
+             x="1086.0223"
+             id="tspan14769"
+             sodipodi:role="line">B</tspan></text>
       </g>
     </g>
     <g
@@ -585,151 +634,6 @@
          x="702.74353"
          y="-320.30081">0%</tspan>
     </text>
-    <g
-       id="g5364-7"
-       transform="matrix(1.0000036,0,0,1.0000036,735.621,338.81552)">
-      <g
-         id="g5240-4"
-         transform="matrix(0.99999638,0,0,0.99999638,156.65654,116.84465)">
-        <g
-           id="g5244-1"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="matrix(1,0,0,-1,74.7665,20.1152)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5246-7">
-            <tspan
-               x="0"
-               y="0"
-               id="tspan5248-7">0</tspan>
-          </text>
-        </g>
-        <g
-           id="g5252-4"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="scale(1,-1)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5254-8"
-             x="314.453"
-             y="-20.1152">
-            <tspan
-               x="314.453 322.08508 329.71716"
-               y="-20.1152"
-               sodipodi:role="line"
-               id="tspan5256-6">200</tspan>
-          </text>
-        </g>
-        <g
-           id="g5260-8"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="scale(1,-1)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5262-8"
-             x="563.82294"
-             y="-20.1152">
-            <tspan
-               x="563.82294 571.45502 579.0871"
-               y="-20.1152"
-               sodipodi:role="line"
-               id="tspan5264-1">400</tspan>
-          </text>
-        </g>
-        <g
-           id="g5268-4"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="scale(1,-1)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5270-5"
-             x="810.258"
-             y="-20.1152">
-            <tspan
-               x="810.258 817.89008 825.52209"
-               y="-20.1152"
-               sodipodi:role="line"
-               id="tspan5272-8">600</tspan>
-          </text>
-        </g>
-        <g
-           id="g5276-8"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="scale(1,-1)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5278-6"
-             x="1059.74"
-             y="-20.1152">
-            <tspan
-               x="1059.74 1067.3721"
-               y="-20.1152"
-               sodipodi:role="line"
-               id="tspan5280-2">800</tspan>
-          </text>
-        </g>
-        <g
-           id="g5284-1"
-           transform="matrix(1.0000036,0,0,1.0000036,-238.67444,161.79373)">
-          <text
-             transform="scale(1,-1)"
-             style="font-variant:normal;font-weight:normal;font-size:12px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text5286-4"
-             x="1302.48"
-             y="-20.1152">
-            <tspan
-               x="1302.48 1310.1121 1317.7443 1325.3763"
-               y="-20.1152"
-               sodipodi:role="line"
-               id="tspan5288-9">1000</tspan>
-          </text>
-        </g>
-        <g
-           transform="translate(0,-20.800001)"
-           id="g5433">
-          <path
-             inkscape:connector-curvature="0"
-             id="path5242-8"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m -160.88502,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5250-9"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 87.026274,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5258-4"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 334.93288,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5266-6"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 582.84842,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5274-8"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 830.75502,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5282-8"
-             style="fill:none;stroke:#000000;stroke-width:0.50000513;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 1078.6751,195.03538 0,3.99987" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path5300-9"
-             style="fill:none;stroke:#000000;stroke-width:1.00001025;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m -160.90324,198.64108 1252.86464,0"
-             sodipodi:nodetypes="cc" />
-        </g>
-      </g>
-      <g
-         id="g11831"
-         style="fill-opacity:1;stroke:#000000;stroke-width:0.80422151"
-         transform="matrix(1.236907,0,0,-0.79999712,-42.03623,-38.698088)" />
-    </g>
     <g
        id="g5240"
        transform="translate(892.75751,106.96167)">
@@ -8195,17 +8099,17 @@
              sodipodi:linespacing="125%"
              id="text4310"
              y="-110.20869"
-             x="632.63525"
+             x="801.55096"
              style="font-style:normal;font-weight:normal;font-size:19.5854454px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              xml:space="preserve"
              transform="scale(0.80436106,1.2432228)"><tspan
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.08721924px;font-family:cmr10;-inkscape-font-specification:cmr10"
                y="-110.20869"
-               x="632.63525"
+               x="801.55096"
                sodipodi:role="line"
                id="tspan3506">ground-truth</tspan></text>
           <g
-             transform="matrix(0.60834684,-0.8236541,-0.5329015,-0.94026262,910.15207,1065.8435)"
+             transform="matrix(0.60834684,-0.8236541,-0.5329015,-0.94026262,1046.0213,1065.8435)"
              id="g4320">
             <path
                sodipodi:nodetypes="cc"
@@ -8225,19 +8129,19 @@
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;font-size:16.08721924px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="496.76016"
-             y="-8.148694"
+             x="745.4762"
+             y="-10.558733"
              id="text4290"
              sodipodi:linespacing="125%"
              transform="scale(0.80436106,1.2432228)"><tspan
                sodipodi:role="line"
                id="tspan4292"
-               x="496.76016"
-               y="-8.148694"
+               x="745.4762"
+               y="-10.558733"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.08721924px;font-family:cmr10;-inkscape-font-specification:cmr10">robot's observations</tspan></text>
           <g
              id="g4304"
-             transform="matrix(0.62955352,0.78466141,0.50767336,-0.97303972,-289.59606,823.21397)">
+             transform="matrix(0.62955352,0.78466141,0.50767336,-0.97303972,-89.538583,820.21775)">
             <path
                style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.80000007px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                d="m 238.81925,1055.8405 -41.86684,3.9419"

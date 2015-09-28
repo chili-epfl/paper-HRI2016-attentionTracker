@@ -702,29 +702,50 @@ example, a robot which is writing, could typically elicit gazes to its hand as
 well as to its head. A human looking at either of these locations would be
 considered to be \emph{with} the robot in terms of
 interaction\footnote{Considering a probabilistic model of
-attention expectations would be an interesting extension of this metric.}. Also notable, we exclude from the computation of
+attention expectations (an attention distribution) would be an interesting
+extension of this metric.}. Also notable, we exclude from the computation of
 $\mathcal{W}$ all of the periods of time where the user's focus of attention can
-not be estimated (typically because the user's
-face is not visible at those times).
+not be estimated (typically because the user's face is not visible at those
+times).
 
-\subsection{Experimental Interpretation}
+\subsection{Experimental Measure \& Interpretation}
+
+\begin{table}[t]
+    \centering
+    \caption{Mapping between the interaction phases and the expected
+        attentional targets.}
+
+    \begin{tabular}{ll}
+        \toprule
+        {\bf Phase} & {\bf Expected targets} \\
+        \midrule
+        Presentation & {\sf robot} \\ 
+        Waiting for word to write & {\sf secondary tablet} \\ 
+        Writing word & {\sf tablet}, {\sf robot} \\ 
+        Waiting for feedback & {\sf tablet}, {\sf secondary tablet} \\ 
+        Story telling & {\sf robot} \\ 
+        Bye & {\sf robot} \\ 
+        \bottomrule
+    \end{tabular}
+    \label{tab:targets}
+\end{table}
 
 Over the course of the experiment presented at section~\ref{sec:expe}, the robot
-controller would associate a set of expected attentional targets to the task being
-performed. For instance, while the robot was waiting for the child's handwriting
-demonstration, the expected attentional target was the tablet (since the child
-was supposed to write there), and while the robot was writing itself, the
-attentional targets were expected to be either on the tablet or on the robot.
-These expected targets, forming altogether the robot's attentional {\it a
-priori}, are depicted on Figure~\ref{fig:with-me-ness} as the green lines. They
-are used to compute the with-me-ness. With-me-ness can be calculated over the
-whole interaction (Table~\ref{tab:results-with-me-ness}) or over shorter time
-windows (bottom graph on Figure~\ref{fig:with-me-ness}). Shorter time windows
-are interesting for two purposes: to analyse the level of with-me-ness in
-relation to specific interaction episodes; to allow a measurement of
-with-me-ness by the robot \emph{over the course} of the interaction
-(\emph{in-the-moment} measurement) -- in this later case, one may typically want
-to consider a sliding time window.
+controller would associate a set of expected attentional targets to the phase of
+the interaction (Table~\ref{tab:targets}). For instance, while the robot was
+waiting for the child's handwriting demonstration (``\textit{Waiting for
+feedback}''), the expected attentional target of the child was the tablet (since
+the child was supposed to write there) or the secondary tablet (that displayed a
+template of the word, used as reference by the child). These expected targets
+form altogether the robot's attentional {\it a priori} and are used to compute
+the with-me-ness.  They are represented over time by the green lines on
+Figure~\ref{fig:with-me-ness}. With-me-ness can be calculated over the whole
+interaction (see corresponding results in Table~\ref{tab:results-with-me-ness})
+or over shorter time windows. Shorter time windows are interesting for two
+purposes: to analyse the level of with-me-ness in relation to specific
+interaction episodes; to allow a measurement of with-me-ness by the robot
+\emph{over the course} of the interaction (\emph{in-the-moment} measurement) --
+in this later case, one may typically want to consider a sliding time window.
 
 \begin{figure*}
     \centering
@@ -761,58 +782,80 @@ to consider a sliding time window.
     \label{tab:results-with-me-ness}
 \end{table}
 
-Figure~\ref{fig:with-me-ness} can be further analyzed:\fixme{This paragraph
-needs to be adapted}
-The matching curve (cyan color) shows the overlapping between the
-expected and the real focuses of attention. As can be noticed there is a
-fluctuation at the beginning of the interaction as well as just before the
-activity switching. These chaotic gaze manifestation is what we call an
-automatic discovery of events, when the user experiences an uncertainty in the
-present situation. 
+The with-me-ness plotted at the bottom of Figure~\ref{fig:with-me-ness} is in
+fact computed on a sliding window of 30 seconds, and thus gives a picture of
+``how well the child is following the robot's expectations'' at that time. As
+seen, the with-me-ness computed at run-time by the robot (blue line) is
+generally lower than the ground-truth (orange line, based on video-annotations),
+and sometimes quite off, such as during episode marked ``A'': during that phase,
+one can notice that the attention is mostly directed to undefined target {\sf
+Other}, likely a consequence of inaccurate head detection.  This kind of error
+(inaccurate head pose estimation) is the main source of discrepancy between the
+ground-truth and the attention distribution measured by the robot: ignoring all
+the episodes where the child's gaze is measured to be directed to {\sf Other},
+we indeed obtain levels of with-me-ness close to the ground-truth (over the six
+subjects, $M=87.5, SD=4.6$).
 
-The first one of the previous two situations presented above is due to the
-novelty effect the subjects experience for the first time in front of the system
-and according to the rest of participants suggests that the adaptation time is
-around the first 2 minutes of interaction. In the second case, an unexpected
-robot behavior produces such reaction due to an activity switching, the story
-telling.
+A chart like Figure~\ref{fig:with-me-ness} remains an useful tool to analyse the
+interaction, and several observations can be made out of it: as said, the green
+lines represent how the robot imagine, at a given time, the attention
+distribution of the child. They also provide an accurate picture of the overall
+turn-taking as viewed by the robot: for instance, the episode ``B'' on
+Figure~\ref{fig:with-me-ness} corresponds to one of the ``\emph{Robot writing}''
+episodes, surrounded by ``\emph{Waiting for feedback}'' phases like ``C''; episode
+``D'' corresponds to the story telling; etc. In terms of interaction, the large
+variance of the duration of these phases reflects the fact that this child would
+sometimes take a lot of time to send feedback to the robot, and sometimes, on
+the contrary, be very quick.
 
-It is important to consider that in some occasions during the interaction, none
-of the focuses of attention were within the field of view due to the time
-transition from one focus to another resulting in an ambiguity. In order to deal
-with these few cases it is assumed that the minimum distance between the height
-of the field of view (cone) and the targets corresponds to the most likely focus
-of attention. However, we also want to distinguish such cases when the subject
-is directly not looking where the defined targets are located, but towards a
-region far from the interaction field. These cases are not common but they can
-be easily identified by setting a horizontal threshold to the field of view.
+Looking at the ground-truth focus of attention (orange lines), the first
+striking observation is that this child did generally \emph{closely} follow what
+the robot was expecting: in that regard, it seems that the child was very much
+engaged into the interaction (we discuss in the next section the exact
+relationships between with-me-ness and engagement). The only major exception is
+the story-telling phase (episode ``D''): the child was seemingly not captivated by the
+first half of the story, and his attention was not directed towards the robot.
 
-A relevant trend that can be observed is the continuous `look for approval'
-situation where the subjects look at the experimenter in order to provide
-feedback about the robot's response before providing their own one (see yellow
-boxes in figure \ref{fig:realExpected}). Such transition tablet-experimenter
-becomes more frequent in several cases, for instance when the experimenter makes
-a suggestion (orange box in figure \ref{fig:realExpected}), in this case, switch
-to a more complicated word.
+Another interesting observation pertains to the facilitator: as one can see,
+this child only rarely turned to the facilitator, indicating that the
+interaction and the task were meaningful and easy for him to follow alone.
 
-Once the turn-taking is established, a pattern becomes visible during the
-subject's feedback, when an attempt is performed: Such pattern shows a high
-intermittent gaze frequency from the tablet to the selection. It also reveals
-that the subject is using the demonstration model in the selection tablet to
-provide a better answer to the robot. In fact, subjects decrease the response
-time after each shift as well as the gaze frequency towards the model suggesting
-an assimilation over time. Moreover, when a new demonstration is selected for
-playing, the same behavior is replicated (see yellow boxes in figure
-\ref{fig:realExpected}).
+More subtle patterns and events can also be observed: for instance, during the
+feedback phases like episode ``C'', we
+can notice numerous gaze shifts between the tablet (where the child write) and the
+secondary tablet (that showed a template of the word). The episode ``B'' (robot
+writing) is also interesting: the child did not look at the robot, and instead
+remained focused on the secondary tablet. This situation is typically useful for
+the robot to detect as it may want to adapt its behavior to recover the child's
+attention.
 
 
-If we consider the case shown in section \ref{sec:fromFaceTo}, evaluating the
-subject's progression together with the time on task may be an indicator of
-engagement: If the subject answers so quickly with respect to the previous
-attempts with a poorer handwriting may be the case she is not engaged anymore.
-In such hypothetical case an activity switch can be easily implemented in a
-robot architecture. It confirms the findings reported in \cite{anzalone} where
-time response to event is proposed to account quality of interaction. 
+%A relevant trend that can be observed is the continuous `look for approval'
+%situation where the subjects look at the experimenter in order to provide
+%feedback about the robot's response before providing their own one (see yellow
+%boxes in figure \ref{fig:realExpected}). Such transition tablet-experimenter
+%becomes more frequent in several cases, for instance when the experimenter makes
+%a suggestion (orange box in figure \ref{fig:realExpected}), in this case, switch
+%to a more complicated word.
+%
+%Once the turn-taking is established, a pattern becomes visible during the
+%subject's feedback, when an attempt is performed: Such pattern shows a high
+%intermittent gaze frequency from the tablet to the selection. It also reveals
+%that the subject is using the demonstration model in the selection tablet to
+%provide a better answer to the robot. In fact, subjects decrease the response
+%time after each shift as well as the gaze frequency towards the model suggesting
+%an assimilation over time. Moreover, when a new demonstration is selected for
+%playing, the same behavior is replicated (see yellow boxes in figure
+%\ref{fig:realExpected}).
+
+
+%If we consider the case shown in section \ref{sec:fromFaceTo}, evaluating the
+%subject's progression together with the time on task may be an indicator of
+%engagement: If the subject answers so quickly with respect to the previous
+%attempts with a poorer handwriting may be the case she is not engaged anymore.
+%In such hypothetical case an activity switch can be easily implemented in a
+%robot architecture. It confirms the findings reported in \cite{anzalone} where
+%time response to event is proposed to account quality of interaction. 
 %
 %However, a high amount of gaze shift (figure \ref{fig:gazeR}) towards the
 %demonstration provided can reveal that the challenge is too big or no gaze, the
@@ -849,11 +892,11 @@ time response to event is proposed to account quality of interaction.
 %the engagement level during the interaction based on gaze shift and word
 %correctness.
 
-It is also important to notice that the initiative of the robot into the
-learning process in a turn-taking activity produces an effect in the engagement
-of the human partner. However, experience suggests that a robot that learns
-evoke a positive action in the partner. But the opposite, a robot that is not
-able to progress over time, produces the contrary effect.
+%It is also important to notice that the initiative of the robot into the
+%learning process in a turn-taking activity produces an effect in the engagement
+%of the human partner. However, experience suggests that a robot that learns
+%evoke a positive action in the partner. But the opposite, a robot that is not
+%able to progress over time, produces the contrary effect.
 
 %Finally, the subjects set their attention more often to the tablet displaying the generated hand-writing during the robot feedback rather than to the robot itself. 
 
@@ -937,21 +980,24 @@ implicitly''. We propose to understand it here in an even slightly broader sense
 better reflect the \emph{interaction}: ``you are \emph{with} me if you focus on
 what is important for the interactive task at hand.''
 
-On the other hand, with-me-ness is only a precursor of engagement: it
-does not say much about the \emph{cognitive} commitment of a user to an interaction. A
+On the other hand, with-me-ness is only a precursor of engagement: it does not
+say much about the \emph{cognitive} commitment of a user to an interaction. A
 user may closely adhere to the injunctions of the robot (or, actually, of the
-experimenters), with thus high levels of with-me-ness,  without being \emph{engaged} into the interaction. This is
-typically seen in child-robot interaction: children will attempt to closely
-follow what they are asked to do -- which may \emph{look like} they are engaged
-into the interaction -- while they merely \emph{obey orders}.
+experimenters), with thus high levels of with-me-ness,  without being
+\emph{engaged} into the interaction. This is typically seen in child-robot
+interaction: children will attempt to closely follow what they are asked to do
+-- which may \emph{look like} they are engaged into the interaction -- while
+they merely \emph{obey orders}.
 
 Compared to engagement, one of the strength of with-me-ness is its specificity:
-it is well-defined, we can formalize it, and
-as such, it is valuable to assess and compare how users are willing or able to
-interact with a robot. Besides, we have hopefully demonstrated in this article
-that with-me-ness is an operational \emph{in-the-moment} metric that can be also
-used as feed-back to the robot controller to build richer, more adaptive
-interactive behaviors for our robots.
+it is well-defined (the only important variable -- that needs to be reported --
+is the mapping {\it phase/expected attentional target}, \ie our
+Table~\ref{tab:targets}), we can formalize it, and as such, it is valuable to
+assess and compare how users are willing or able to interact with a robot.
+Besides, we have hopefully demonstrated in this article that with-me-ness is an
+operational \emph{in-the-moment} metric that can be also used as feedback to the
+robot controller to build richer, more adaptive interactive behaviors for our
+robots.
 
 \section*{Acknowledgments}
 
