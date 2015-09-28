@@ -560,9 +560,10 @@ the \emph{least} successful tracking).
     \caption{\small \textbf{Comparison of computed focus of attention \vs ground
         truth} during a face-to-face child-robot interaction (subject 4
         in table~\ref{tab:results}, 3.5min-long excerpt).
-        In blue (top line), the focus of attention as computed by the robot;
-        in orange (bottom line), the focus of attention as manually annotated
-        (ground-truth). The bottom graph shows agreement between both (whenever
+        In blue (top lines), the focus of attention as computed by the robot;
+        in orange (bottom lines), the focus of attention as manually annotated
+        (ground-truth). Periods where the head is lost are marked with dashed
+        vertical lines. The bottom graph shows agreement between both (whenever
         the head is detected).}
 
     \label{fig:realExpected}
@@ -583,15 +584,17 @@ Figure~\ref{head_pose_real_world}), close proximity with the tablet while
 writing, and gaze directed to the facilitator (who was sitting directly on the left of
 the child, Figure~\ref{fig:realSetup}).
 
-In terms of attention tracking, two groups of children stand out of
-Table~\ref{tab:results}: the robot's estimate of the focus of attention for
-subjects 1, 4 and 5 has questionable agreement with the ground-truth (Cronbach's
-$\alpha$ close to 0.6), while for subjects 2, 3 and 6, we find a good agreement
-($\alpha$ close to 0.8). After further analysis of the videos, it
-reflects that the first group of children rely more on their eyes to direct
-their gaze than the second group. Note that, notwithstanding the small sample
-size, it is rather intriguing that the two groups appear so well distinct.
-This calls for further experimental investigation.
+In terms of attention tracking, Cohen's $\kappa$ values are between 0.47 and
+0.68 with one subject resulting in significantly worst tracking, at 0.26. While
+the interpretation of Cohen's $\kappa$ is subject to discussions (the number of
+the coded values -- in our case 6 -- and the distribution probability of values
+-- in our case, values are \emph{not} equiprobable -- are factors impacting
+$\kappa$ independently of the level of agreement), the levels of agreement are
+\emph{moderate} to \emph{substantial}, with one subject only
+showing \emph{fair} agreement~\cite{landis1977measurement}. Further analysis of
+the videos shows that the child with the lowest level of agreement is especially
+calm and would rely more on the eyes to direct his gaze than the other children,
+thus leading to a less accurate estimation of its focus of attention.
 
 %\subsubsection{Focus of attention distribution}
 %
