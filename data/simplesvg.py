@@ -47,8 +47,20 @@ class Line:
                 (self.start[0],self.start[1],self.end[0],self.end[1])]
 
 
+class Polyline:
+    def __init__(self,points, color = None):
+        self.points = points # [(x,y), (x,y)...]
+        self.color = color
+        return
+
+    def strarray(self):
+        return ["  <path d=\"M %s\"\n" %\
+                " ".join(["%d,%d" % (x,y) for x,y in self.points]),
+                "    style=\"fill:%s;\"  />\n" % colorstr(self.color)]
+
+
 class Circle:
-    def __init__(self,center,radius,color):
+    def __init__(self,center,radius,color = None):
         self.center = center #xy tuple
         self.radius = radius #xy tuple
         self.color = color   #rgb tuple in range(0,256)
@@ -60,7 +72,7 @@ class Circle:
                 "    style=\"fill:%s;\"  />\n" % colorstr(self.color)]
 
 class Rectangle:
-    def __init__(self,origin,height,width,color):
+    def __init__(self,origin,height,width,color = None):
         self.origin = origin
         self.height = height
         self.width = width
@@ -87,7 +99,10 @@ class Text:
                 "  </text>\n"]
         
     
-def colorstr(rgb): return "#%x%x%x" % (rgb[0]/16,rgb[1]/16,rgb[2]/16)
+def colorstr(rgb):
+    if rgb is None:
+        return "none"
+    return "#%x%x%x" % (rgb[0]/16,rgb[1]/16,rgb[2]/16)
 
 def test():
     scene = Scene('test')

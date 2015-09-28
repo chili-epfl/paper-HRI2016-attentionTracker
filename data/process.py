@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import pympi
 
-from simplesvg import Scene, Line
+from simplesvg import Scene, Line, Polyline
 
 
 
@@ -93,7 +93,7 @@ def parse_robot_observations(robot_observations_file):
 
     return events_observed
 
-def filter_observations(obs, min_duration = 0.3):
+def filter_observations(obs, min_duration):
 
     filtered = {}
 
@@ -187,9 +187,15 @@ def find_interval(t, intervals):
             return ts, te, target
     return None, None, None
 
-def withmeness(observations, expectations, name = None):
+def withmeness(observations, expectations, name = None, t_start = None, t_end = None):
 
-    t_end = observations[observations.keys()[-1]][1]
+    if t_end is None:
+        t_end = observations[observations.keys()[-1]][1]
+    else:
+        t_end = min(t_end, observations[observations.keys()[-1]][1])
+
+    if t_start is None:
+        t_start = 0
 
     total_time = 0.
     total_time_matching = 0.
@@ -202,11 +208,12 @@ def withmeness(observations, expectations, name = None):
         csv = open(name + ".csv", "w")
         csv.write("t,rating1,rating2\n")
 
-    for t in arange(0, t_end, dt):
+    for t in arange(t_start, t_end, dt):
+
             expected_start, _, e_target = find_interval(t, expectations_intervals)
             observations_start, _, o_target = find_interval(t, observations_intervals)
 
-            if expected_start and observations_start:
+            if e_target and o_target:
                 target = observations[observations_start][0][0]
 
                 if target != LOST:
@@ -223,10 +230,38 @@ def withmeness(observations, expectations, name = None):
     if csv:
         csv.close()
 
+    if total_time == 0:
+        import pdb;pdb.set_trace()
+        return None
+
     withmeness = total_time_matching/total_time
     print("Total time: %s sec, total time matching: %s sec, With-me-ness: %s" % (total_time, total_time_matching, withmeness))
 
     return withmeness
+
+def plot_withmeness(name, observations, expectations, sliding_window = 30):
+    svg = Scene(name)
+
+    t_end = observations[observations.keys()[-1]][1]
+
+    points = []
+
+    delta = 1
+    #delta = sliding_window
+
+    for t_start in arange(0, t_end-sliding_window+1, delta):
+
+            w = withmeness(observations, expectations, name = None, t_start=t_start, t_end=(t_start + sliding_window))
+            #print("start: %s, end: %s -> %s" % (t_start, t_start + sliding_window, w))
+
+            if w is not None:
+                points.append((t_start,-(w * 100)))
+                #points.append((t_start + delta,-(w * 100)))
+
+
+    svg.add(Polyline(points))
+    svg.write_svg()
+
 
 
 ###############################################################################
@@ -252,14 +287,19 @@ for i in range(1,7):
 
     print("With-me-ness groundtruth/expected")
     withmeness(events_groundtruth, events_expected, path + "gt-expect")
+    #print("---------------------------------")
+    #plot_withmeness(path + "w-gt", events_groundtruth, events_expected)
+
 
     print("=================================")
     print("With-me-ness observed/expected")
     withmeness(events_observed, events_expected, path + "obs-expect")
+    #print("---------------------------------")
+    #plot_withmeness(path + "w-obs", events_observed, events_expected)
 
 
-    print("=================================")
-    print("With-me-ness observed/groundtruth")
-    withmeness(events_observed, events_groundtruth, path + "obs-gt")
+    #print("=================================")
+    #print("With-me-ness observed/groundtruth")
+    #withmeness(events_observed, events_groundtruth, path + "obs-gt")
 
 
