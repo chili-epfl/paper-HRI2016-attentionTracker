@@ -145,13 +145,15 @@ We measure \emph{with-me-ness} by comparing the attentional focus of the human
 (as estimated in real-time by the robot) with the expected, {\it a priori}
 targets of attention elicited by the task at hand.
 
-This article is organized in three sections: we first present a novel method for
-on-line estimation of the focus of attention based on fast 6D head pose
-estimation. We then validate this approach with a real-world field experiment
-with children. We finally show how to compute ``with-me-ness'' over the course
-of the interaction to provide a new \emph{in-the-moment} measurement of the
-quality of interaction, and compare levels computed by the robot with a ground
-truth based on manual post-hoc annotations.
+The following sections expose the full methodology, starting with the estimation
+of attention: we present in the next section a novel method for on-line estimation
+of the focus of attention based on fast 6D head pose estimation. We validate
+this technique in section~\ref{sec:expe} with a real-world field study involving
+children. Section~\ref{sec:withmeness} formally introduce the concept of
+\emph{with-me-ness}. We present how to compute it over the course of the
+interaction to eventually build a new \emph{in-the-moment} measurement of the
+quality of interaction. We finally validate and discuss this metric by comparing
+it to manual post-hoc annotations of the video-recordings of the interaction.
 
 %\paragraph{Motivation: Impact on Learning}
 %
@@ -553,7 +555,7 @@ such, we do not consider that it \emph{wrongly} estimates the focus.
 The main results are reported in Table~\ref{tab:results}
 %and Figure~\ref{fig:cosinematrix} (cosine similarity matrix);
 Figure~\ref{fig:realExpected} further gives a concrete picture of the
-ground-truth \vs computed attentional targets for subject 4 (the subject with
+ground-truth \vs computed attentional targets for subject~4 (the subject with
 the \emph{least} successful tracking).
 
 %
@@ -636,12 +638,17 @@ thus leading to a less accurate estimation of his focus of attention.
 %\end{figure}
 
 
+The next section builds upon this technique for real-time estimation of
+the focus of attention: by comparing the focus of attention with the set of
+attentional targets {\it a priori} expected by the robot, we can estimate to
+what extent the user is ``with'' the robot.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{With-me-ness}
+\label{sec:withmeness}
 
 \subsection{Concept \& Calculation}
 
@@ -764,7 +771,7 @@ typically want to consider a sliding time window.
     \includegraphics[width=\linewidth]{with-me-ness}
     \caption{\small \textbf{With-me-ness}. Evolution of the level of
         \emph{with-me-ness} over the whole $\approx$17min long interaction of
-        subject 2. The top chart is similar to Figure~\ref{fig:realExpected}
+        subject~2. The top chart is similar to Figure~\ref{fig:realExpected}
         with the \emph{expected} attentional targets added in green. The bottom
         diagram represents the instantaneous level of with-me-ness over a
         sliding window of 30 seconds. The blue line is the with-me-ness as estimated
@@ -918,12 +925,7 @@ it may want to adapt its behavior to recover the child's attention.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Discussion and Conclusion}
-
-We have presented how a robot can effectively assess in real-time with a regular
-camera, the focus of attention of its interactant, and how we can combine it
-with the robot's {\it a priori} knowledge about the interaction to build a
-metric of \emph{with-me-ness} over the course of the interaction.
+\section{Discussion}
 
 \paragraph{Head Pose to Assess Attention: is it Relevant?}
 
@@ -1009,6 +1011,30 @@ assess and compare how users are willing or able to interact with a robot.  We
 have hopefully demonstrated in this article that with-me-ness is an operational
 \emph{in-the-moment} metric that can be also used as feedback to the robot
 controller to build richer, more adaptive interactive behaviors for our robots.
+
+\section{Conclusion}
+
+We have presented how a robot can effectively assess in real-time with a regular
+camera, the focus of attention of its interactants, and how we can combine it
+with the robot's {\it a priori} knowledge about the interaction to build a
+metric of \emph{with-me-ness} over the course of the interaction.
+
+The experimental validation has been conducted with six children in face-to-face
+interaction with an autonomous robot, over a total duration of about 2 hours. It
+shows that {\it 1)} most of the time, we are able to estimate the head pose of
+these children; {\it 2)} based on these head poses only, the instantaneous focus
+of attention as computed by the robot does reach a good level of accuracy, with
+however one inaccurate outlier out of the six participant; {\it 3)} the robot is
+able to compute in real-time a level of \emph{with-me-ness} that correlates
+strongly with the ground-truth.
+
+The accuracy of the attention estimation could be improved, first by adding
+heuristics to detect and ignore erroneous/inaccurate face detections, second by
+implementing pupil tracking on top of head pose estimation. However, our results
+show that the accuracy levels that we reach already support the reliable
+computation of a metric measuring a high-level social construct, the
+\emph{with-me-ness}, which we argued should be used as a well-defined, reliable
+precursor of engagement in building adaptive robot behaviors.
 
 \section*{Acknowledgments}
 
