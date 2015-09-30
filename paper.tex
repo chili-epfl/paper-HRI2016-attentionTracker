@@ -501,9 +501,12 @@ $\alpha=.89$)\fixme{did the 2nd annotator annotated the 6 whole interactions?}.
 The manual coding forms our attentional \emph{ground-truth}.
 
 To assess the accuracy of the attention estimation by the robot, we computed
-over time (excluding the periods when the head is not detected) the
-overlap between the ground-truth and the robot's estimate and the
-inter-rater agreement (Cohen's $\kappa$).
+over time the overlap between the ground-truth and the robot's estimate and the
+inter-rater agreement (Cohen's $\kappa$). The periods where the head was not
+detected were \emph{excluded} from the agreement computation: at such times, the
+robot explicitly knows that it can not estimate the focus of attention, and as
+such, we do not consider that it \emph{wrongly} estimates the focus.
+
 %and the cosine similarity
 %matrix.
 
@@ -564,8 +567,7 @@ the \emph{least} successful tracking).
         in table~\ref{tab:results}, 3.5min-long excerpt).
         In blue (top lines), the focus of attention as computed by the robot;
         in orange (bottom lines), the focus of attention as manually annotated
-        (ground-truth). Periods where the head is lost are marked with dashed
-        vertical lines. The bottom graph shows agreement between both (whenever
+        (ground-truth). The bottom section shows agreement between both (whenever
         the head is detected).}
 
     \label{fig:realExpected}
@@ -574,29 +576,29 @@ the \emph{least} successful tracking).
 \end{figure*}
 
 
-During the whole interaction, the head pose of the children was satisfactorily
-and consistently tracked (86\% of the time in average, $SD=3.0$). While this
-high score is expected for a face-to-face interaction with a static head-tracking camera
+During the whole interaction, the head pose of the children was consistently
+tracked, 86\% of the time in average, $SD=3.0$. While this high score is
+expected for a face-to-face interaction with a static head-tracking camera
 (meaning that the child head would remain in the field of view of the camera
 most of the time), this is still comforting in terms of suitability of our
 approach for head pose estimation with children in field experiments of this
 kind. Expectedly, the primary causes of lost head pose were occlusions with the
 hands (similar to the middle-bottom picture in
 Figure~\ref{head_pose_real_world}), close proximity with the tablet while
-writing, and gaze directed to the facilitator (who was sitting directly on the left of
-the child, Figure~\ref{fig:realSetup}).
+writing, and gaze directed to the facilitator (who was sitting directly on the
+left of the child, Figure~\ref{fig:realSetup}).
 
 In terms of attention tracking, Cohen's $\kappa$ values are between 0.47 and
 0.68 with one subject resulting in significantly worst tracking, at 0.26. While
-the interpretation of Cohen's $\kappa$ is subject to discussions (the number of
+the interpretation of Cohen's $\kappa$ is subject to discussion (the number of
 the coded values -- in our case 6 -- and the distribution probability of values
 -- in our case, values are \emph{not} equiprobable -- are factors impacting
 $\kappa$ independently of the level of agreement), the levels of agreement are
-\emph{moderate} to \emph{substantial}, with one subject only
-showing \emph{fair} agreement~\cite{landis1977measurement}. Further analysis of
-the videos shows that the child with the lowest level of agreement is especially
-calm and would rely more on the eyes to direct his gaze than the other children,
-thus leading to a less accurate estimation of its focus of attention.
+\emph{moderate} to \emph{substantial}, with one subject only showing \emph{fair}
+agreement~\cite{landis1977measurement}. Further analysis of the videos shows
+that the child with the lowest level of agreement was particularly quiet and
+would indeed rely more on the eyes to direct his gaze than the other children,
+thus leading to a less accurate estimation of his focus of attention.
 
 %\subsubsection{Focus of attention distribution}
 %
@@ -732,22 +734,25 @@ times).
     \label{tab:targets}
 \end{table}
 
-Over the course of the experiment presented at section~\ref{sec:expe}, the robot
+Over the course of the experiment presented in section~\ref{sec:expe}, the robot
 controller would associate a set of expected attentional targets to the phase of
 the interaction (Table~\ref{tab:targets}). For instance, while the robot was
 waiting for the child's handwriting demonstration (``\textit{Waiting for
 feedback}''), the expected attentional target of the child was the tablet (since
 the child was supposed to write there) or the secondary tablet (that displayed a
-template of the word, used as reference by the child). These expected targets
-form altogether the robot's attentional {\it a priori} and are used to compute
-the with-me-ness.  They are represented over time by the green lines on
-Figure~\ref{fig:with-me-ness}. With-me-ness can be calculated over the whole
-interaction (see corresponding results in Table~\ref{tab:results-with-me-ness})
-or over shorter time windows. Shorter time windows are interesting for two
+template of the word, used as a reference by the child). These expected targets (green lines on Figure~\ref{fig:with-me-ness})
+form the robot's attentional {\it a priori} knowledge and are used to compute
+the with-me-ness. With-me-ness can be calculated over the whole
+interaction
+or over shorter time windows. With-me-ness over the whole interaction for the
+six subjects is
+reported in Table~\ref{tab:results-with-me-ness}. The Pearson's correlation with the
+ground-truth is $r(4)=0.46$ (significance not computed due to small
+sample size). Shorter time windows are interesting for two
 purposes: to analyse the level of with-me-ness in relation to specific
 interaction episodes; to allow a measurement of with-me-ness by the robot
 \emph{over the course} of the interaction (\emph{in-the-moment} measurement) --
-in this later case, one may typically want to consider a sliding time window.
+in the latter case, one may typically want to consider a sliding time window.
 
 \begin{figure*}
     \centering
@@ -757,10 +762,10 @@ in this later case, one may typically want to consider a sliding time window.
         subject 2. The top chart is similar to Figure~\ref{fig:realExpected}
         with the \emph{expected} attentional targets added in green. The bottom
         diagram represents the instantaneous level of with-me-ness over a
-        sliding window of 30 seconds. The blue line is with-me-ness as estimated
-        by the robot, the orange line is with-me-ness computed from manually
-        annotated attentional targets.  Pearson's correlation between both: $r(973)=0.58, p =
-        2.2e^{-16}.$}
+        sliding window of 30 seconds. The blue line is the with-me-ness as estimated
+        by the robot, the orange line is the with-me-ness computed from manually
+        annotated attentional targets.  Pearson's correlation between both
+        series for this subject: $r(973)=0.58, p < 0.001$.}
 
     \label{fig:with-me-ness}
 \end{figure*}
@@ -771,7 +776,7 @@ in this later case, one may typically want to consider a sliding time window.
     \caption{\textbf{Levels of with-me-ness}. For each subject, the with-me-ness
     level is reported over the whole interaction, either based on the
     ground-truth (\ie \emph{ground-truth with-me-ness}), or based on the focus of
-    attention measured by the robot. Pearson's correlation: $r(4)=0.46$.}
+    attention measured by the robot.}
 
     \begin{tabular}{p{1cm}cccccccc}
         \toprule
@@ -798,8 +803,8 @@ the episodes where the child's gaze is measured to be directed to {\sf Other},
 we indeed obtain levels of with-me-ness close to the ground-truth (over the six
 subjects, $M=87.5, SD=4.6$).
 
-A chart like Figure~\ref{fig:with-me-ness} remains an useful tool to analyse the
-interaction, and several observations can be made out of it: as said, the green
+A chart like Figure~\ref{fig:with-me-ness} remains a useful tool to analyse the
+interaction, and several observations can be made from it: the green
 lines represent how the robot imagine, at a given time, the attention
 distribution of the child. They also provide an accurate picture of the overall
 turn-taking as viewed by the robot: for instance, the episode ``B'' on
@@ -813,18 +818,18 @@ the contrary, be very quick.
 Looking at the ground-truth focus of attention (orange lines), the first
 striking observation is that this child did generally \emph{closely} follow what
 the robot was expecting: in that regard, it seems that the child was very much
-engaged into the interaction (we discuss in the next section the exact
+engaged in the interaction (we discuss in the next section the exact
 relationships between with-me-ness and engagement). The only major exception is
 the story-telling phase (episode ``D''): the child was seemingly not captivated by the
-first half of the story, and his attention was not directed towards the robot.
+first half of the story, and their attention was not directed towards the robot.
 
 Another interesting observation pertains to the facilitator: as one can see,
-this child only rarely turned to the facilitator, indicating that the
-interaction and the task were meaningful and easy for him to follow alone.
+this child only rarely turned to the facilitator, possibly indicating that the
+interaction and the task were meaningful and easy enough for him to follow alone.
 
 More subtle patterns and events can also be observed: for instance, during the
 feedback phases like episode ``C'', we
-can notice numerous gaze shifts between the tablet (where the child write) and the
+can notice numerous gaze shifts between the tablet (where the child writes) and the
 secondary tablet (that showed a template of the word). The episode ``B'' (robot
 writing) is also interesting: the child did not look at the robot, and instead
 remained focused on the secondary tablet. This situation is typically useful for
@@ -909,9 +914,10 @@ attention.
 
 \section{Discussion and Conclusion}
 
-As hinted by the title of this article, we have presented here how a robot can
-effectively assess in real-time and with a regular camera the focus of attention
-of its interactant, and how we can, in turn, combine it with the robot's {\it a priori}
+We have presented how a robot can
+effectively assess in real-time with a regular camera, the focus of attention
+of its interactant, and how we can combine it with the robot's {\it a priori}
+knowledge
 about the interaction to build a metric of
 \emph{with-me-ness} over the course of the interaction.
 
@@ -929,19 +935,19 @@ about the interaction to build a metric of
 %these results are encouraging, there is a need of validation with a greater
 %amount of subjects.
 
-We already stated the main limitations of our approach to estimation of the
+We already stated the main limitations of our approach to estimating the
 focus of attention: eye gaze information is neglected and we do not perform
-actual visibility check of the in focus objects (we simply approximate them to
+visibility check of the in-focus objects (we simply approximate them to
 their origins, ignoring possible occlusions).
 
 While the first issue is shared with most of the other vision (2D or 3D) or motion
 capture techniques for real-time gaze estimation found in robotics,
-our results are positive: we shows that relying
+our results are positive: we show that relying
 purely on head pose estimation to estimate gaze direction leads to real-world
 measures that are worth being considered and used. They may not match manual
 annotations, but they are definitely a valuable \emph{in-the-moment} input for
-the robot, reaching for certain children levels of accuracy traditionally
-considered as very good.
+the robot. For certain children, we reach levels of accuracy traditionally
+considered as good.
 
 Interestingly, previous research conducted on ape-human interaction by
 Tomasello~\etal~\cite{tomasello2007reliance} shows that apes rely primarily
@@ -949,10 +955,10 @@ on the head pose to estimate the focus of attention of a human partner, in to co
 to human children who primarily rely on eye direction. From this perspective,
 our robot mimics attention tracking mechanism comparable to the ones found in apes.
 
-Our approach relies on a simple, non-intrusive sensor (a RGB camera on
+Our approach relies on a simple, non-intrusive sensor (a RGB camera by
 the robot) and an open-source, fast pose estimation algorithm\fixme{test on nao!
-how fast is it actually?}: we hope that this may contribute to a widespread
-adoption of such a technique on a range of robots, including the common {\sc
+how fast is it actually?}: we hope that this may contribute to the widespread
+adoption of such a technique on a range of robots, including the relatively common {\sc
 nao} platform.
 
 %Gaze information acquired during the interactions is not only useful to detect
@@ -965,38 +971,38 @@ nao} platform.
 
 Borrowing the neologism from the field of CSCL, we have also introduced in this
 article
-\emph{with-me-ness} as a measure of ``how much the user in \emph{with} the robot during
-a task''. This can be acquired over the course the interaction,
-thus providing the robot with a real-time metric for relatively high-level social construct,
+\emph{with-me-ness} as a measure of ``how much the user is \emph{with} the robot during
+a task''. This can be acquired over the course of the interaction,
+thus providing the robot with a real-time metric for a relatively high-level social construct,
 undoubtedly related to engagement.
 
-One may reasonably wonder how different is \emph{with-me-ness} from \emph{joint
+One may reasonably wonder how different \emph{with-me-ness} is from \emph{joint
 attention} on one hand, and from \emph{engagement} on the other hand.
 With-me-ness is related to both, with however noteworthy nuances: (Triadic) \emph{joint
 attention} is understood as the cognitive realization of a shared attention to
 an object, itself building on a shared perception of that object (\ie joint attention
 builds on a \emph{perceptual} alignment of two agents). \emph{Conceptual
-with-me-ness} as proposed by Sharma~\etal is on the contrary \emph{referential}: ``you are
+with-me-ness} as proposed by Sharma~\etal in~\cite{sharma2014me} is on the contrary \emph{referential}: ``you are
 \emph{with} me if you focus on what I refer to, either explicitly or
-implicitly''. We propose to understand it here in an even slightly broader sense, that
-better reflect the \emph{interaction}: ``you are \emph{with} me if you focus on
+implicitly''. We understand it here in a slightly broader sense that
+reflects the \emph{interaction}: ``you are \emph{with} me if you focus on
 what is important for the interactive task at hand.''
 
 On the other hand, with-me-ness is only a precursor of engagement: it does not
 say much about the \emph{cognitive} commitment of a user to an interaction. A
 user may closely adhere to the injunctions of the robot (or, actually, of the
 experimenters), with thus high levels of with-me-ness,  without being
-\emph{engaged} into the interaction. This is typically seen in child-robot
+\emph{engaged} in the interaction. This is typically seen in child-robot
 interaction: children will attempt to closely follow what they are asked to do
--- which may \emph{look like} they are engaged into the interaction -- while
+-- which may \emph{look like} they are engaged in the interaction -- while
 they merely \emph{obey orders}.
 
-Compared to engagement, one of the strength of with-me-ness is its specificity:
+Compared to engagement, one of the strengths of with-me-ness is its specificity:
 it is well-defined (the only important variable -- that needs to be reported --
 is the mapping {\it phase/expected attentional target}, \ie our
 Table~\ref{tab:targets}), we can formalize it, and as such, it is valuable to
 assess and compare how users are willing or able to interact with a robot.
-Besides, we have hopefully demonstrated in this article that with-me-ness is an
+We have hopefully demonstrated in this article that with-me-ness is an
 operational \emph{in-the-moment} metric that can be also used as feedback to the
 robot controller to build richer, more adaptive interactive behaviors for our
 robots.
