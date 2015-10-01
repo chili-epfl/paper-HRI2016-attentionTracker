@@ -26,11 +26,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.2106407"
-     inkscape:cx="492.87591"
-     inkscape:cy="690.29694"
+     inkscape:zoom="1.1053204"
+     inkscape:cx="892.99081"
+     inkscape:cy="457.99741"
      inkscape:document-units="px"
-     inkscape:current-layer="g4355"
+     inkscape:current-layer="layer1"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -39,7 +39,7 @@
      inkscape:window-width="2560"
      inkscape:window-height="1332"
      inkscape:window-x="1080"
-     inkscape:window-y="534"
+     inkscape:window-y="287"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -59,14 +59,14 @@
      id="layer1"
      transform="translate(383.62141,-107.36442)">
     <image
-       sodipodi:absref="/home/skadge/teaching/hri-summer-school-2015/doc/figs/face.png"
-       xlink:href="file:///home/skadge/teaching/hri-summer-school-2015/doc/figs/face.png"
-       width="637.5"
-       height="837.5"
+       sodipodi:absref="/home/skadge/publications/hri2016-attention/figs/face.png"
+       xlink:href="face.png"
+       y="109.36333"
+       x="146.23991"
+       id="image3407"
        preserveAspectRatio="none"
-       id="image4286"
-       x="146.24004"
-       y="111.36333" />
+       height="837.50024"
+       width="637.50012" />
     <g
        transform="translate(765.66079,-487.22572)"
        id="g4355">

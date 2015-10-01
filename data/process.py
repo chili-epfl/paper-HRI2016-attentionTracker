@@ -14,6 +14,7 @@ tier_expected = "Robot state"
 
 
 LOST = "Lost track"
+OTHER = "Other"
 
 annotation2foa = {
         ##### Robot state #####
@@ -34,7 +35,7 @@ annotation2foa = {
         "lost_track": (LOST,)}
 
 
-def get_time(ts):
+def get_time(eaf, ts):
     """ Returns the timestamp of an EAF 'timeslot', in seconds
     """
     return eaf.timeslots[ts] / 1000.
@@ -51,7 +52,7 @@ def prepare(eaf, tier):
             print("Unknown annotation: %s" % ann)
             continue
 
-        rawevents[get_time(ts)] = (annotation2foa[ann], get_time(te))
+        rawevents[get_time(eaf, ts)] = (annotation2foa[ann], get_time(eaf, te))
 
     # Order the 'events' by timestamps
     return OrderedDict(sorted(rawevents.items(), key=lambda t: t[0]))
@@ -106,42 +107,7 @@ def filter_observations(obs, min_duration):
 
     filtered = OrderedDict(sorted(filtered.items(), key=lambda t: t[0]))
     return filtered
-    #merged = OrderedDict()
 
-    #match = False
-    #idx = 0
-    #while idx < len(filtered.keys()):
-    #    k = filtered.keys()[idx]
-
-    #    j = 1
-    #    while (idx + j) < len(filtered.keys())-1 and \
-    #          filtered[k][0] == filtered[filtered.keys()[idx + j]][0]:
-    #        j += 1
-    #        match = True
-
-    #    if match:
-    #        merged[k] = (filtered[k][0], filtered[filtered.keys()[idx + j]][1])
-    #        idx += j 
-    #    else:
-    #        merged[k] = (filtered[k][0], filtered[k][1])
-    #        idx += 1
-
-    #return merged
-
-#test = OrderedDict([
-#        (1,(('b',), 3)),
-#        (3.1,(('Other',), 3.2)),
-#        (3.3,(('a',), 3.9)),
-#        (4,(('Other',), 5)),
-#        (5.1,(('a',), 5.2)),
-#        (5.3,(('Other',), 5.4)),
-#        (5.5,(('a',), 7)),
-#        (7.1,(('Other',), 7.2)),
-#        (7.3,(('a',), 8))])
-#
-#print(filter_observations(test))
-
-#print(events_observed)
 ############################################################################
 #     SVG rendering
 ############################################################################
@@ -194,6 +160,7 @@ def withmeness(observations, expectations, name = None, t_start = None, t_end = 
     else:
         t_end = min(t_end, observations[observations.keys()[-1]][1])
 
+
     if t_start is None:
         t_start = 0
 
@@ -216,7 +183,7 @@ def withmeness(observations, expectations, name = None, t_start = None, t_end = 
             if e_target and o_target:
                 target = observations[observations_start][0][0]
 
-                if target != LOST:
+                if target != LOST and target != OTHER:
                     if csv:
                         csv.write("%s,%s,%s\n" % (t, '/'.join(e_target), '/'.join(o_target)))
 
@@ -265,6 +232,8 @@ def plot_withmeness(name, observations, expectations, sliding_window = 30):
 
 
 ###############################################################################
+total_duration = 0
+
 for i in range(1,7):
 
     print("\n\nSubject %s\n" % i)
@@ -274,6 +243,11 @@ for i in range(1,7):
 
     events_groundtruth = prepare(eaf, tier_groundtruth)
     events_expected = prepare(eaf, tier_expected)
+    total_duration += events_expected[events_expected.keys()[-1]][1]
+
+    elan_file_2nd_annotator = path + "webcam_%s_2.eaf" % i
+    eaf_2nd = pympi.Elan.Eaf(elan_file_2nd_annotator)
+    events_groundtruth_2nd = prepare(eaf_2nd, tier_groundtruth)
 
     robot_observations_file = path + "capturedFoA.csv"
     events_observed = parse_robot_observations(robot_observations_file)
@@ -281,19 +255,19 @@ for i in range(1,7):
     events_observed = filter_observations(events_observed, min_duration=0.5)
 
 
-    plot(path + "expected", events_expected)
-    plot(path + "groundtruth", events_groundtruth)
-    plot(path + "observed", events_observed)
+    #plot(path + "expected", events_expected)
+    #plot(path + "groundtruth", events_groundtruth)
+    #plot(path + "observed", events_observed)
 
-    print("With-me-ness groundtruth/expected")
-    withmeness(events_groundtruth, events_expected, path + "gt-expect")
+    #print("With-me-ness groundtruth/expected")
+    #withmeness(events_groundtruth, events_expected, path + "gt-expect")
     #print("---------------------------------")
     #plot_withmeness(path + "w-gt", events_groundtruth, events_expected)
 
 
-    print("=================================")
-    print("With-me-ness observed/expected")
-    withmeness(events_observed, events_expected, path + "obs-expect")
+    #print("=================================")
+    #print("With-me-ness observed/expected")
+    #withmeness(events_observed, events_expected, path + "obs-expect")
     #print("---------------------------------")
     #plot_withmeness(path + "w-obs", events_observed, events_expected)
 
@@ -301,5 +275,14 @@ for i in range(1,7):
     #print("=================================")
     #print("With-me-ness observed/groundtruth")
     #withmeness(events_observed, events_groundtruth, path + "obs-gt")
+
+    print("=================================")
+    print("Agreement annotators")
+    withmeness(events_groundtruth_2nd, events_groundtruth, path + "annotators")
+
+
+print("=================================")
+print("Total: %dmin %dsec (per subject: %dmin %dsec)" % (total_duration // 60, total_duration % 60, (total_duration/6)//60, (total_duration/6) % 60))
+print("Total: %smin (per subject: %smin)" % (total_duration / 60, (total_duration/6)/60))
 
 
