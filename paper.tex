@@ -44,8 +44,8 @@ Engagement, however, is a complex, multi-faceted cognitive mechanism that is
 only indirectly observable. This article formalizes \emph{with-me-ness} as one
 of such indirect measures. \emph{With-me-ness}, a concept borrowed from the
 field of {\it Computer-Supported Collaborative Learning}, measures in a
-well-defined way to what extend the human is \emph{with} the robot over the
-course of an interactive task. As such, it is an meaningful precursor of
+well-defined way to what extent the human is \emph{with} the robot over the
+course of an interactive task. As such, it is a meaningful precursor of
 engagement.
 
 We expose the full methodology, from real-time estimation of the human's focus
@@ -96,7 +96,7 @@ research directions, existing literature tends to evaluate each of these
 algorithms in their own metric space, without considering the interaction
 quality at a global level. Anzalone~\etal~\cite{anzalone} have recently argued
 in favor of such a global evaluation, and they propose to assess these
-algorithms in term of their capability to \emph{obtain the desired effect} in a
+algorithms in terms of their capability to \emph{obtain the desired effect} in a
 human-robot interaction context. They correspondingly propose metrics built
 around the measurement of \emph{engagement} as indicator of the quality of the
 experience.
@@ -117,7 +117,7 @@ presented in~\cite{ivaldi2015towards}.
 
 For instance, \cite{Castellano:2009} proposes to predict children's level of
 engagement by integrating non-verbal cues (gaze and smiles) with the current
-state of the interaction in a Bayesian model. While they report high level of
+state of the interaction in a Bayesian model. While they report a high level of
 accuracy, their approach requires post-hoc video annotations, and is not
 applicable to on-line engagement assessment. Similarly,
 Baxter~\etal~\cite{baxter2014tracking} posit that the measure of the direction
@@ -149,7 +149,7 @@ The following sections expose the full methodology, starting with the estimation
 of attention: we present in the next section a novel method for on-line estimation
 of the focus of attention based on fast 6D head pose estimation. We validate
 this technique in section~\ref{sec:expe} with a real-world field study involving
-children. Section~\ref{sec:withmeness} formally introduce the concept of
+children. Section~\ref{sec:withmeness} formally introduces the concept of
 \emph{with-me-ness}. We present how to compute it over the course of the
 interaction to eventually build a new \emph{in-the-moment} measurement of the
 quality of interaction. We finally validate and discuss this metric by comparing
@@ -350,7 +350,7 @@ static with respect to the robot, thus simplifying the scene perception.
 As presented above, we use the 6D head pose as an approximation of the actual
 gaze direction, and we further approximate from here the participant's field of
 attention. The assumption that such an approximation of the field of attention
-allows to derive the actual focus of attention needs to validated
+allows to derive the actual focus of attention needs to be validated
 experimentally.  Our proposed experiment involves child-robot interactions in
 the context of handwriting remediation.  This section details the experimental
 procedure and presents our results.
@@ -776,7 +776,7 @@ typically want to consider a sliding time window.
         sliding window of 30 seconds. The blue line is the with-me-ness as estimated
         by the robot, the orange line is the with-me-ness computed from manually
         annotated attentional targets.  Pearson's correlation between both
-        series for this subject: $r(973)=0.58, p < 0.001$.}
+        series for this subject: $r(973)=0.58, p < .001$.}
 
     \label{fig:with-me-ness}
 \end{figure*}
@@ -1024,7 +1024,7 @@ interaction with an autonomous robot, over a total duration of about 2 hours. It
 shows that {\it 1)} most of the time, we are able to estimate the head pose of
 these children; {\it 2)} based on these head poses only, the instantaneous focus
 of attention as computed by the robot does reach a good level of accuracy, with
-however one inaccurate outlier out of the six participant; {\it 3)} the robot is
+however one inaccurate outlier out of the six participants; {\it 3)} the robot is
 able to compute in real-time a level of \emph{with-me-ness} that correlates
 strongly with the ground-truth.
 
