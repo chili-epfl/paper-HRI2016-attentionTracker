@@ -154,6 +154,25 @@ def find_interval(t, intervals):
     return None, None, None
 
 def withmeness(observations, expectations, name = None, t_start = None, t_end = None):
+    """ Computes the with-me-ness based on a set of observations (what the user
+    is looking at) and expectations (where the robot expect the user to look
+    at).
+
+    `observations` and `expectations` are OrderedDict and have this form:
+        {start_time:(target, end_time),
+         ...
+        }
+    with monotonically growing start_time.
+    Target is one of the target defined above in annotation2foa. Times are in
+    second.
+
+    If given, `t_start` and `t_end` define the timespan taken into account to
+    compute the with-me-ness (if not provided, with-me-ness is computed over
+    the whole observataions dictionary).
+
+    If the user provides `name` as well, a CSV file is created with 3 columns:
+    time, observation, expectation.
+    """
 
     if t_end is None:
         t_end = observations[observations.keys()[-1]][1]
