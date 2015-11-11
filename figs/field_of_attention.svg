@@ -26,16 +26,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="592.03344"
-     inkscape:cy="836.38904"
+     inkscape:zoom="0.35"
+     inkscape:cx="111.75519"
+     inkscape:cy="434.87754"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1332"
+     inkscape:window-width="1920"
+     inkscape:window-height="1026"
      inkscape:window-x="1080"
-     inkscape:window-y="534"
+     inkscape:window-y="867"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,14 +59,14 @@
      id="layer1"
      transform="translate(460.89285,-13.790767)">
     <image
-       sodipodi:absref="/home/skadge/publications/hri2016-attention/figs/rviz_camera.png"
-       xlink:href="rviz_camera.png"
-       width="1487.5"
-       height="1100"
-       preserveAspectRatio="none"
-       id="image5661"
+       sodipodi:absref="/home/slemaignan/publications/hri2016-attention/figs/rviz_camera.jpg"
+       xlink:href="rviz_camera.jpg"
+       y="13.790767"
        x="-460.89285"
-       y="13.790767" />
+       id="image5661"
+       preserveAspectRatio="none"
+       height="1100"
+       width="1487.5" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:55.81476974px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
