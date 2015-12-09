@@ -255,8 +255,11 @@ intrinsic parameters of the camera (calibrated camera) is required for an
 accurate estimation of the absolute 3D localization of the head.
 
 Besides being fast, the face alignment algorithm has been found to perform well
-in terms of robustness, including in a range of difficult situations
-(occlusions, large head rotations) as encountered in field experiments.
+in terms of robustness, including in a range of difficult situations encountered
+in field experiments, like partial occlusions or large head rotations (we have
+measured the default {\tt dlib} model to be able to track a face
+with rotations up to $\pm 40\degree$
+horizontally and $\pm 30\degree$ vertically).
 Figure~\ref{head_pose_real_world} shows a selection of such difficult scenes
 with one child.
 
