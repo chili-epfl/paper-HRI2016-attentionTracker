@@ -1,11 +1,18 @@
-\documentclass{sig-alternate}
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage{ gensymb } % for \degree
+\usepackage{ amssymb } % for \varnothing
 
 \usepackage{hyperref}
+\usepackage{cite}
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
 \usepackage{booktabs}
+
+\usepackage{amsmath}
 
 \usepackage[draft,nomargin,footnote]{fixme}
 
@@ -23,15 +30,16 @@
 \graphicspath{{figs/}}
 
 \begin{document}
-%
-% --- Author Metadata here ---
-\conferenceinfo{HRI}{'16 Chrischurch, New Zealand.}
-%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
-%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
-% --- End of Author Metadata ---
 
 \title{From Real-time Attention Assessment to ``With-me-ness'' in Human-Robot Interaction}
-\author{Séverin Lemaignan \qquad Fernando Garcia \qquad Alexis Jacq \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
+
+\author{\IEEEauthorblockN{Séverin Lemaignan, Fernando Garcia, Alexis Jacq, Pierre Dillenbourg}
+\IEEEauthorblockA{
+Computer-Human Interaction in Learning and Instruction Laboratory (CHILI) \\
+École Polytechnique Fédérale de Lausanne (EPFL) \\
+Lausanne, Switzerland \\
+Email: \tt firstname.lastname@epfl.ch}
+}
 
 
 \maketitle
@@ -56,15 +64,6 @@ We report as well on the experimental validation of this approach, using a
 naturalistic setup involving children during a complex robot-teaching task.
 
 \end{abstract}
-
-%% A category with the (minimum) three required fields
-%\category{H.4}{Information Systems Applications}{Miscellaneous}
-%%A category including the fourth, optional field follows...
-%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
-
-\terms{Experimentation, Human Factors.}
-
-\keywords{Human-Robot Interaction; Social Robotics; Attention Assessment; Engagement; Computer Vision.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1042,6 +1041,6 @@ e a Tecnologia (FCT) with reference UID/CEC/ 50021/2013, and by the Swiss
 National Science Foundation through the National Centre of Competence in
 Research Robotics.
 
-\bibliographystyle{abbrv}
-\bibliography{sigproc}
+\bibliographystyle{IEEEtran}
+\bibliography{biblio}
 \end{document}
