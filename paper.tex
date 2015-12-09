@@ -19,7 +19,6 @@
 \newcommand{\ie}{\textit{i.e.}\xspace}
 \newcommand{\etc}{\textit{etc.}\xspace}
 \newcommand{\vs}{\textit{vs.}\xspace}
-\newcommand{\redacted}{\textit{\sc [REDACTED FOR REVIEW]}\xspace}
 
 \graphicspath{{figs/}}
 
@@ -32,9 +31,7 @@
 % --- End of Author Metadata ---
 
 \title{From Real-time Attention Assessment to ``With-me-ness'' in Human-Robot Interaction}
-
-%\author{Séverin Lemaignan \qquad Fernando Garcia \qquad Alexis Jacq \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
-\author{Redacted for double-blind review}
+\author{Séverin Lemaignan \qquad Fernando Garcia \qquad Alexis Jacq \qquad Pierre Dillenbourg\\Computer-Human Interaction in Learning and Instruction Laboratory (CHILI)\\École Polytechnique Fédérale de Lausanne (EPFL)}
 
 
 \maketitle
@@ -268,7 +265,7 @@ with one child.
     \centering
     \includegraphics[width=0.9\linewidth]{head_pose}
     \caption{The 6D head pose is estimated by fitting a 3D model of an
-        adult head (left) {\it\sc[FACE REDACTED FOR REVIEW]} onto the detected 2D features of the face (right). We
+        adult head (left) onto the detected 2D features of the face (right). We
         rely on an iterative $PnP$ algorithm, using 8 correspondence pairs
         (three are depicted: the sellion -- the nasal depression --, the left
         tragion and the menton). The 3D origin of the head is set at the sellion.}
@@ -360,7 +357,7 @@ procedure and presents our results.
 
 \subsection{Experimental Procedure}
 
-The experiment, part of the \redacted project, involves a robot
+The experiment, part of the CoWriter project~\cite{Hood:2015}, involves a robot
 which tries to engage a child in handwriting tasks using a \emph{learning by
 teaching} paradigm (\ie the child is the teacher, and he/she attempts to improve
 the robot's handwriting). A tactile tablet is used as writing support.
@@ -386,8 +383,7 @@ setup: a face-to-face child-robot interaction with an (autonomous) Aldebaran
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\columnwidth]{realSetup}
-    \caption{\small Picture of the interaction with one of the children
-    {\it\sc[FACE REDACTED FOR REVIEW]}.}
+    \caption{\small Picture of the interaction with one of the children.}
     \label{fig:realSetup}
 \end{figure}
 
@@ -432,7 +428,7 @@ pressing a small button on the tablet. The robot learns from this demonstration
 and tries again. The child continues the turn-taking until they decide to train
 the robot on another word. In total, the children performed on average 12.16
 ($SD=2.61$) rounds of writing (complete details on the rationale and
-implementation of this experiment can be found in \redacted).
+implementation of this experiment can be found in~\cite{Hood:2015}).
 
 
 Once per interaction, the robot interrupts the handwriting task to tell a story
@@ -494,10 +490,10 @@ tf} library. The same {\sc tf} library is used to represent the possible point
 of interests as individual frames: an object is considered to be in focus when
 its frame lies within the field of attention of the participant
 (Figure~\ref{fig:vfoa}).  The implementation is open-source and available at
-\redacted.
+\url{https://github.com/chili-epfl/attention-tracker}.
 
 The implementation of the hand-writing activity itself has been presented by
-\redacted.
+Hood~\etal in~\cite{Hood:2015}.
 
 \subsection{Data Collection \& Analysis}
 
@@ -1041,7 +1037,10 @@ precursor of engagement in building adaptive robot behaviors.
 
 \section*{Acknowledgments}
 
-\redacted
+This research was partially supported by the Funda\c{c}\~{a}o para a Ci\^{e}ncia
+e a Tecnologia (FCT) with reference UID/CEC/ 50021/2013, and by the Swiss
+National Science Foundation through the National Centre of Competence in
+Research Robotics.
 
 \bibliographystyle{abbrv}
 \bibliography{sigproc}
