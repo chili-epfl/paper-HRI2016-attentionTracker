@@ -47,23 +47,23 @@ Email: \tt firstname.lastname@epfl.ch}
 
 Measuring ``how much the human is in the interaction'' -- the \emph{level of
 engagement} -- is instrumental in building effective interactive robots.
-
 Engagement, however, is a complex, multi-faceted cognitive mechanism that is
 only indirectly observable. This article formalizes \emph{with-me-ness} as one
 of such indirect measures. \emph{With-me-ness}, a concept borrowed from the
 field of {\it Computer-Supported Collaborative Learning}, measures in a
 well-defined way to what extent the human is \emph{with} the robot over the
 course of an interactive task. As such, it is a meaningful precursor of
-engagement.
-
-We expose the full methodology, from real-time estimation of the human's focus
-of attention (relying on a novel, open-source, vision-based head pose
-estimator), to on-line computation of with-me-ness.
-
-We report as well on the experimental validation of this approach, using a
+engagement.  We expose in this paper the full methodology, from real-time
+estimation of the human's focus of attention (relying on a novel, open-source,
+vision-based head pose estimator), to on-line computation of with-me-ness.  We
+report as well on the experimental validation of this approach, using a
 naturalistic setup involving children during a complex robot-teaching task.
 
 \end{abstract}
+
+\begin{IEEEkeywords}
+Human-Robot Interaction; Visual Focus of Attention; With-me-ness; Real-time Head Pose Estimation.
+\end{IEEEkeywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -247,7 +247,8 @@ technique only involves a single monocular RGB camera used for facial feature
 extraction, and a static simplified 3D mesh of a human head.  68 facial features
 are extracted using a fast template-based face alignment algorithm by Kazemi and
 Sullivan~\cite{kazemi2014one}, as implemented in the open-source {\tt dlib}
-library~\cite{dlib09}.  Eight of these features are then matched to their 3D
+library~\cite{dlib09}.  Eight of these features (chosen to be far apart and
+relatively stable across age and gender) are then matched to their 3D
 counterparts (Figure~\ref{head_pose}) and we rely on an iterative $PnP$
 algorithm (OpenCV's implementation) to compute the translation and rotation of
 the head with respect to the camera frame. With this approach, knowing the
@@ -299,14 +300,13 @@ with one child.
 We model the field of attention as the central region of the field of view.  The
 field of view itself is approximated to a cone spanned from the nasal depression
 (sellion) of the human face. Different dimensions for the human field of view
-can be found in the litterature: Holmqvist~\cite{holmqvist2011eye} models it
+can be found in the literature: Holmqvist~\cite{holmqvist2011eye} models it
 with an horizontal aperture of $ \pm 40\degree $ and a vertical aperture of $
-\pm 25\degree $, while Spector~\cite{walker1980clinical} for instance suggests
+\pm 25\degree $, while Walker~\cite{walker1980clinical} for instance suggests
 $60\degree$ up, $75\degree$ down, $60\degree$ inwards (towards the nose) and
 $95\degree$ outwards.  Previous work on visual perspective taking for social
 robotics~\cite{sisbot2011situation} model the field of attention as a cone of
 $30\degree$. We retained in this work a slightly wider aperture of $40\degree$.
-
 We then approximate the visual \emph{focus} of attention (VFoA) of the human to
 the objects which lie inside this field of attention (Figure~\ref{fig:vfoa}). At
 a given time, more than one object can therefore be \emph{in focus}.
@@ -322,14 +322,10 @@ in~\cite{sisbot2011situation} for instance.
 
 Within these limitations, computing if object $A(x_A,y_A,z_A)$ is in the field
 of attention of the human requires first to transform the coordinates
-$A(X_A,Y_A,Z_A)$ into the frame of the face, and then to verify the following
-simple inequality (with $fov$ the aperture, and assuming that the main axis
-$\vec{x}$ of the field of attention points forward):
-
-\begin{align}
-    \sqrt{Y_A^2 + Z_A^2} < tan\left(\frac{fov}{2}\right) \cdot X_A
-\label{eq:fov}
-\end{align}
+$A(X_A,Y_A,Z_A)$ into the frame of the face, and then to verify the
+simple inequality $\sqrt{Y_A^2 + Z_A^2} < tan\left(\frac{fov}{2}\right) \cdot
+X_A$ (with $fov$ the aperture, and assuming that the main axis
+$\vec{x}$ of the field of attention points forward).
 
 Our approach assumes that the pose of the objects of interest are available to
 the system: as described in section~\ref{sec:system}, our implementation relies
@@ -363,12 +359,11 @@ The experiment, part of the CoWriter project~\cite{Hood:2015}, involves a robot
 which tries to engage a child in handwriting tasks using a \emph{learning by
 teaching} paradigm (\ie the child is the teacher, and he/she attempts to improve
 the robot's handwriting). A tactile tablet is used as writing support.
-
 Figures~\ref{fig:setup} and~\ref{fig:realSetup} illustrate the experimental
 setup: a face-to-face child-robot interaction with an (autonomous) Aldebaran
 {\sc nao} robot, in the presence of a facilitator (one of the researchers).
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\columnwidth]{experimental_setup}
     \caption{\small \textbf{Experimental setup}: face-to-face interaction with a {\sc
@@ -382,7 +377,7 @@ setup: a face-to-face child-robot interaction with an (autonomous) Aldebaran
 \end{figure}
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=1\columnwidth]{realSetup}
     \caption{\small Picture of the interaction with one of the children.}
@@ -422,8 +417,8 @@ after the other to interact with the robot (duration: $M=19.6$ min, $SD=1.58$).
 The interaction is organized in rounds of writing: during a typical round, the
 child requests the robot to write something (a single letter, a number, or a
 full word), and presents a tactile tablet (equipped with a custom writing
-application) to the robot. The robot writes on the tablet by mimicking the
-writing gesture (but without actually physically touching the tablet); the child
+application) to the robot. The robot ``writes'' on the tablet by drawing in the
+air the letters that are displayed on the screen by the tablet application; the child
 then pulls back the tablet, corrects the robot's attempt by writing on top of or
 next to the robot's writing, and ``sends'' his/her demonstration to the robot by
 pressing a small button on the tablet. The robot learns from this demonstration
@@ -435,8 +430,9 @@ implementation of this experiment can be found in~\cite{Hood:2015}).
 
 Once per interaction, the robot interrupts the handwriting task to tell a story
 (taking about 2 min), and the turn-based hand-writing task continues afterwards.
-The intended purpose of the story-telling episode is to locally trigger a
-different set of attention behaviors for the child.
+The intended purpose of the story-telling episode is to break the routine of the
+writing turns by creating a surprise, and thus, to elicit a different set of
+attention behaviors from the child.
 
 
 \subsection{System Implementation}
@@ -462,7 +458,8 @@ different set of attention behaviors for the child.
 
     \node at (0,0) [cmpt, fill=Green!50] (tf) {tf};
     \node [cmpt, fill=YellowOrange!50, left=of tf] (attention) {attention tracking};
-    \node [above=0.6cm of attention, text width=2.7cm,align=center] (input) {\tt /image \\ /camera\_info \\ dlib {\sf faces model} \\ {\sf 3D face template}};
+    \node [above=0.6cm of attention, text width=3cm,align=center] (input) {{\tt
+    /image}, {\tt /camera\_info}, \\ {\tt dlib} {\sf faces model}, \\ {\sf 3D face template}};
     \node [cmpt, right=of tf] (static) {static pose publishers};
     \node [above=0.6cm of static, text width=2.7cm,align=center] (staticposes) {\sf locations of \\areas of interest};
     \node [cmpt, above=0.6cm of tf] (pose) {robot state publisher};
@@ -479,8 +476,8 @@ different set of attention behaviors for the child.
 
 \end{tikzpicture}
 }
-
-    \caption{\small ROS nodes involved in the VFoA estimation (orange nodes were developed for this work).}
+    \caption{\small ROS nodes involved in the VFoA estimation (orange nodes were
+    specifically developed for this work).}
     \label{fig:system}
 \end{figure}
 
@@ -492,7 +489,7 @@ tf} library. The same {\sc tf} library is used to represent the possible point
 of interests as individual frames: an object is considered to be in focus when
 its frame lies within the field of attention of the participant
 (Figure~\ref{fig:vfoa}).  The implementation is open-source and available at
-\url{https://github.com/chili-epfl/attention-tracker}.
+\texttt{\url{https://github.com/chili-epfl/attention-tracker}}.
 
 The implementation of the hand-writing activity itself has been presented by
 Hood~\etal in~\cite{Hood:2015}.
@@ -787,7 +784,7 @@ typically want to consider a sliding time window.
     \centering
     \caption{\textbf{Levels of with-me-ness}. For each subject, the with-me-ness
     level is reported over the whole interaction, either based on the
-    ground-truth (\ie \emph{ground-truth with-me-ness}), or based on the focus of
+    annotated focus of attention (\ie \emph{ground-truth with-me-ness}), or based on the focus of
     attention measured by the robot.}
 
     \begin{tabular}{p{1cm}cccccccc}
@@ -834,7 +831,8 @@ engaged in the interaction (we discuss in the next section the exact
 relationships between with-me-ness and engagement). The only major exception is
 the story-telling phase (episode ``D''): the child was seemingly not captivated
 by the first half of the story, and their attention was not directed towards the
-robot.
+robot (this actually matches the observed behavior of the children who mostly
+found the story boring).
 
 Another interesting observation pertains to the facilitator: as one can see,
 this child only rarely turned to the facilitator, possibly indicating that the
@@ -954,12 +952,12 @@ considered and used. They may not match manual annotations, but they are
 definitely a valuable \emph{in-the-moment} input for the robot. For certain
 children, we reach levels of accuracy traditionally considered as good.
 
-Interestingly, previous research conducted on ape-human interaction by
-Tomasello~\etal~\cite{tomasello2007reliance} shows that apes rely primarily on
-the head pose to estimate the focus of attention of a human partner, in to
-contrast to human children who primarily rely on eye direction. From this
-perspective, our robot mimics attention tracking mechanism comparable to the
-ones found in apes.
+%Interestingly, previous research conducted on ape-human interaction by
+%Tomasello~\etal~\cite{tomasello2007reliance} shows that apes rely primarily on
+%the head pose to estimate the focus of attention of a human partner, in to
+%contrast to human children who primarily rely on eye direction. From this
+%perspective, our robot mimics attention tracking mechanism comparable to the
+%ones found in apes.
 
 Our approach relies on a simple, non-intrusive sensor (a RGB camera by the
 robot) and an open-source, fast pose estimation algorithm
@@ -1005,13 +1003,24 @@ interaction: children will attempt to closely follow what they are asked to do
 merely \emph{obey orders}.
 
 Compared to engagement, one of the strengths of with-me-ness is its specificity:
-it is well-defined (the only important variable -- that needs to be reported --
-is the mapping {\it phase/expected attentional target}, \ie our
-Table~\ref{tab:targets}), we can formalize it, and as such, it is valuable to
+it is well-defined, we can formalize it, and as such, it is valuable to
 assess and compare how users are willing or able to interact with a robot.  We
 have hopefully demonstrated in this article that with-me-ness is an operational
-\emph{in-the-moment} metric that can be also used as feedback to the robot
-controller to build richer, more adaptive interactive behaviors for our robots.
+\emph{in-the-moment} metric that can also be used as a real-time feedback to the
+robot controller to build richer, more adaptive interactive behaviors for our
+robots.
+
+Note however that, besides the actual focus of attention, the mapping {\it
+phase/expected attentional target} (\ie our Table~\ref{tab:targets}) is a
+critical piece of information to interpret with-me-ness. The mapping is
+typically built by a domain expert, and is often subject to debate (for
+instance in our experiment, one could argue that during the ``Waiting for
+feedback'' phase, the child could have gazed toward the robot to make sure the
+robot was paying attention, and consequently, {\sf robot} should be added to the
+expected target).  For this reason, the chosen mapping should always be reported
+along with the computed with-me-ness levels, and with-me-ness should not be
+reported as an absolute metric, but rather as a mean of comparing
+different interactions within the same study.
 
 \section{Conclusion}
 
